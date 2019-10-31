@@ -1,4 +1,4 @@
-# EngSoft I V0.1
+# EngSoft I V0.2
 
 > Projeto da disciplina de Engenharia de Software I
 
