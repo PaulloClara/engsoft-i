@@ -4,8 +4,8 @@
 
 #### Clone/Configure
 
-`$ git clone https://github.com/PaulloClara/engsoft_i.git`\
-`$ cd engsoft_i`\
+`$ git clone https://github.com/PaulloClara/engsoft-i.git`\
+`$ cd engsoft-i`\
 `$ python -m venv .env`\
 `$ source .env/bin/activate`\
 `$ pip install -r requirements.txt`
