@@ -1,5 +1,4 @@
 from src.utils.tk import UI
-
 from src.view.navbar import Navbar
 from src.view.student import Student
 from src.view.activity import Activity
@@ -46,7 +45,13 @@ class View(UI.Window):
         self.active_container = 'student'
 
     def create_activity_container(self):
-        self.activity = Activity(master=self)
+        self.activity = Activity(master=self, controller=self.__controller)
+
+        controller = self.__controller.activity
+
+        self.activity.register_button.configure(
+            command=controller.register_button)
+
         self.active_container = 'activity'
 
     def create_group_container(self):
