@@ -10,7 +10,7 @@ class RegisterWindow(UI.Window):
         self.resizable(0, 0)
 
         self.form = None
-        self.error = None
+        self.error_window = None
 
         self._create_form()
 
@@ -30,7 +30,7 @@ class RegisterWindow(UI.Window):
         return _inputs
 
     def create_error_window(self, error):
-        pass
+        self.error_window = ErrorWindow(error=error)
 
 
 class Form(UI.Container):
@@ -150,3 +150,52 @@ class Form(UI.Container):
             cnf=configs,
             grid=grid
         )
+
+
+class ErrorWindow(UI.Window):
+    def __init__(self, error):
+        super().__init__()
+
+        self.title('Janela de Erro')
+        self.geometry(f'{len(error) * 16}x140')
+        self.resizable(0, 0)
+
+        self.error_msg = error
+
+        self.container = None
+        self.error_label = None
+        self.confirm_button = None
+
+        self._create_container()
+
+    def _create_container(self):
+        configs = {}
+        configs['bd'] = 10
+
+        self.container = UI.get_container(master=self, cnf=configs)
+
+        self._create_error_label()
+        self._create_confirm_button()
+
+    def _create_error_label(self):
+        configs, pack = {}, {}
+
+        configs['text'] = self.error_msg
+        configs['fg'] = 'red'
+        configs['font'] = ('arial', 16, 'bold')
+
+        pack['pady'] = 10
+
+        self.error_label = UI.get_label(master=self, cnf=configs, pack=pack)
+
+    def _create_confirm_button(self):
+        configs, pack = {}, {}
+
+        configs['text'] = 'OK'
+        configs['bg'] = 'green'
+        configs['command'] = self.destroy
+
+        pack['pady'] = 25
+        pack['side'] = 'bottom'
+
+        self.confirm_button = UI.get_button(master=self, cnf=configs, pack=pack)
