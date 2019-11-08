@@ -32,13 +32,14 @@ class View(UI.Window):
     def _create_navbar(self):
         self.navbar = Navbar(master=self)
 
-        click_student_button = self.__controller.navbar.student_button
-        click_activity_button = self.__controller.navbar.activity_button
-        click_group_button = self.__controller.navbar.group_button
+        controller = self.__controller.navbar
 
-        self.navbar.student_button.configure(command=click_student_button)
-        self.navbar.activity_button.configure(command=click_activity_button)
-        self.navbar.group_button.configure(command=click_group_button)
+        self.navbar.student_button.configure(
+            command=controller.student_button)
+        self.navbar.activity_button.configure(
+            command=controller.activity_button)
+        self.navbar.group_button.configure(
+            command=controller.group_button)
 
     def create_student_container(self):
         self.student = Student(master=self)
