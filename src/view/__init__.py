@@ -13,7 +13,8 @@ class View(UI.Window):
         self.__controller = controller
 
         self.title('EngSoft')
-        self.geometry('800x600')
+        self.geometry('1200x600')
+        self.resizable(0, 0)
 
         self.navbar = None
         self.student = None
@@ -41,7 +42,7 @@ class View(UI.Window):
             command=controller.group_button)
 
     def create_student_container(self):
-        self.student = Student(master=self)
+        self.student = Student(master=self, controller=self.__controller)
         self.active_container = 'student'
 
     def create_activity_container(self):
