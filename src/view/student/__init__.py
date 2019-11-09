@@ -1,12 +1,18 @@
 from src.utils.tk import UI
+from src.view.student.student_list import StudentList
 
 
 class Student(UI.Container):
 
-    def __init__(self, master):
+    def __init__(self, master, controller):
         super().__init__(master=master)
-        self.pack()
+        self.pack(side='bottom')
 
-        label_temp = UI.get_label(master=self, cnf={
-            'text': 'Alunos'
-        })
+        self.__controller = controller
+
+        self.student_list = None
+
+        self._create_student_list()
+
+    def _create_student_list(self):
+        self.student_list = StudentList(master=self)
