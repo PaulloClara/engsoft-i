@@ -1,5 +1,6 @@
 from src.controller.navbar import Navbar
 from src.controller.activity import Activity
+from src.controller.student import Student
 
 
 class Controller:
@@ -10,6 +11,7 @@ class Controller:
 
         self.navbar = None
         self.activity = None
+        self.student = None
 
     def start(self, model, view):
         self.view = view
@@ -17,5 +19,6 @@ class Controller:
 
         self.navbar = Navbar(controller=self)
         self.activity = Activity(controller=self)
+        self.student = Student(controller=self)
 
         self.view.start()

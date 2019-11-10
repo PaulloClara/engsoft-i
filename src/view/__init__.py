@@ -3,6 +3,7 @@ from src.view.navbar import Navbar
 from src.view.student import Student
 from src.view.activity import Activity
 from src.view.group import Group
+from src.view.error_window import ErrorWindow
 
 
 class View(UI.Window):
@@ -20,6 +21,8 @@ class View(UI.Window):
         self.student = None
         self.activity = None
         self.group = None
+
+        self.error_window = None
 
         self.active_container = ''
 
@@ -42,16 +45,14 @@ class View(UI.Window):
             command=controller.group_button)
 
     def create_student_container(self):
-        self.student = Student(master=self, controller=self.__controller)
+        self.student = Student(
+            master=self, controller=self.__controller.student)
+
         self.active_container = 'student'
 
     def create_activity_container(self):
-        self.activity = Activity(master=self, controller=self.__controller)
-
-        controller = self.__controller.activity
-
-        self.activity.register_button.configure(
-            command=controller.register_button)
+        self.activity = Activity(
+            master=self, controller=self.__controller.activity)
 
         self.active_container = 'activity'
 
@@ -68,3 +69,6 @@ class View(UI.Window):
             self.group.destroy()
 
         self.active_container = ''
+
+    def create_error_window(self, error):
+        self.error_window = ErrorWindow(error=error)
