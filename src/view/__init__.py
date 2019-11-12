@@ -1,9 +1,12 @@
 from src.utils.tk import UI
+
+from src.view.group import Group
 from src.view.navbar import Navbar
 from src.view.student import Student
 from src.view.activity import Activity
-from src.view.group import Group
+
 from src.view.error_window import ErrorWindow
+from src.view.raffle_window import RaffleWindow
 
 
 class View(UI.Window):
@@ -17,12 +20,13 @@ class View(UI.Window):
         self.geometry('1200x600')
         self.resizable(0, 0)
 
+        self.group = None
         self.navbar = None
         self.student = None
         self.activity = None
-        self.group = None
 
         self.error_window = None
+        self.raffle_window = None
 
         self.active_container = ''
 
@@ -47,6 +51,8 @@ class View(UI.Window):
     def create_student_container(self):
         self.student = Student(
             master=self, controller=self.__controller.student)
+
+        self.__controller.student.mounted()
 
         self.active_container = 'student'
 
@@ -74,3 +80,6 @@ class View(UI.Window):
 
     def create_error_window(self, error):
         self.error_window = ErrorWindow(error=error)
+
+    def create_raffle_window(self, student, activity):
+        self.raffle_window = RaffleWindow(student=student, activity=activity)

@@ -3,7 +3,7 @@ from src.utils.tk import UI
 
 class StudentList(UI.ScrollFrame):
 
-    def __init__(self, master):
+    def __init__(self, master, commands):
         cnf, canvas_cnf, viewport_cnf, scrollbar_cnf = {}, {}, {}, {}
 
         cnf['bd'] = 2
@@ -21,12 +21,9 @@ class StudentList(UI.ScrollFrame):
                          vt_cnf=viewport_cnf, sr_cnf=scrollbar_cnf)
         self.pack(expand=True)
 
-        self.label_list = []
+        self.commands = commands
 
-        for i in range(10):
-            self.create_student_label(student_name='Paulo Ricardo da Silva C.')
-            self.create_student_label(student_name='Josivan Cabra Macho')
-            self.create_student_label(student_name='Wesley Weslei Weslley')
+        self.label_list = []
 
     def create_student_label(self, student_name):
         # Container

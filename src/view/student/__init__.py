@@ -18,7 +18,11 @@ class Student(UI.Container):
         self._create_actions()
 
     def _create_student_list(self):
-        self.student_list = StudentList(master=self)
+        commands = {}
+
+        if not self.student_list:
+            self.student_list =\
+                StudentList(master=self, commands=commands)
 
     def _create_actions(self):
         commands = {}
