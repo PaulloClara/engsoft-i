@@ -54,6 +54,8 @@ class View(UI.Window):
         self.activity = Activity(
             master=self, controller=self.__controller.activity)
 
+        self.__controller.activity.mounted()
+
         self.active_container = 'activity'
 
     def create_group_container(self):

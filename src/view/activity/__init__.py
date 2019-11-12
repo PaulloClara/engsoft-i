@@ -19,15 +19,26 @@ class Activity(UI.Container):
         self._create_activities_list()
         self._create_actions()
 
-    def _create_activities_list(self):
-        self.activities_list = ActivitiesList(master=self)
-
     def _create_actions(self):
         commands = {}
         commands['raffle'] = self.__controller.raffle_button
         commands['register'] = self.__controller.register_button
 
         self.actions = Actions(master=self, commands=commands)
+
+    def _create_activities_list(self):
+        commands = {}
+        commands['remove'] = self.__controller.remove_activity_button
+        commands['raffle'] = self.__controller.raffle_activity_button
+
+        if not self.activities_list:
+            self.activities_list =\
+                ActivitiesList(master=self, commands=commands)
+
+    def destroy_activities_list(self):
+        for activity in self.activities_list.label_list:
+            activity.destroy()
+        self.activities_list.label_list = []
 
     def create_register_window(self):
         commands = {}

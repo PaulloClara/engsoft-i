@@ -3,7 +3,7 @@ from src.utils.tk import UI
 
 class ActivitiesList(UI.ScrollFrame):
 
-    def __init__(self, master):
+    def __init__(self, master, commands):
         cnf, canvas_cnf, viewport_cnf, scrollbar_cnf = {}, {}, {}, {}
 
         cnf['bd'] = 2
@@ -21,14 +21,10 @@ class ActivitiesList(UI.ScrollFrame):
                          vt_cnf=viewport_cnf, sr_cnf=scrollbar_cnf)
         self.pack(expand=True)
 
+        self.commands = commands
         self.label_list = []
 
-        for i in range(10):
-            self.create_activity_label(activity_title='Capinar um lote')
-            self.create_activity_label(activity_title='Lavar meu carro')
-            self.create_activity_label(activity_title='Dar aula no meu lugar')
-
-    def create_activity_label(self, activity_title):
+    def create_activity_label(self, activity):
         # Container
         cnf, pack = {}, {}
 
@@ -42,7 +38,7 @@ class ActivitiesList(UI.ScrollFrame):
         # Label
         cnf, pack = {}, {}
 
-        cnf['text'] = activity_title
+        cnf['text'] = activity['title']
         cnf['bg'] = 'blue'
         cnf['fg'] = 'white'
         cnf['width'] = 120
@@ -76,5 +72,9 @@ class ActivitiesList(UI.ScrollFrame):
 
         label_container.button =\
             UI.get_button(master=label_container, cnf=cnf, pack=pack)
+
+        activity_id = activity['activity_id']
+        label_container.button.bind(
+            "<Button-1>", lambda a: self.commands['remove'](activity_id))
 
         self.label_list.append(label_container)
