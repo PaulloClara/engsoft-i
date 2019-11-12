@@ -16,10 +16,10 @@ class Store:
 
         result = self._connection.cursor().execute(sql_code)
 
-        if 'INSERT' in sql_code:
-            self.commit()
-        elif 'SELECT' in sql_code and convert:
+        if 'SELECT' in sql_code and convert:
             result = self.convert(table=result, columns=columns)
+
+        self.commit()
 
         return result
 
@@ -67,3 +67,6 @@ class Store:
         columns = ', '.join(columns)
 
         return f'INSERT INTO {table}({columns}) VALUES({values})'
+
+    def delete(self, table, condition):
+        return f'DELETE FROM {table} WHERE {condition}'
