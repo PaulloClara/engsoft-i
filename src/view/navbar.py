@@ -7,9 +7,9 @@ class Navbar(UI.Container):
         super().__init__(master=master)
         self.pack()
 
+        self.group_button = None
         self.student_button = None
         self.activity_button = None
-        self.group_button = None
 
         self.create_student_button()
         self.create_activity_button()
@@ -23,11 +23,7 @@ class Navbar(UI.Container):
 
         pack['side'] = 'left'
 
-        self.student_button = UI.get_button(
-            master=self,
-            cnf=configs,
-            pack=pack
-        )
+        self.student_button = UI.get_button(master=self, cnf=configs, pack=pack)
 
     def create_activity_button(self):
         configs, pack = {}, {}
@@ -38,11 +34,8 @@ class Navbar(UI.Container):
 
         pack['side'] = 'left'
 
-        self.activity_button = UI.get_button(
-            master=self,
-            cnf=configs,
-            pack=pack
-        )
+        self.activity_button =\
+            UI.get_button(master=self, cnf=configs, pack=pack)
 
     def create_group_button(self):
         configs, pack = {}, {}
@@ -52,8 +45,4 @@ class Navbar(UI.Container):
 
         pack['side'] = 'left'
 
-        self.group_button = UI.get_button(
-            master=self,
-            cnf=configs,
-            pack=pack
-        )
+        self.group_button = UI.get_button(master=self, cnf=configs, pack=pack)

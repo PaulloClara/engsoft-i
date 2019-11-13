@@ -1,7 +1,8 @@
 from src.utils import Utils
+
 from src.controller.navbar import Navbar
-from src.controller.activity import Activity
 from src.controller.student import Student
+from src.controller.activity import Activity
 
 
 class Controller:
@@ -11,16 +12,16 @@ class Controller:
         self.model = None
 
         self.navbar = None
-        self.activity = None
         self.student = None
+        self.activity = None
 
     def start(self, model, view):
         self.view = view
         self.model = model
 
         self.navbar = Navbar(controller=self)
-        self.activity = Activity(controller=self)
         self.student = Student(controller=self)
+        self.activity = Activity(controller=self)
 
         self.view.start()
 
@@ -46,4 +47,5 @@ class Controller:
         else:
             activity = activities[Utils.get_random_int(0, len(activities)-1)]
 
-        self.view.create_raffle_window(student=student, activity=activity['title'])
+        self.view.create_raffle_window(
+            student=student, activity=activity['title'])

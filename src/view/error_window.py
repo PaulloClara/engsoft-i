@@ -2,6 +2,7 @@ from src.utils.tk import UI
 
 
 class ErrorWindow(UI.Window):
+
     def __init__(self, error):
         super().__init__()
 

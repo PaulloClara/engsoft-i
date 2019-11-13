@@ -1,4 +1,5 @@
 from src.utils.tk import UI
+
 from src.view.activity.actions import Actions
 from src.view.activity.list import ActivitiesList
 from src.view.activity.register import RegisterWindow
@@ -22,6 +23,7 @@ class Activity(UI.Container):
 
     def _create_actions(self):
         commands = {}
+
         commands['raffle'] = self.commands['raffle']
         commands['register'] = self.__controller.register_button
 
@@ -29,6 +31,7 @@ class Activity(UI.Container):
 
     def _create_activities_list(self):
         commands = {}
+
         commands['raffle'] = self.commands['raffle']
         commands['remove'] = self.__controller.remove_activity_button
 
@@ -39,6 +42,7 @@ class Activity(UI.Container):
     def destroy_activities_list(self):
         for activity in self.activities_list.label_list:
             activity.destroy()
+
         self.activities_list.label_list = []
 
     def create_register_window(self):

@@ -1,4 +1,5 @@
 from src.utils.tk import UI
+
 from src.view.student.actions import Actions
 from src.view.student.list import StudentList
 
@@ -20,14 +21,15 @@ class Student(UI.Container):
 
     def _create_student_list(self):
         commands = {}
+
         commands['raffle'] = self.commands['raffle']
 
         if not self.student_list:
-            self.student_list =\
-                StudentList(master=self, commands=commands)
+            self.student_list = StudentList(master=self, commands=commands)
 
     def _create_actions(self):
         commands = {}
+
         commands['raffle'] = self.commands['raffle']
         commands['browse_file'] = self.__controller.browse_file_button
 

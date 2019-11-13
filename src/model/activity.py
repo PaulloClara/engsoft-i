@@ -19,24 +19,27 @@ class Activity:
     def register_activity(self, activity):
         values = [activity['title'], activity['desc'], activity['deadline']]
 
-        sql_code = self.__store.insert(
-            table=self.table, columns=self.columns[1:], values=values)
-
+        sql_code =\
+            self.__store.insert(
+                table=self.table, columns=self.columns[1:], values=values)
         self.__store.run(sql_code=sql_code)
+
         self.get_activities()
 
     def remove_activity(self, activity_id):
         condition = f'activity_id = {activity_id}'
         sql_code = self.__store.delete(table=self.table, condition=condition)
-
         self.__store.run(sql_code=sql_code)
+
         self.get_activities()
 
     def check_form(self, form):
         if form['title'] == '':
             return 'O campo "Titulo" não pode estar vazio'
+
         if form['desc'] == '':
             return 'O campo "Descrição" não pode estar vazio'
+
         if form['deadline'] == '':
             return 'O campo "Data de Entrega" não pode estar vazio'
 

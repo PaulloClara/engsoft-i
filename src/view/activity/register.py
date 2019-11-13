@@ -26,12 +26,9 @@ class RegisterWindow(UI.Window):
     def get_form(self):
         fields = {}
 
-        fields['title'] =\
-            self.form.title_field['input'].get()
-        fields['desc'] =\
-            self.form.desc_field['input'].get()
-        fields['deadline'] =\
-            self.form.deadline_field['input'].get()
+        fields['desc'] = self.form.desc_field['input'].get()
+        fields['title'] = self.form.title_field['input'].get()
+        fields['deadline'] = self.form.deadline_field['input'].get()
 
         return fields
 
@@ -42,13 +39,13 @@ class Form(UI.Container):
         super().__init__(master=master, cnf={'bd': 10})
         self.pack()
 
-        self.title_field = {}
+        self.commands = commands
+
         self.desc_field = {}
+        self.title_field = {}
         self.deadline_field = {}
         self.submit_button = None
         self.cancel_button = None
-
-        self.commands = commands
 
         self._create_title_field()
         self._create_desc_field()

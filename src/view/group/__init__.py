@@ -7,6 +7,4 @@ class Group(UI.Container):
         super().__init__(master=master)
         self.pack()
 
-        label_temp = UI.get_label(master=self, cnf={
-            'text': 'Grupos'
-        })
+        label_temp = UI.get_label(master=self, cnf={'text': 'Grupos'})

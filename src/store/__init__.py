@@ -12,6 +12,7 @@ class Store:
     def run(self, sql_code, convert=True, columns=[]):
         if self._connected:
             self.close_connection()
+
         self._connection = self.connect()
 
         result = self._connection.cursor().execute(sql_code)
