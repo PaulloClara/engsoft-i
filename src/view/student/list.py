@@ -1,7 +1,7 @@
-from src.utils.tk import UI
+from src.utils.tk import TKUtils
 
 
-class StudentList(UI.ScrollFrame):
+class StudentList(TKUtils.ScrollFrame()):
 
     def __init__(self, master, commands):
         cnf, canvas_cnf, viewport_cnf, scrollbar_cnf = {}, {}, {}, {}
@@ -34,7 +34,7 @@ class StudentList(UI.ScrollFrame):
         cnf['relief'] = 'ridge'
 
         label_container =\
-            UI.get_container(master=self.viewport, cnf=cnf, pack=pack)
+            TKUtils.get_container(master=self.viewport, cnf=cnf, pack=pack)
 
         # Label
         cnf, pack = {}, {}
@@ -48,7 +48,7 @@ class StudentList(UI.ScrollFrame):
         pack['side'] = 'left'
 
         label_container.label =\
-            UI.get_label(master=label_container, cnf=cnf, pack=pack)
+            TKUtils.get_label(master=label_container, cnf=cnf, pack=pack)
 
         # Raffle Button
         cnf, pack, defs = {}, {}, {}
@@ -64,6 +64,6 @@ class StudentList(UI.ScrollFrame):
         pack['side'] = 'right'
 
         label_container.button =\
-            UI.get_button(master=label_container, cnf=cnf, pack=pack)
+            TKUtils.get_button(master=label_container, cnf=cnf, pack=pack)
 
         self.label_list.append(label_container)

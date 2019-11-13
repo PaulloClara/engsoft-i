@@ -1,7 +1,7 @@
-from src.utils.tk import UI
+from src.utils.tk import TKUtils
 
 
-class ErrorWindow(UI.Window):
+class ErrorWindow(TKUtils.Window()):
 
     def __init__(self, error):
         super().__init__()
@@ -22,7 +22,7 @@ class ErrorWindow(UI.Window):
         cnf = {}
         cnf['bd'] = 10
 
-        self.container = UI.get_container(master=self, cnf=cnf)
+        self.container = TKUtils.get_container(master=self, cnf=cnf)
 
         self._create_error_label()
         self._create_confirm_button()
@@ -36,7 +36,7 @@ class ErrorWindow(UI.Window):
 
         pack['pady'] = 10
 
-        self.error_label = UI.get_label(master=self, cnf=cnf, pack=pack)
+        self.error_label = TKUtils.get_label(master=self, cnf=cnf, pack=pack)
 
     def _create_confirm_button(self):
         cnf, pack = {}, {}
@@ -48,4 +48,4 @@ class ErrorWindow(UI.Window):
         pack['pady'] = 25
         pack['side'] = 'bottom'
 
-        self.confirm_button = UI.get_button(master=self, cnf=cnf, pack=pack)
+        self.confirm_button = TKUtils.get_button(master=self, cnf=cnf, pack=pack)

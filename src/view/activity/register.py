@@ -1,7 +1,7 @@
-from src.utils.tk import UI
+from src.utils.tk import TKUtils
 
 
-class RegisterWindow(UI.Window):
+class RegisterWindow(TKUtils.Window()):
 
     def __init__(self, commands):
         super().__init__()
@@ -33,7 +33,7 @@ class RegisterWindow(UI.Window):
         return fields
 
 
-class Form(UI.Container):
+class Form(TKUtils.Container()):
 
     def __init__(self, master, commands):
         super().__init__(master=master, cnf={'bd': 10})
@@ -64,7 +64,7 @@ class Form(UI.Container):
         grid['sticky'] = 'W'
 
         self.title_field['label'] =\
-            UI.get_label(master=self, cnf=cnf, grid=grid)
+            TKUtils.get_label(master=self, cnf=cnf, grid=grid)
 
         cnf, grid = {}, {}
 
@@ -72,7 +72,7 @@ class Form(UI.Container):
         grid['column'] = 1
 
         self.title_field['input'] =\
-            UI.get_input(master=self, cnf=cnf, grid=grid)
+            TKUtils.get_input(master=self, cnf=cnf, grid=grid)
 
     def _create_desc_field(self):
         cnf, grid = {}, {}
@@ -84,14 +84,14 @@ class Form(UI.Container):
         grid['column'] = 0
         grid['sticky'] = 'W'
 
-        self.desc_field['label'] = UI.get_label(master=self, cnf=cnf, grid=grid)
+        self.desc_field['label'] = TKUtils.get_label(master=self, cnf=cnf, grid=grid)
 
         cnf, grid = {}, {}
 
         grid['row'] = 1
         grid['column'] = 1
 
-        self.desc_field['input'] = UI.get_input(master=self, cnf=cnf, grid=grid)
+        self.desc_field['input'] = TKUtils.get_input(master=self, cnf=cnf, grid=grid)
 
     def _create_deadline_field(self):
         cnf, grid = {}, {}
@@ -104,7 +104,7 @@ class Form(UI.Container):
         grid['sticky'] = 'W'
 
         self.deadline_field['label'] =\
-            UI.get_label(master=self, cnf=cnf, grid=grid)
+            TKUtils.get_label(master=self, cnf=cnf, grid=grid)
 
         cnf, grid = {}, {}
 
@@ -112,7 +112,7 @@ class Form(UI.Container):
         grid['column'] = 1
 
         self.deadline_field['input'] =\
-            UI.get_input(master=self, cnf=cnf, grid=grid)
+            TKUtils.get_input(master=self, cnf=cnf, grid=grid)
 
     def _create_cancel_button(self):
         cnf, grid = {}, {}
@@ -126,7 +126,7 @@ class Form(UI.Container):
         grid['sticky'] = 'W'
         grid['pady'] = 350 - self.winfo_screenmmheight()
 
-        self.cancel_button = UI.get_button(master=self, cnf=cnf, grid=grid)
+        self.cancel_button = TKUtils.get_button(master=self, cnf=cnf, grid=grid)
 
     def _create_submit_button(self):
         cnf, grid = {}, {}
@@ -140,4 +140,4 @@ class Form(UI.Container):
         grid['sticky'] = 'E'
         grid['pady'] = 350 - self.winfo_screenmmheight()
 
-        self.submit_button = UI.get_button(master=self, cnf=cnf, grid=grid)
+        self.submit_button = TKUtils.get_button(master=self, cnf=cnf, grid=grid)

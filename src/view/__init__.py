@@ -1,4 +1,4 @@
-from src.utils.tk import UI
+from src.utils.tk import TKUtils
 
 from src.view.group import Group
 from src.view.navbar import Navbar
@@ -9,7 +9,7 @@ from src.view.error_window import ErrorWindow
 from src.view.raffle_window import RaffleWindow
 
 
-class View(UI.Window):
+class View(TKUtils.Window()):
 
     def __init__(self, controller):
         super().__init__()

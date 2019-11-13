@@ -3,34 +3,14 @@ import tkinter as tk
 
 class TKUtils:
 
-    def __init__(self):
-        self.Window = tk.Tk
-        self.Container = tk.Frame
-        self.ScrollFrame = ScrollFrame
+    @staticmethod
+    def get_label(master, cnf={}, pack={}, grid={}):
+        default_cnf = {}
 
-        self.__label_config = {}
-        self.__label_config['text'] = '...'
-        self.__label_config['font'] = ('arial', 12, 'bold')
+        default_cnf['text'] = '...'
+        default_cnf['font'] = ('arial', 12, 'bold')
 
-        self.__button_config = {}
-        self.__button_config['text'] = '...'
-        self.__button_config['width'] = 10
-        self.__button_config['height'] = 1
-        self.__button_config['bd'] = 3
-        self.__button_config['pady'] = 6
-        self.__button_config['padx'] = 6
-        self.__button_config['font'] = ('arial', 14, 'bold')
-
-        self.__entry_config = {}
-        self.__entry_config['width'] = 20
-        self.__entry_config['bg'] = "white"
-        self.__entry_config['fg'] = "black"
-        self.__entry_config['bd'] = 0
-        self.__entry_config['justify'] = 'left'
-        self.__entry_config['font'] = ('arial', 13, 'italic')
-
-    def get_label(self, master, cnf={}, pack={}, grid={}):
-        label = tk.Label(master=master, cnf=self.__label_config)
+        label = tk.Label(master=master, cnf=default_cnf)
         label.configure(cnf=cnf)
 
         if grid:
@@ -40,8 +20,19 @@ class TKUtils:
 
         return label
 
-    def get_button(self, master, cnf={}, pack={}, grid={}):
-        button = tk.Button(master=master, cnf=self.__button_config)
+    @staticmethod
+    def get_button(master, cnf={}, pack={}, grid={}):
+        default_cnf = {}
+
+        default_cnf['text'] = '...'
+        default_cnf['width'] = 10
+        default_cnf['height'] = 1
+        default_cnf['bd'] = 3
+        default_cnf['pady'] = 6
+        default_cnf['padx'] = 6
+        default_cnf['font'] = ('arial', 14, 'bold')
+
+        button = tk.Button(master=master, cnf=default_cnf)
         button.configure(cnf=cnf)
 
         if grid:
@@ -51,8 +42,18 @@ class TKUtils:
 
         return button
 
-    def get_input(self, master, cnf={}, pack={}, grid={}):
-        _input = tk.Entry(master=master, cnf=self.__entry_config)
+    @staticmethod
+    def get_input(master, cnf={}, pack={}, grid={}):
+        default_cnf = {}
+
+        default_cnf['width'] = 20
+        default_cnf['bg'] = 'white'
+        default_cnf['fg'] = 'black'
+        default_cnf['bd'] = 0
+        default_cnf['justify'] = 'left'
+        default_cnf['font'] = ('arial', 13, 'italic')
+
+        _input = tk.Entry(master=master, cnf=default_cnf)
         _input.configure(cnf=cnf)
 
         if grid:
@@ -62,8 +63,9 @@ class TKUtils:
 
         return _input
 
-    def get_container(self, master, cnf={}, pack={}, grid={}):
-        container = self.Container(master=master, cnf=cnf)
+    @staticmethod
+    def get_container(master, cnf={}, pack={}, grid={}):
+        container = tk.Frame(master=master, cnf=cnf)
 
         if grid:
             container.grid(grid)
@@ -72,13 +74,26 @@ class TKUtils:
 
         return container
 
-    def get_window(self, title='New Window', size='200x100'):
-        window = self.Window()
+    @staticmethod
+    def get_window(title='New Window', size='200x100'):
+        window = tk.Tk()
 
         window.title(title)
         window.geometry(size)
 
         return window
+
+    @staticmethod
+    def Window():
+        return tk.Tk
+
+    @staticmethod
+    def Container():
+        return tk.Frame
+
+    @staticmethod
+    def ScrollFrame():
+        return ScrollFrame
 
 
 class ScrollFrame(tk.Frame):
@@ -111,6 +126,3 @@ class ScrollFrame(tk.Frame):
     def on_canvas_configure(self, event):
         canvas_width = event.width
         self.canvas.itemconfig(self.canvas_window, width=canvas_width)
-
-
-UI = TKUtils()

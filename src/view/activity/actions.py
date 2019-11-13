@@ -1,7 +1,7 @@
-from src.utils.tk import UI
+from src.utils.tk import TKUtils
 
 
-class Actions(UI.Container):
+class Actions(TKUtils.Container()):
 
     def __init__(self, master, commands):
         super().__init__(master=master, cnf={'bd': 10})
@@ -25,7 +25,7 @@ class Actions(UI.Container):
 
         pack['side'] = 'left'
 
-        self.raffle_button = UI.get_button(master=self, cnf=cnf, pack=pack)
+        self.raffle_button = TKUtils.get_button(master=self, cnf=cnf, pack=pack)
 
     def _create_register_button(self):
         cnf, pack = {}, {}
@@ -37,4 +37,4 @@ class Actions(UI.Container):
 
         pack['side'] = 'right'
 
-        self.register_button = UI.get_button(master=self, cnf=cnf, pack=pack)
+        self.register_button = TKUtils.get_button(master=self, cnf=cnf, pack=pack)

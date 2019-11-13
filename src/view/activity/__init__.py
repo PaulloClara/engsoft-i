@@ -1,11 +1,11 @@
-from src.utils.tk import UI
+from src.utils.tk import TKUtils
 
 from src.view.activity.actions import Actions
 from src.view.activity.list import ActivitiesList
 from src.view.activity.register import RegisterWindow
 
 
-class Activity(UI.Container):
+class Activity(TKUtils.Container()):
 
     def __init__(self, master, controller, commands):
         super().__init__(master=master)

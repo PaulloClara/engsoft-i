@@ -1,7 +1,7 @@
-from src.utils.tk import UI
+from src.utils.tk import TKUtils
 
 
-class RaffleWindow(UI.Window):
+class RaffleWindow(TKUtils.Window()):
 
     def __init__(self, student, activity):
         super().__init__()
@@ -23,7 +23,7 @@ class RaffleWindow(UI.Window):
         self._create_activity_label()
 
     def _create_container(self):
-        self.container = UI.get_container(master=self)
+        self.container = TKUtils.get_container(master=self)
 
     def _create_student_label(self):
         cnf, pack = {}, {}
@@ -34,7 +34,7 @@ class RaffleWindow(UI.Window):
         cnf['font'] = ('arial', 16, 'bold')
 
         self.student_label =\
-            UI.get_label(master=self.container, cnf=cnf, pack=pack)
+            TKUtils.get_label(master=self.container, cnf=cnf, pack=pack)
 
     def _create_activity_label(self):
         cnf, pack = {}, {}
@@ -45,4 +45,4 @@ class RaffleWindow(UI.Window):
         cnf['font'] = ('arial', 16, 'bold')
 
         self.activity_label =\
-            UI.get_label(master=self.container, cnf=cnf, pack=pack)
+            TKUtils.get_label(master=self.container, cnf=cnf, pack=pack)

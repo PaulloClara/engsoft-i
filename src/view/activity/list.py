@@ -1,7 +1,7 @@
-from src.utils.tk import UI
+from src.utils.tk import TKUtils
 
 
-class ActivitiesList(UI.ScrollFrame):
+class ActivitiesList(TKUtils.ScrollFrame()):
 
     def __init__(self, master, commands):
         cnf, canvas_cnf, viewport_cnf, scrollbar_cnf = {}, {}, {}, {}
@@ -33,7 +33,7 @@ class ActivitiesList(UI.ScrollFrame):
         cnf['relief'] = 'ridge'
 
         label_container =\
-            UI.get_container(master=self.viewport, cnf=cnf, pack=pack)
+            TKUtils.get_container(master=self.viewport, cnf=cnf, pack=pack)
 
         # Label
         cnf, pack = {}, {}
@@ -47,7 +47,7 @@ class ActivitiesList(UI.ScrollFrame):
         pack['side'] = 'left'
 
         label_container.label =\
-            UI.get_label(master=label_container, cnf=cnf, pack=pack)
+            TKUtils.get_label(master=label_container, cnf=cnf, pack=pack)
 
         # Raffle Button
         cnf, pack, defs = {}, {}, {}
@@ -63,7 +63,7 @@ class ActivitiesList(UI.ScrollFrame):
         pack['side'] = 'left'
 
         label_container.button =\
-            UI.get_button(master=label_container, cnf=cnf, pack=pack)
+            TKUtils.get_button(master=label_container, cnf=cnf, pack=pack)
 
         # Remove Button
         cnf, pack = {}, {}
@@ -75,7 +75,7 @@ class ActivitiesList(UI.ScrollFrame):
         pack['side'] = 'right'
 
         label_container.button =\
-            UI.get_button(master=label_container, cnf=cnf, pack=pack)
+            TKUtils.get_button(master=label_container, cnf=cnf, pack=pack)
 
         activity_id = activity['activity_id']
         label_container.button.bind(

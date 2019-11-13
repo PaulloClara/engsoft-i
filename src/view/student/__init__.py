@@ -1,10 +1,10 @@
-from src.utils.tk import UI
+from src.utils.tk import TKUtils
 
 from src.view.student.actions import Actions
 from src.view.student.list import StudentList
 
 
-class Student(UI.Container):
+class Student(TKUtils.Container()):
 
     def __init__(self, master, controller, commands):
         super().__init__(master=master)

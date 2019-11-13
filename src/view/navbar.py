@@ -1,7 +1,7 @@
-from src.utils.tk import UI
+from src.utils.tk import TKUtils
 
 
-class Navbar(UI.Container):
+class Navbar(TKUtils.Container()):
 
     def __init__(self, master):
         super().__init__(master=master)
@@ -23,7 +23,7 @@ class Navbar(UI.Container):
 
         pack['side'] = 'left'
 
-        self.student_button = UI.get_button(master=self, cnf=configs, pack=pack)
+        self.student_button = TKUtils.get_button(master=self, cnf=configs, pack=pack)
 
     def create_activity_button(self):
         configs, pack = {}, {}
@@ -35,7 +35,7 @@ class Navbar(UI.Container):
         pack['side'] = 'left'
 
         self.activity_button =\
-            UI.get_button(master=self, cnf=configs, pack=pack)
+            TKUtils.get_button(master=self, cnf=configs, pack=pack)
 
     def create_group_button(self):
         configs, pack = {}, {}
@@ -45,4 +45,4 @@ class Navbar(UI.Container):
 
         pack['side'] = 'left'
 
-        self.group_button = UI.get_button(master=self, cnf=configs, pack=pack)
+        self.group_button = TKUtils.get_button(master=self, cnf=configs, pack=pack)
