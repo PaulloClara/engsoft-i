@@ -37,14 +37,13 @@ class View(TKUtils.Window()):
         self.mainloop()
 
     def _create_navbar(self):
-        self.navbar = Navbar(master=self)
+        commands = {}
 
-        controller = self.__controller.navbar
+        commands['group'] = self.__controller.navbar.group_button
+        commands['student'] = self.__controller.navbar.student_button
+        commands['activity'] = self.__controller.navbar.activity_button
 
-        self.navbar.student_button.configure(command=controller.student_button)
-        self.navbar.activity_button.configure(
-            command=controller.activity_button)
-        self.navbar.group_button.configure(command=controller.group_button)
+        self.navbar = Navbar(master=self, commands=commands)
 
     def create_student_container(self):
         commands = {}

@@ -3,9 +3,11 @@ from src.utils.tk import TKUtils
 
 class Navbar(TKUtils.Container()):
 
-    def __init__(self, master):
+    def __init__(self, master, commands):
         super().__init__(master=master)
         self.pack()
+
+        self.commands = commands
 
         self.group_button = None
         self.student_button = None
@@ -16,33 +18,37 @@ class Navbar(TKUtils.Container()):
         self.create_group_button()
 
     def create_student_button(self):
-        configs, pack = {}, {}
+        cnf, pack = {}, {}
 
-        configs['text'] = 'Alunos'
-        configs['bg'] = 'red'
+        cnf['text'] = 'Alunos'
+        cnf['bg'] = 'red'
+        cnf['command'] = self.commands['student']
 
         pack['side'] = 'left'
 
-        self.student_button = TKUtils.get_button(master=self, cnf=configs, pack=pack)
+        self.student_button =\
+            TKUtils.get_button(master=self, cnf=cnf, pack=pack)
 
     def create_activity_button(self):
-        configs, pack = {}, {}
+        cnf, pack = {}, {}
 
-        configs['text'] = 'Atividades'
-        configs['bg'] = 'blue'
-        configs['width'] = 20
+        cnf['text'] = 'Atividades'
+        cnf['bg'] = 'blue'
+        cnf['width'] = 20
+        cnf['command'] = self.commands['activity']
 
         pack['side'] = 'left'
 
         self.activity_button =\
-            TKUtils.get_button(master=self, cnf=configs, pack=pack)
+            TKUtils.get_button(master=self, cnf=cnf, pack=pack)
 
     def create_group_button(self):
-        configs, pack = {}, {}
+        cnf, pack = {}, {}
 
-        configs['text'] = 'Grupos'
-        configs['bg'] = 'green'
+        cnf['text'] = 'Grupos'
+        cnf['bg'] = 'green'
+        cnf['command'] = self.commands['group']
 
         pack['side'] = 'left'
 
-        self.group_button = TKUtils.get_button(master=self, cnf=configs, pack=pack)
+        self.group_button = TKUtils.get_button(master=self, cnf=cnf, pack=pack)
