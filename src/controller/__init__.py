@@ -1,5 +1,3 @@
-from src.utils import Utils
-
 from src.controller.navbar import Navbar
 from src.controller.student import Student
 from src.controller.activity import Activity
@@ -26,26 +24,11 @@ class Controller:
         self.view.start()
 
     def raffle_button(self, defs={}):
-        students = self.model.student.students
-        activities = self.model.activity.activities
+        error, student, activity = self.model.raffle(defs=defs)
 
-        if not students:
-            self.view.create_error_window(error='Lista de estudantes vazia')
+        if error:
+            self.view.create_error_window(error=error)
             return
-
-        if not activities:
-            self.view.create_error_window(error='Lista de atividades vazia')
-            return
-
-        if defs and defs['type'] == 'student':
-            student = defs['value']
-        else:
-            student = students[Utils.get_random_int(0, len(students)-1)]
-
-        if defs and defs['type'] == 'activity':
-            activity = defs['value']
-        else:
-            activity = activities[Utils.get_random_int(0, len(activities)-1)]
 
         self.view.create_raffle_window(
             student=student, activity=activity['title'])
