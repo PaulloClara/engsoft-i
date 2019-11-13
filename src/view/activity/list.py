@@ -1,7 +1,7 @@
 from src.utils.tk import TKUtils
 
 
-class ActivitiesList(TKUtils.ScrollFrame()):
+class ActivitiesList(TKUtils.ScrollContainer()):
 
     def __init__(self, master, commands):
         cnf, canvas_cnf, viewport_cnf, scrollbar_cnf = {}, {}, {}, {}

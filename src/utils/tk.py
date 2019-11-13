@@ -92,11 +92,11 @@ class TKUtils:
         return tk.Frame
 
     @staticmethod
-    def ScrollFrame():
-        return ScrollFrame
+    def ScrollContainer():
+        return ScrollContainer
 
 
-class ScrollFrame(tk.Frame):
+class ScrollContainer(tk.Frame):
 
     def __init__(self, master, cnf={}, cs_cnf={}, vt_cnf={}, sr_cnf={}):
         super().__init__(master=master, cnf=cnf)
