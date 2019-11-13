@@ -16,7 +16,7 @@ class View(TKUtils.Window()):
 
         self.__controller = controller
 
-        self.title('EngSoft')
+        self.title('StuKi®')
         self.geometry('1200x600')
         self.resizable(0, 0)
 

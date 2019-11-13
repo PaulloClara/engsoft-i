@@ -1,4 +1,4 @@
-# EngSoft I V0.3
+# StuKi® V1.0
 
 > Projeto da disciplina de Engenharia de Software I
 
