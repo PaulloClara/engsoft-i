@@ -17,4 +17,4 @@ class Student:
         file.close()
 
     def clear_line(self, line):
-        return line.replace('\n', '')
+        return line.replace('\n', '').title()

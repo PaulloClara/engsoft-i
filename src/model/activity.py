@@ -17,6 +17,7 @@ class Activity:
             self.__store.run(sql_code=sql_code, columns=self.columns)
 
     def register_activity(self, activity):
+        activity['title'] = activity['title'].capitalize()
         values = [activity['title'], activity['desc'], activity['deadline']]
 
         sql_code =\
