@@ -71,14 +71,12 @@ class ActivitiesList(TKUtils.ScrollFrame()):
         cnf['text'] = 'X'
         cnf['bg'] = 'red'
         cnf['width'] = 2
+        cnf['command'] =\
+            lambda evt=None: self.commands['remove'](activity['activity_id'])
 
         pack['side'] = 'right'
 
         label_container.button =\
             TKUtils.get_button(master=label_container, cnf=cnf, pack=pack)
-
-        activity_id = activity['activity_id']
-        label_container.button.bind(
-            "<Button-1>", lambda a: self.commands['remove'](activity_id))
 
         self.label_list.append(label_container)
