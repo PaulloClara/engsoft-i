@@ -51,11 +51,15 @@ class StudentList(UI.ScrollFrame):
             UI.get_label(master=label_container, cnf=cnf, pack=pack)
 
         # Raffle Button
-        cnf, pack = {}, {}
+        cnf, pack, defs = {}, {}, {}
+
+        defs['type'] = 'student'
+        defs['value'] = student_name
 
         cnf['text'] = 'O'
         cnf['bg'] = 'orange'
         cnf['width'] = 2
+        cnf['command'] = lambda evt=None: self.commands['raffle'](defs=defs)
 
         pack['side'] = 'right'
 

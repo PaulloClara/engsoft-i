@@ -3,9 +3,6 @@ class Activity:
     def __init__(self, controller):
         self.__controller = controller
 
-    def raffle_button(self):
-        view = self.__controller.view.activity
-
     def register_button(self):
         view = self.__controller.view.activity
 
@@ -20,9 +17,6 @@ class Activity:
 
         view.destroy_activities_list()
         self.load_activities_list()
-
-    def raffle_activity_button(self):
-        pass
 
     def submit_form_button(self):
         view = self.__controller.view.activity

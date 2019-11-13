@@ -49,16 +49,22 @@ class View(UI.Window):
             command=controller.group_button)
 
     def create_student_container(self):
+        commands = {}
+        commands['raffle'] = self.__controller.raffle_button
+
         self.student = Student(
-            master=self, controller=self.__controller.student)
+            master=self, controller=self.__controller.student, commands=commands)
 
         self.__controller.student.mounted()
 
         self.active_container = 'student'
 
     def create_activity_container(self):
+        commands = {}
+        commands['raffle'] = self.__controller.raffle_button
+
         self.activity = Activity(
-            master=self, controller=self.__controller.activity)
+            master=self, controller=self.__controller.activity, commands=commands)
 
         self.__controller.activity.mounted()
 

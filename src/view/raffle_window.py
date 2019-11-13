@@ -7,7 +7,7 @@ class RaffleWindow(UI.Window):
         super().__init__()
 
         self.title('Grande Felizardo(a)')
-        self.geometry(f'{len(student) * 16}x100')
+        self.geometry(f'{len(student) * 18 + 100}x100')
         self.resizable(0, 0)
 
         self.student_name = student

@@ -5,10 +5,11 @@ from src.view.student.list import StudentList
 
 class Student(UI.Container):
 
-    def __init__(self, master, controller):
+    def __init__(self, master, controller, commands):
         super().__init__(master=master)
         self.pack(side='bottom')
 
+        self.commands = commands
         self.__controller = controller
 
         self.actions = None
@@ -19,6 +20,7 @@ class Student(UI.Container):
 
     def _create_student_list(self):
         commands = {}
+        commands['raffle'] = self.commands['raffle']
 
         if not self.student_list:
             self.student_list =\
@@ -26,7 +28,7 @@ class Student(UI.Container):
 
     def _create_actions(self):
         commands = {}
-        commands['raffle'] = self.__controller.raffle_button
+        commands['raffle'] = self.commands['raffle']
         commands['browse_file'] = self.__controller.browse_file_button
 
         self.actions = Actions(master=self, commands=commands)

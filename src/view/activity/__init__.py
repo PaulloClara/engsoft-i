@@ -6,10 +6,11 @@ from src.view.activity.register import RegisterWindow
 
 class Activity(UI.Container):
 
-    def __init__(self, master, controller):
+    def __init__(self, master, controller, commands):
         super().__init__(master=master)
         self.pack(side='bottom')
 
+        self.commands = commands
         self.__controller = controller
 
         self.actions = None
@@ -21,15 +22,15 @@ class Activity(UI.Container):
 
     def _create_actions(self):
         commands = {}
-        commands['raffle'] = self.__controller.raffle_button
+        commands['raffle'] = self.commands['raffle']
         commands['register'] = self.__controller.register_button
 
         self.actions = Actions(master=self, commands=commands)
 
     def _create_activities_list(self):
         commands = {}
+        commands['raffle'] = self.commands['raffle']
         commands['remove'] = self.__controller.remove_activity_button
-        commands['raffle'] = self.__controller.raffle_activity_button
 
         if not self.activities_list:
             self.activities_list =\
