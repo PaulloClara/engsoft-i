@@ -95,6 +95,11 @@ class TKUtils:
     def ScrollContainer():
         return ScrollContainer
 
+    @staticmethod
+    def set_icon(master, icon_name):
+        img = tk.PhotoImage(file=f'src/assets/{icon_name}.png')
+        master.tk.call('wm', 'iconphoto', master._w, img)
+
 
 class ScrollContainer(tk.Frame):
 

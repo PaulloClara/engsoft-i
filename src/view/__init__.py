@@ -20,6 +20,8 @@ class View(TKUtils.Window()):
         self.geometry('1200x600')
         self.resizable(0, 0)
 
+        TKUtils.set_icon(master=self, icon_name='icon')
+
         self.group = None
         self.navbar = None
         self.student = None
