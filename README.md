@@ -1,11 +1,11 @@
 # StuKi® V1.0
 
-> Projeto da disciplina de Engenharia de Software I
+> Projeto referente à disciplina de Engenharia de Software I - IFPI
 
 #### Clone/Configure
 
-`$ git clone https://github.com/PaulloClara/engsoft-i.git`\
-`$ cd engsoft-i`\
+`$ git clone https://github.com/PaulloClara/stuki.git`\
+`$ cd stuki`\
 `$ python -m venv .env`\
 `$ source .env/bin/activate`\
 `$ pip install -r requirements.txt`
