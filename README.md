@@ -8,7 +8,8 @@
 `$ cd stuki`\
 `$ python -m venv .env`\
 `$ source .env/bin/activate`\
-`$ pip install -r requirements.txt`
+`$ pip install -r requirements.txt`\
+`$ git update-index --assume-unchanged src/store/database.sqlite`
 
 #### Ativar/Desativar Env
 
