@@ -98,8 +98,8 @@ class TKUtils:
 
     @staticmethod
     def set_icon(master, icon_name):
-        img = tk.PhotoImage(file=f'src/assets/{icon_name}.png')
-        master.tk.call('wm', 'iconphoto', master._w, img)
+        image = tk.PhotoImage(file=f'src/assets/{icon_name}.png')
+        master.wm_iconphoto(True, image)
 
 
 class ScrollContainer(tk.Frame):
