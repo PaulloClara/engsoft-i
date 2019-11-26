@@ -10,8 +10,8 @@ class StudentList(TKUtils.ScrollContainer()):
         cnf['bg'] = 'grey'
         cnf['relief'] = 'flat'
 
-        canvas_cnf['width'] = 1200
-        canvas_cnf['height'] = 460
+        canvas_cnf['width'] = 920
+        canvas_cnf['height'] = 360
 
         scrollbar_cnf['bd'] = 4
         scrollbar_cnf['bg'] = 'grey'
@@ -29,9 +29,8 @@ class StudentList(TKUtils.ScrollContainer()):
         # Container
         cnf, pack = {}, {}
 
-        cnf['bd'] = 4
-        cnf['bg'] = 'green'
-        cnf['relief'] = 'ridge'
+        cnf['bd'] = 1
+        cnf['bg'] = 'grey'
 
         label_container =\
             TKUtils.get_container(master=self.viewport, cnf=cnf, pack=pack)
@@ -42,7 +41,7 @@ class StudentList(TKUtils.ScrollContainer()):
         cnf['text'] = student_name
         cnf['bg'] = 'red'
         cnf['fg'] = 'white'
-        cnf['width'] = 124
+        cnf['width'] = 98
         cnf['height'] = 2
 
         pack['side'] = 'left'

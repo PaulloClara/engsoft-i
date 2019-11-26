@@ -17,7 +17,7 @@ class View(TKUtils.Window()):
         self.__controller = controller
 
         self.title('StuKi®')
-        self.geometry('1200x600')
+        self.geometry('960x480')
         self.resizable(0, 0)
 
         TKUtils.set_icon(master=self, icon_name='icon')

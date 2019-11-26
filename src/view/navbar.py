@@ -22,6 +22,8 @@ class Navbar(TKUtils.Container()):
 
         cnf['text'] = 'Alunos'
         cnf['bg'] = 'red'
+        cnf['width'] = 14
+        cnf['font'] = ('arial', 16, 'bold')
         cnf['command'] = self.commands['student']
 
         pack['side'] = 'left'
@@ -34,7 +36,8 @@ class Navbar(TKUtils.Container()):
 
         cnf['text'] = 'Atividades'
         cnf['bg'] = 'blue'
-        cnf['width'] = 20
+        cnf['width'] = 24
+        cnf['font'] = ('arial', 16, 'bold')
         cnf['command'] = self.commands['activity']
 
         pack['side'] = 'left'
@@ -47,6 +50,8 @@ class Navbar(TKUtils.Container()):
 
         cnf['text'] = 'Grupos'
         cnf['bg'] = 'green'
+        cnf['width'] = 14
+        cnf['font'] = ('arial', 16, 'bold')
         cnf['command'] = self.commands['group']
 
         pack['side'] = 'left'

@@ -27,10 +27,11 @@ class TKUtils:
         default_cnf['text'] = '...'
         default_cnf['width'] = 10
         default_cnf['height'] = 1
-        default_cnf['bd'] = 3
+        default_cnf['bd'] = 2
         default_cnf['pady'] = 6
         default_cnf['padx'] = 6
-        default_cnf['font'] = ('arial', 14, 'bold')
+        default_cnf['fg'] = 'white'
+        default_cnf['font'] = ('arial', 12, 'bold')
 
         button = tk.Button(master=master, cnf=default_cnf)
         button.configure(cnf=cnf)
@@ -51,7 +52,7 @@ class TKUtils:
         default_cnf['fg'] = 'black'
         default_cnf['bd'] = 0
         default_cnf['justify'] = 'left'
-        default_cnf['font'] = ('arial', 13, 'italic')
+        default_cnf['font'] = ('arial', 12, 'italic')
 
         _input = tk.Entry(master=master, cnf=default_cnf)
         _input.configure(cnf=cnf)
