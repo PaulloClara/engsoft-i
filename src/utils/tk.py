@@ -1,4 +1,5 @@
 import tkinter as tk
+from src.utils import Utils
 
 
 class TKUtils:
@@ -98,7 +99,8 @@ class TKUtils:
 
     @staticmethod
     def set_icon(master, icon_name):
-        image = tk.PhotoImage(file=f'src/assets/{icon_name}.png')
+        file = Utils.get_full_path(f'src/assets/{icon_name}.png')
+        image = tk.PhotoImage(file=file)
         master.wm_iconphoto(True, image)
 
 

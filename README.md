@@ -18,8 +18,12 @@
 
 #### Rodar App
 
-`$ python -B run.py`
+`$ python -B run.py --dev`
 
 #### Rodar Testes
 
-`$ python -B run.py --tests`
+`$ python -B run.py --test`
+
+#### Gerar execultavel
+
+`$ cxfreeze run.py --target-dir dist`

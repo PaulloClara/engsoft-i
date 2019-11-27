@@ -1,4 +1,4 @@
-from sys import argv as args
+from src.utils import Utils
 
 from src.view import View
 from src.model import Model
@@ -8,7 +8,7 @@ from tests import Tests
 
 
 if __name__ == '__main__':
-    if '--test' in args:
+    if Utils.check_testmode():
         tests = Tests()
         tests.start()
     else:

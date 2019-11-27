@@ -1,11 +1,11 @@
 import sqlite3
-from os import getcwd as current_path
+from src.utils import Utils
 
 
 class Store:
 
     def __init__(self):
-        self._db_path = current_path() + r'/src/store/database.sqlite'
+        self._db_path = Utils.get_full_path('src/store/database.sqlite')
         self._connected = False
         self._connection = None
 

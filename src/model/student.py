@@ -1,3 +1,6 @@
+from src.utils import Utils
+
+
 class Student:
 
     def __init__(self, model, controller):
@@ -9,7 +12,7 @@ class Student:
         self.read_file()
 
     def read_file(self):
-        file = open("src/store/student.csv", mode="r")
+        file = open(Utils.get_full_path('src/store/student.csv'), mode='r')
 
         for line in file:
             self.students.append(self.clear_line(line=line))
