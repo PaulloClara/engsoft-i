@@ -1,6 +1,6 @@
-# StuKi® V1.0
+# StuKi®
 
-> Projeto referente à disciplina de Engenharia de Software I - IFPI
+Projeto referente à disciplina de Engenharia de Software I - IFPI
 
 #### Clone/Configure
 
