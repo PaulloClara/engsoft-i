@@ -28,7 +28,6 @@ class RegisterWindow(TKUtils.Window()):
 
         fields['desc'] = self.form.desc_field['input'].get()
         fields['title'] = self.form.title_field['input'].get()
-        fields['deadline'] = self.form.deadline_field['input'].get()
 
         return fields
 
@@ -43,7 +42,6 @@ class Form(TKUtils.Container()):
 
         self.desc_field = {}
         self.title_field = {}
-        self.deadline_field = {}
         self.submit_button = None
         self.cancel_button = None
 

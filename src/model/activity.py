@@ -5,7 +5,7 @@ class Activity:
         self.__controller = controller
 
         self.table = 'activity'
-        self.columns = ['activity_id', 'title', 'desc', 'deadline']
+        self.columns = ['activity_id', 'title', 'desc']
 
         self.activities = []
 
@@ -18,7 +18,7 @@ class Activity:
 
     def register_activity(self, activity):
         activity['title'] = activity['title'].capitalize()
-        values = [activity['title'], activity['desc'], activity['deadline']]
+        values = [activity['title'], activity['desc']]
 
         sql_code =\
             self.__store.insert(
