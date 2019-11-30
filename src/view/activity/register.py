@@ -49,7 +49,6 @@ class Form(TKUtils.Container()):
 
         self._create_title_field()
         self._create_desc_field()
-        self._create_deadline_field()
         self._create_submit_button()
         self._create_cancel_button()
 
@@ -92,27 +91,6 @@ class Form(TKUtils.Container()):
         grid['column'] = 1
 
         self.desc_field['input'] = TKUtils.get_input(master=self, cnf=cnf, grid=grid)
-
-    def _create_deadline_field(self):
-        cnf, grid = {}, {}
-
-        cnf['text'] = 'Data de Entrega   '
-        cnf['pady'] = 4
-
-        grid['row'] = 2
-        grid['column'] = 0
-        grid['sticky'] = 'W'
-
-        self.deadline_field['label'] =\
-            TKUtils.get_label(master=self, cnf=cnf, grid=grid)
-
-        cnf, grid = {}, {}
-
-        grid['row'] = 2
-        grid['column'] = 1
-
-        self.deadline_field['input'] =\
-            TKUtils.get_input(master=self, cnf=cnf, grid=grid)
 
     def _create_cancel_button(self):
         cnf, grid = {}, {}
