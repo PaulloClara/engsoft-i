@@ -41,16 +41,8 @@ class Activity:
         if form['desc'] == '':
             return 'O campo "Descrição" não pode estar vazio'
 
-        if form['deadline'] == '':
-            return 'O campo "Data de Entrega" não pode estar vazio'
-
-        deadline = form['deadline'].replace('/', '')
-        if len(deadline) != 8:
-            return 'Campo "Data de Entrega" invalido'
-
         return 'ok'
 
     def reset_form(self, form):
         form['title'] = ''
         form['desc'] = ''
-        form['deadline'] = ''
