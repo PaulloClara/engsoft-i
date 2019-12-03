@@ -8,12 +8,12 @@ from tests import Tests
 
 
 if __name__ == '__main__':
-    if Utils.check_testmode():
+    if Utils.verificar_modo_teste():
         tests = Tests()
-        tests.start()
+        tests.iniciar()
     else:
         controller = Controller()
         model = Model(controller=controller)
         view = View(controller=controller)
 
-        controller.start(model=model, view=view)
+        controller.iniciar(model=model, view=view)

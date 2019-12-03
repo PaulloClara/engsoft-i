@@ -1,8 +1,8 @@
 from src.store import Store
 from src.utils import Utils
 
-from src.model.student import Student
-from src.model.activity import Activity
+from src.model.aluno import Aluno
+from src.model.atividade import Atividade
 
 
 class Model:
@@ -11,27 +11,27 @@ class Model:
         self.__controller = controller
 
         self.store = Store()
-        self.student = Student(model=self, controller=self.__controller)
-        self.activity = Activity(controller=self.__controller, store=self.store)
+        self.aluno = Aluno(model=self, controller=self.__controller)
+        self.atividade = Atividade(controller=self.__controller, store=self.store)
 
-    def raffle(self, defs):
-        students = self.student.students
-        activities = self.activity.activities
+    def sortear(self, defs):
+        alunos = self.aluno.alunos
+        atividades = self.atividade.atividades
 
-        if not students:
+        if not alunos:
             return 'Lista de estudantes vazia', None, None
 
-        if not activities:
+        if not atividades:
             return 'Lista de atividades vazia', None, None
 
-        if defs and defs['type'] == 'student':
-            student = defs['value']
+        if defs and defs['tipo'] == 'aluno':
+            aluno = defs['valor']
         else:
-            student = students[Utils.get_random_int(0, len(students)-1)]
+            aluno = alunos[Utils.obter_inteiro_aleatorio(0, len(alunos)-1)]
 
-        if defs and defs['type'] == 'activity':
-            activity = defs['value']
+        if defs and defs['tipo'] == 'atividade':
+            atividade = defs['valor']
         else:
-            activity = activities[Utils.get_random_int(0, len(activities)-1)]
+            atividade = atividades[Utils.obter_inteiro_aleatorio(0, len(atividades)-1)]
 
-        return None, student, activity
+        return None, aluno, atividade

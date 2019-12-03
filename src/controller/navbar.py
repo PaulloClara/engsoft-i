@@ -3,23 +3,23 @@ class Navbar:
     def __init__(self, controller):
         self.__controller = controller
 
-    def student_button(self):
-        if (self.__controller.view.active_container == 'student'):
+    def evento_tela_de_aluno(self):
+        if (self.__controller.view.container_ativo == 'aluno'):
             return
 
-        self.__controller.view.destroy_active_container()
-        self.__controller.view.create_student_container()
+        self.__controller.view.destruir_container_ativo()
+        self.__controller.view.criar_container_de_aluno()
 
-    def activity_button(self):
-        if (self.__controller.view.active_container == 'activity'):
+    def evento_tela_de_atividade(self):
+        if (self.__controller.view.container_ativo == 'atividade'):
             return
 
-        self.__controller.view.destroy_active_container()
-        self.__controller.view.create_activity_container()
+        self.__controller.view.destruir_container_ativo()
+        self.__controller.view.criar_container_de_atividade()
 
-    def group_button(self):
-        if (self.__controller.view.active_container == 'group'):
+    def evento_tela_de_grupo(self):
+        if (self.__controller.view.container_ativo == 'grupo'):
             return
 
-        self.__controller.view.destroy_active_container()
-        self.__controller.view.create_group_container()
+        self.__controller.view.destruir_container_ativo()
+        self.__controller.view.criar_container_de_grupo()

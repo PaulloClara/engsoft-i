@@ -3,57 +3,57 @@ from src.utils.tk import TKUtils
 
 class Navbar(TKUtils.Container()):
 
-    def __init__(self, master, commands):
+    def __init__(self, master, eventos):
         super().__init__(master=master)
         self.pack()
 
-        self.commands = commands
+        self.eventos = eventos
 
-        self.group_button = None
-        self.student_button = None
-        self.activity_button = None
+        self.botao_grupo = None
+        self.botao_aluno = None
+        self.botao_atividade = None
 
-        self.create_student_button()
-        self.create_activity_button()
-        self.create_group_button()
+        self.criar_botao_aluno()
+        self.criar_botao_atividade()
+        self.criar_botao_grupo()
 
-    def create_student_button(self):
+    def criar_botao_aluno(self):
         cnf, pack = {}, {}
 
         cnf['text'] = 'Alunos'
         cnf['bg'] = 'red'
         cnf['width'] = 14
         cnf['font'] = ('arial', 16, 'bold')
-        cnf['command'] = self.commands['student']
+        cnf['command'] = self.eventos['aluno']
 
         pack['side'] = 'left'
 
-        self.student_button =\
-            TKUtils.get_button(master=self, cnf=cnf, pack=pack)
+        self.botao_aluno =\
+            TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
 
-    def create_activity_button(self):
+    def criar_botao_atividade(self):
         cnf, pack = {}, {}
 
         cnf['text'] = 'Atividades'
         cnf['bg'] = 'blue'
         cnf['width'] = 24
         cnf['font'] = ('arial', 16, 'bold')
-        cnf['command'] = self.commands['activity']
+        cnf['command'] = self.eventos['atividade']
 
         pack['side'] = 'left'
 
-        self.activity_button =\
-            TKUtils.get_button(master=self, cnf=cnf, pack=pack)
+        self.botao_atividade =\
+            TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
 
-    def create_group_button(self):
+    def criar_botao_grupo(self):
         cnf, pack = {}, {}
 
         cnf['text'] = 'Grupos'
         cnf['bg'] = 'green'
         cnf['width'] = 14
         cnf['font'] = ('arial', 16, 'bold')
-        cnf['command'] = self.commands['group']
+        cnf['command'] = self.eventos['grupo']
 
         pack['side'] = 'left'
 
-        self.group_button = TKUtils.get_button(master=self, cnf=cnf, pack=pack)
+        self.botao_grupo = TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)

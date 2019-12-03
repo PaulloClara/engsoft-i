@@ -6,46 +6,52 @@ from random import randint
 class Utils:
 
     @staticmethod
-    def get_random_int(start, end):
+    def obter_inteiro_aleatorio(start, end):
         return randint(start, end)
 
     @staticmethod
-    def get_current_path():
-        return getcwd()
+    def obter_caminho_atual():
+        caminho = getcwd()
+
+        caminho_de_execucao = Utils.obter_caminho_de_execucao()
+        if caminho_de_execucao != '':
+            caminho = f'{caminho}/{caminho_de_execucao}'
+
+        return caminho
 
     @staticmethod
-    def get_full_path(file_path):
-        full_path = f'{Utils.get_current_path()}/{Utils.get_run_path()}'
+    def obter_caminho(caminho_do_arquivo):
+        caminho = Utils.obter_caminho_atual()
 
-        if Utils.check_prodmode():
-            full_path = f'{full_path}/lib'
+        if Utils.verificar_modo_producao():
+            caminho = f'{caminho}/lib'
 
-        full_path = f'{full_path}/{file_path}'
+        caminho = f'{caminho}/{caminho_do_arquivo}'
 
-        return full_path
+        return caminho
 
     @staticmethod
-    def get_args():
+    def obter_parametros():
         return argv
 
     @staticmethod
-    def get_run_path():
+    def obter_caminho_de_execucao():
         return '/'.join(argv[0].split('/')[:-1])
 
     @staticmethod
-    def check_devmode():
+    def verificar_modo_dev():
         if '--dev' in argv:
             return True
         return False
 
     @staticmethod
-    def check_testmode():
+    def verificar_modo_teste():
         if '--test' in argv:
             return True
         return False
 
     @staticmethod
-    def check_prodmode():
-        if not Utils.check_devmode() and not Utils.check_testmode():
+    def verificar_modo_producao():
+        if not Utils.verificar_modo_dev() and not Utils.verificar_modo_teste():
             return True
         return False

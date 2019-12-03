@@ -1,9 +1,9 @@
 from src.utils.tk import TKUtils
 
 
-class StudentList(TKUtils.ScrollContainer()):
+class ListaDeAlunos(TKUtils.ScrollContainer()):
 
-    def __init__(self, master, commands):
+    def __init__(self, master, eventos):
         cnf, canvas_cnf, viewport_cnf, scrollbar_cnf = {}, {}, {}, {}
 
         cnf['bd'] = 2
@@ -21,24 +21,24 @@ class StudentList(TKUtils.ScrollContainer()):
                          vt_cnf=viewport_cnf, sr_cnf=scrollbar_cnf)
         self.pack(expand=True)
 
-        self.commands = commands
+        self.eventos = eventos
 
-        self.label_list = []
+        self.lista_de_alunos = []
 
-    def create_student_label(self, student_name):
+    def adicionar(self, nome_do_aluno):
         # Container
         cnf, pack = {}, {}
 
         cnf['bd'] = 1
         cnf['bg'] = 'grey'
 
-        label_container =\
-            TKUtils.get_container(master=self.viewport, cnf=cnf, pack=pack)
+        container =\
+            TKUtils.obter_container(master=self.viewport, cnf=cnf, pack=pack)
 
         # Label
         cnf, pack = {}, {}
 
-        cnf['text'] = student_name
+        cnf['text'] = nome_do_aluno
         cnf['bg'] = 'red'
         cnf['fg'] = 'white'
         cnf['width'] = 98
@@ -46,23 +46,23 @@ class StudentList(TKUtils.ScrollContainer()):
 
         pack['side'] = 'left'
 
-        label_container.label =\
-            TKUtils.get_label(master=label_container, cnf=cnf, pack=pack)
+        container.label =\
+            TKUtils.obter_label(master=container, cnf=cnf, pack=pack)
 
         # Raffle Button
         cnf, pack, defs = {}, {}, {}
 
-        defs['type'] = 'student'
-        defs['value'] = student_name
+        defs['tipo'] = 'aluno'
+        defs['valor'] = nome_do_aluno
 
         cnf['text'] = 'O'
         cnf['bg'] = 'orange'
         cnf['width'] = 2
-        cnf['command'] = lambda evt=None: self.commands['raffle'](defs=defs)
+        cnf['command'] = lambda evt=None: self.eventos['sortear'](defs=defs)
 
         pack['side'] = 'right'
 
-        label_container.button =\
-            TKUtils.get_button(master=label_container, cnf=cnf, pack=pack)
+        container.botao =\
+            TKUtils.obter_botao(master=container, cnf=cnf, pack=pack)
 
-        self.label_list.append(label_container)
+        self.lista_de_alunos.append(container)

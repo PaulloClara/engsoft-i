@@ -1,15 +1,15 @@
 from src.utils.tk import TKUtils
 
-from src.view.group import Group
 from src.view.navbar import Navbar
-from src.view.student import Student
-from src.view.activity import Activity
+from src.view.aluno import Aluno
+from src.view.grupo import Grupo
+from src.view.atividade import Atividade
 
-from src.view.error_window import ErrorWindow
-from src.view.raffle_window import RaffleWindow
+from src.view.janela_de_erro import JanelaDeErro
+from src.view.janela_de_sorteio import JanelaDeSorteio
 
 
-class View(TKUtils.Window()):
+class View(TKUtils.Janela()):
 
     def __init__(self, controller):
         super().__init__()
@@ -20,75 +20,74 @@ class View(TKUtils.Window()):
         self.geometry('960x480')
         self.resizable(0, 0)
 
-        TKUtils.set_icon(master=self, icon_name='icon')
+        TKUtils.definir_icone(master=self, nome_do_icone='icone')
 
-        self.group = None
+        self.grupo = None
         self.navbar = None
-        self.student = None
-        self.activity = None
+        self.aluno = None
+        self.atividade = None
 
-        self.error_window = None
-        self.raffle_window = None
+        self.janela_de_erro = None
+        self.janela_de_sorteio = None
 
-        self.active_container = ''
+        self.container_ativo = ''
 
-    def start(self):
-        self._create_navbar()
-        self.create_student_container()
+    def iniciar(self):
+        self.criar_navbar()
+        self.criar_container_de_aluno()
 
         self.mainloop()
 
-    def _create_navbar(self):
-        commands = {}
+    def criar_navbar(self):
+        eventos = {}
 
-        commands['group'] = self.__controller.navbar.group_button
-        commands['student'] = self.__controller.navbar.student_button
-        commands['activity'] = self.__controller.navbar.activity_button
+        eventos['aluno'] = self.__controller.navbar.evento_tela_de_aluno
+        eventos['grupo'] = self.__controller.navbar.evento_tela_de_grupo
+        eventos['atividade'] = self.__controller.navbar.evento_tela_de_atividade
 
-        self.navbar = Navbar(master=self, commands=commands)
+        self.navbar = Navbar(master=self, eventos=eventos)
 
-    def create_student_container(self):
-        commands = {}
+    def criar_container_de_aluno(self):
+        eventos = {}
 
-        commands['raffle'] = self.__controller.raffle_button
+        eventos['sortear'] = self.__controller.sortear
 
-        controller = self.__controller.student
-        self.student =\
-            Student(master=self, controller=controller, commands=commands)
+        controller = self.__controller.aluno
+        self.aluno = Aluno(master=self, controller=controller, eventos=eventos)
 
-        self.active_container = 'student'
+        self.container_ativo = 'aluno'
 
-        self.__controller.student.mounted()
+        self.__controller.aluno.evento_montado()
 
-    def create_activity_container(self):
-        commands = {}
+    def criar_container_de_atividade(self):
+        eventos = {}
 
-        commands['raffle'] = self.__controller.raffle_button
+        eventos['sortear'] = self.__controller.sortear
 
-        controller = self.__controller.activity
-        self.activity =\
-            Activity(master=self, controller=controller, commands=commands)
+        controller = self.__controller.atividade
+        self.atividade =\
+            Atividade(master=self, controller=controller, eventos=eventos)
 
-        self.active_container = 'activity'
+        self.container_ativo = 'atividade'
 
-        self.__controller.activity.mounted()
+        self.__controller.atividade.evento_montado()
 
-    def create_group_container(self):
-        self.group = Group(master=self)
-        self.active_container = 'group'
+    def criar_container_de_grupo(self):
+        self.grupo = Grupo(master=self)
+        self.container_ativo = 'grupo'
 
-    def destroy_active_container(self):
-        if self.active_container == 'student':
-            self.student.destroy()
-        elif self.active_container == 'activity':
-            self.activity.destroy()
-        elif self.active_container == 'group':
-            self.group.destroy()
+    def destruir_container_ativo(self):
+        if self.container_ativo == 'aluno':
+            self.aluno.destroy()
+        elif self.container_ativo == 'atividade':
+            self.atividade.destroy()
+        elif self.container_ativo == 'grupo':
+            self.grupo.destroy()
 
-        self.active_container = ''
+        self.container_ativo = ''
 
-    def create_error_window(self, error):
-        self.error_window = ErrorWindow(error=error)
+    def criar_janela_de_erro(self, erro):
+        self.janela_de_erro = JanelaDeErro(erro=erro)
 
-    def create_raffle_window(self, student, activity):
-        self.raffle_window = RaffleWindow(student=student, activity=activity)
+    def criar_janela_de_sorteio(self, aluno, atividade):
+        self.janela_de_sorteio = JanelaDeSorteio(aluno=aluno, atividade=atividade)

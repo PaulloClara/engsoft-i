@@ -1,9 +1,9 @@
 from src.utils.tk import TKUtils
 
 
-class ActivitiesList(TKUtils.ScrollContainer()):
+class ListaDeAtividades(TKUtils.ScrollContainer()):
 
-    def __init__(self, master, commands):
+    def __init__(self, master, eventos):
         cnf, canvas_cnf, viewport_cnf, scrollbar_cnf = {}, {}, {}, {}
 
         cnf['bd'] = 2
@@ -21,23 +21,23 @@ class ActivitiesList(TKUtils.ScrollContainer()):
                          vt_cnf=viewport_cnf, sr_cnf=scrollbar_cnf)
         self.pack(expand=True)
 
-        self.commands = commands
-        self.label_list = []
+        self.eventos = eventos
+        self.atividades = []
 
-    def create_activity_label(self, activity):
+    def adicionar(self, atividade):
         # Container
         cnf, pack = {}, {}
 
         cnf['bd'] = 1
         cnf['bg'] = 'grey'
 
-        label_container =\
-            TKUtils.get_container(master=self.viewport, cnf=cnf, pack=pack)
+        container =\
+            TKUtils.obter_container(master=self.viewport, cnf=cnf, pack=pack)
 
         # Label
         cnf, pack = {}, {}
 
-        cnf['text'] = activity['title']
+        cnf['text'] = atividade['titulo']
         cnf['bg'] = 'blue'
         cnf['fg'] = 'white'
         cnf['width'] = 93
@@ -45,24 +45,24 @@ class ActivitiesList(TKUtils.ScrollContainer()):
 
         pack['side'] = 'left'
 
-        label_container.label =\
-            TKUtils.get_label(master=label_container, cnf=cnf, pack=pack)
+        container.label =\
+            TKUtils.obter_label(master=container, cnf=cnf, pack=pack)
 
         # Raffle Button
         cnf, pack, defs = {}, {}, {}
 
-        defs['type'] = 'activity'
-        defs['value'] = activity
+        defs['tipo'] = 'atividade'
+        defs['valor'] = atividade
 
         cnf['text'] = 'O'
         cnf['bg'] = 'orange'
         cnf['width'] = 2
-        cnf['command'] = lambda evt=None: self.commands['raffle'](defs=defs)
+        cnf['command'] = lambda evt=None: self.eventos['sortear'](defs=defs)
 
         pack['side'] = 'left'
 
-        label_container.button =\
-            TKUtils.get_button(master=label_container, cnf=cnf, pack=pack)
+        container.botao =\
+            TKUtils.obter_botao(master=container, cnf=cnf, pack=pack)
 
         # Remove Button
         cnf, pack = {}, {}
@@ -71,11 +71,11 @@ class ActivitiesList(TKUtils.ScrollContainer()):
         cnf['bg'] = 'red'
         cnf['width'] = 2
         cnf['command'] =\
-            lambda evt=None: self.commands['remove'](activity['activity_id'])
+            lambda evt=None: self.eventos['remover'](atividade['id_da_atividade'])
 
         pack['side'] = 'right'
 
-        label_container.button =\
-            TKUtils.get_button(master=label_container, cnf=cnf, pack=pack)
+        container.botao =\
+            TKUtils.obter_botao(master=container, cnf=cnf, pack=pack)
 
-        self.label_list.append(label_container)
+        self.atividades.append(container)

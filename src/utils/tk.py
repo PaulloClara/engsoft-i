@@ -5,13 +5,19 @@ from src.utils import Utils
 class TKUtils:
 
     @staticmethod
-    def get_label(master, cnf={}, pack={}, grid={}):
-        default_cnf = {}
+    def definir_icone(master, nome_do_icone):
+        arquivo = Utils.obter_caminho(f'src/assets/{nome_do_icone}.png')
+        imagem = tk.PhotoImage(file=arquivo)
+        master.wm_iconphoto(True, imagem)
 
-        default_cnf['text'] = '...'
-        default_cnf['font'] = ('arial', 12, 'bold')
+    @staticmethod
+    def obter_label(master, cnf={}, pack={}, grid={}):
+        cnf_padrao = {}
 
-        label = tk.Label(master=master, cnf=default_cnf)
+        cnf_padrao['text'] = '...'
+        cnf_padrao['font'] = ('arial', 12, 'bold')
+
+        label = tk.Label(master=master, cnf=cnf_padrao)
         label.configure(cnf=cnf)
 
         if grid:
@@ -22,40 +28,40 @@ class TKUtils:
         return label
 
     @staticmethod
-    def get_button(master, cnf={}, pack={}, grid={}):
-        default_cnf = {}
+    def obter_botao(master, cnf={}, pack={}, grid={}):
+        cnf_padrao = {}
 
-        default_cnf['text'] = '...'
-        default_cnf['width'] = 10
-        default_cnf['height'] = 1
-        default_cnf['bd'] = 2
-        default_cnf['pady'] = 6
-        default_cnf['padx'] = 6
-        default_cnf['fg'] = 'white'
-        default_cnf['font'] = ('arial', 12, 'bold')
+        cnf_padrao['text'] = '...'
+        cnf_padrao['width'] = 10
+        cnf_padrao['height'] = 1
+        cnf_padrao['bd'] = 2
+        cnf_padrao['pady'] = 6
+        cnf_padrao['padx'] = 6
+        cnf_padrao['fg'] = 'white'
+        cnf_padrao['font'] = ('arial', 12, 'bold')
 
-        button = tk.Button(master=master, cnf=default_cnf)
-        button.configure(cnf=cnf)
+        botao = tk.Button(master=master, cnf=cnf_padrao)
+        botao.configure(cnf=cnf)
 
         if grid:
-            button.grid(grid)
+            botao.grid(grid)
         else:
-            button.pack(pack)
+            botao.pack(pack)
 
-        return button
+        return botao
 
     @staticmethod
-    def get_input(master, cnf={}, pack={}, grid={}):
-        default_cnf = {}
+    def obter_input(master, cnf={}, pack={}, grid={}):
+        cnf_padrao = {}
 
-        default_cnf['width'] = 20
-        default_cnf['bg'] = 'white'
-        default_cnf['fg'] = 'black'
-        default_cnf['bd'] = 0
-        default_cnf['justify'] = 'left'
-        default_cnf['font'] = ('arial', 12, 'italic')
+        cnf_padrao['width'] = 20
+        cnf_padrao['bg'] = 'white'
+        cnf_padrao['fg'] = 'black'
+        cnf_padrao['bd'] = 0
+        cnf_padrao['justify'] = 'left'
+        cnf_padrao['font'] = ('arial', 12, 'italic')
 
-        _input = tk.Entry(master=master, cnf=default_cnf)
+        _input = tk.Entry(master=master, cnf=cnf_padrao)
         _input.configure(cnf=cnf)
 
         if grid:
@@ -66,7 +72,7 @@ class TKUtils:
         return _input
 
     @staticmethod
-    def get_container(master, cnf={}, pack={}, grid={}):
+    def obter_container(master, cnf={}, pack={}, grid={}):
         container = tk.Frame(master=master, cnf=cnf)
 
         if grid:
@@ -77,16 +83,16 @@ class TKUtils:
         return container
 
     @staticmethod
-    def get_window(title='New Window', size='200x100'):
-        window = tk.Tk()
+    def obter_janela(titulo='Nova Janela', tamanho='200x100'):
+        janela = tk.Tk()
 
-        window.title(title)
-        window.geometry(size)
+        janela.title(titulo)
+        janela.geometry(tamanho)
 
-        return window
+        return janela
 
     @staticmethod
-    def Window():
+    def Janela():
         return tk.Tk
 
     @staticmethod
@@ -96,12 +102,6 @@ class TKUtils:
     @staticmethod
     def ScrollContainer():
         return ScrollContainer
-
-    @staticmethod
-    def set_icon(master, icon_name):
-        file = Utils.get_full_path(f'src/assets/{icon_name}.png')
-        image = tk.PhotoImage(file=file)
-        master.wm_iconphoto(True, image)
 
 
 class ScrollContainer(tk.Frame):
