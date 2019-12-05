@@ -3,6 +3,7 @@ from src.utils import Utils
 
 from src.model.aluno import Aluno
 from src.model.atividade import Atividade
+from src.model.grupo import Grupo
 
 
 class Model:
@@ -13,6 +14,7 @@ class Model:
         self.store = Store()
         self.aluno = Aluno(model=self, controller=self.__controller)
         self.atividade = Atividade(controller=self.__controller, store=self.store)
+        self.grupo = Grupo(controller=self.__controller, store=self.store)
 
     def sortear(self, defs):
         alunos = self.aluno.alunos

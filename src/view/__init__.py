@@ -73,8 +73,16 @@ class View(TKUtils.Janela()):
         self.__controller.atividade.evento_montado()
 
     def criar_container_de_grupo(self):
-        self.grupo = Grupo(master=self)
+        eventos = {}
+
+        eventos['sortear'] = self.__controller.sortear
+
+        controller = self.__controller.grupo
+        self.grupo = Grupo(master=self, controller=controller, eventos=eventos)
+
         self.container_ativo = 'grupo'
+
+        self.__controller.grupo.evento_montado()
 
     def destruir_container_ativo(self):
         if self.container_ativo == 'aluno':
