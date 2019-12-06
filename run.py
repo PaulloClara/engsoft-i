@@ -13,7 +13,11 @@ if __name__ == '__main__':
         tests.iniciar()
     else:
         controller = Controller()
-        model = Model(controller=controller)
         view = View(controller=controller)
+        model = Model(controller=controller)
 
-        controller.iniciar(model=model, view=view)
+        controller.segundo_init(model=model, view=view)
+        view.segundo_init()
+        model.segundo_init()
+
+        controller.iniciar()

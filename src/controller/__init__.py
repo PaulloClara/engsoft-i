@@ -15,15 +15,17 @@ class Controller:
         self.atividade = None
         self.grupo = None
 
-    def iniciar(self, model, view):
+    def segundo_init(self, model, view):
         self.view = view
         self.model = model
 
+    def iniciar(self):
         self.navbar = Navbar(controller=self)
         self.aluno = Aluno(controller=self)
         self.atividade = Atividade(controller=self)
         self.grupo = Grupo(controller=self)
 
+        self.model.iniciar()
         self.view.iniciar()
 
     def sortear(self, defs={}):

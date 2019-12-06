@@ -16,12 +16,6 @@ class View(TKUtils.Janela()):
 
         self.__controller = controller
 
-        self.title('StuKi®')
-        self.geometry('960x480')
-        self.resizable(0, 0)
-
-        TKUtils.definir_icone(master=self, nome_do_icone='icone')
-
         self.grupo = None
         self.navbar = None
         self.aluno = None
@@ -31,6 +25,13 @@ class View(TKUtils.Janela()):
         self.janela_de_sorteio = None
 
         self.container_ativo = ''
+
+    def segundo_init(self):
+        self.title('StuKi®')
+        self.geometry('960x480')
+        self.resizable(0, 0)
+
+        TKUtils.definir_icone(master=self, nome_do_icone='icone')
 
     def iniciar(self):
         self.criar_navbar()

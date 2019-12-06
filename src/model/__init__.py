@@ -11,10 +11,19 @@ class Model:
     def __init__(self, controller):
         self.__controller = controller
 
+        self.store = None
+        self.aluno = None
+        self.atividade = None
+        self.grupo = None
+
+    def segundo_init(self):
         self.store = Store()
         self.aluno = Aluno(model=self, controller=self.__controller)
         self.atividade = Atividade(controller=self.__controller, store=self.store)
         self.grupo = Grupo(controller=self.__controller, store=self.store)
+
+    def iniciar(self):
+        pass
 
     def sortear(self, defs):
         alunos = self.aluno.alunos
