@@ -1,6 +1,6 @@
 from src.utils.tk import TKUtils
 from src.view.grupo.actions import Actions
-from src.view.grupo.cadastro import JanelaDeCadastro
+from src.view.grupo.cadastro import Formulario
 
 
 class Grupo(TKUtils.Container()):
@@ -31,7 +31,7 @@ class Grupo(TKUtils.Container()):
         eventos['cancelar'] = self.__controller.evento_cancelar_cadastro
         eventos['confirmar'] = self.__controller.evento_confirmar_cadastro
 
-        self.janela_de_cadastro = JanelaDeCadastro(eventos=eventos)
+        self.janela_de_cadastro = Formulario(eventos=eventos)
 
     def destruir_janela_de_cadastro(self):
         self.janela_de_cadastro.destroy()

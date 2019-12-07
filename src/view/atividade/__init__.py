@@ -2,7 +2,7 @@ from src.utils.tk import TKUtils
 
 from src.view.atividade.actions import Actions
 from src.view.atividade.lista import ListaDeAtividades
-from src.view.atividade.cadastro import JanelaDeCadastro
+from src.view.atividade.cadastro import Formulario
 
 
 class Atividade(TKUtils.Container()):
@@ -50,7 +50,7 @@ class Atividade(TKUtils.Container()):
         eventos['cancelar'] = self.__controller.evento_cancelar_cadastro
         eventos['confirmar'] = self.__controller.evento_confirmar_cadastro
 
-        self.janela_de_cadastro = JanelaDeCadastro(eventos=eventos)
+        self.janela_de_cadastro = Formulario(eventos=eventos)
 
     def destruir_janela_de_cadastro(self):
         self.janela_de_cadastro.destroy()
