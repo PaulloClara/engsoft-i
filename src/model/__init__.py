@@ -1,9 +1,11 @@
 from src.store import Store
 from src.utils import Utils
 
+from src.model.home import Home
 from src.model.aluno import Aluno
-from src.model.atividade import Atividade
 from src.model.grupo import Grupo
+from src.model.atividade import Atividade
+from src.model.sobre import Sobre
 
 
 class Model:
@@ -18,9 +20,11 @@ class Model:
 
     def segundo_init(self):
         self.store = Store()
-        self.aluno = Aluno(model=self, controller=self.controller)
-        self.atividade = Atividade(controller=self.controller, store=self.store)
+        self.home = Home(model=self)
+        self.aluno = Aluno(model=self)
         self.grupo = Grupo(model=self)
+        self.atividade = Atividade(model=self)
+        self.sobre = Sobre(model=self)
 
     def iniciar(self):
         pass

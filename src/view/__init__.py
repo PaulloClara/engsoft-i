@@ -1,9 +1,11 @@
 from src.utils.tk import TKUtils
 
 from src.view.navbar import Navbar
+from src.view.home import Home
 from src.view.aluno import Aluno
 from src.view.grupo import Grupo
 from src.view.atividade import Atividade
+from src.view.sobre import Sobre
 
 from src.view.janela_de_erro import JanelaDeErro
 from src.view.janela_de_sorteio import JanelaDeSorteio
@@ -17,9 +19,11 @@ class View(TKUtils.Janela()):
         self.controller = controller
 
         self.navbar = None
+        self.home = None
         self.aluno = None
         self.grupo = None
         self.atividade = None
+        self.sobre = None
 
         self.janela_de_erro = None
         self.janela_de_sorteio = None
@@ -46,6 +50,15 @@ class View(TKUtils.Janela()):
         eventos['atividade'] = self.controller.navbar.evento_tela_de_atividade
 
         self.navbar = Navbar(master=self, eventos=eventos)
+
+    def criar_container_home(self):
+        eventos = {}
+        eventos['click'] = self.controller.home.evento_click_no_label
+
+        self.home = Home(master=self, eventos=eventos)
+
+        self.container_ativo = 'home'
+        self.controller.home.evento_elemento_montado()
 
     def criar_container_de_aluno(self):
         eventos = {}
@@ -78,13 +91,20 @@ class View(TKUtils.Janela()):
         self.container_ativo = 'grupo'
         self.controller.grupo.evento_elemento_montado()
 
+    def criar_container_sobre(self):
+        pass
+
     def destruir_container_ativo(self):
-        if self.container_ativo == 'aluno':
+        if self.container_ativo == 'home':
+            self.home.destroy()
+        elif self.container_ativo == 'aluno':
             self.aluno.destroy()
         elif self.container_ativo == 'atividade':
             self.atividade.destroy()
         elif self.container_ativo == 'grupo':
             self.grupo.destroy()
+        elif self.container_ativo == 'sobre':
+            self.sobre.destroy()
 
         self.container_ativo = ''
 

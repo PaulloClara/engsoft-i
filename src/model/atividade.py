@@ -1,8 +1,9 @@
 class Atividade:
 
-    def __init__(self, controller, store):
-        self.__store = store
-        self.__controller = controller
+    def __init__(self, model):
+        self.model = model
+        self.store = self.model.store
+        self.controller = self.model.controller.atividade
 
         self.tabela = 'atividade'
         self.colunas = ['id_da_atividade', 'titulo', 'desc']
@@ -12,25 +13,25 @@ class Atividade:
         self.obter_atividades()
 
     def obter_atividades(self):
-        codigo_sql = self.__store.select(tabela=self.tabela, colunas=self.colunas)
+        codigo_sql = self.store.select(tabela=self.tabela, colunas=self.colunas)
         self.atividades =\
-            self.__store.executar(codigo_sql=codigo_sql, colunas=self.colunas)
+            self.store.executar(codigo_sql=codigo_sql, colunas=self.colunas)
 
     def cadastrar_atividade(self, atividade):
         atividade['titulo'] = atividade['titulo'].capitalize()
         valores = [atividade['titulo'], atividade['desc']]
 
         codigo_sql =\
-            self.__store.insert(
+            self.store.insert(
                 tabela=self.tabela, colunas=self.colunas[1:], valores=valores)
-        self.__store.executar(codigo_sql=codigo_sql)
+        self.store.executar(codigo_sql=codigo_sql)
 
         self.obter_atividades()
 
     def remover_atividade(self, id_da_atividade):
         condicao = f'id_da_atividade = {id_da_atividade}'
-        codigo_sql = self.__store.delete(tabela=self.tabela, condicao=condicao)
-        self.__store.executar(codigo_sql=codigo_sql)
+        codigo_sql = self.store.delete(tabela=self.tabela, condicao=condicao)
+        self.store.executar(codigo_sql=codigo_sql)
 
         self.obter_atividades()
 

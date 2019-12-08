@@ -3,9 +3,10 @@ from src.utils import Utils
 
 class Aluno:
 
-    def __init__(self, model, controller):
-        self.__model = model
-        self.__controller = controller
+    def __init__(self, model):
+        self.model = model
+        self.store = self.model.store
+        self.controller = self.model.controller.aluno
 
         self.alunos = []
 
