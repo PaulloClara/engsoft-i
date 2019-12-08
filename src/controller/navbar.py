@@ -1,25 +1,42 @@
 class Navbar:
 
     def __init__(self, controller):
-        self.__controller = controller
+        self.view = controller.view
 
-    def evento_tela_de_aluno(self):
-        if (self.__controller.view.container_ativo == 'aluno'):
+    def evento_tela_home(self):
+        if (self.view.container_ativo == 'home'):
             return
 
-        self.__controller.view.destruir_container_ativo()
-        self.__controller.view.criar_container_de_aluno()
+        self.view.destruir_container_ativo()
+        self.view.criar_container_home()
 
-    def evento_tela_de_atividade(self):
-        if (self.__controller.view.container_ativo == 'atividade'):
+    def evento_tela_aluno(self):
+        if (self.view.container_ativo == 'aluno'):
             return
 
-        self.__controller.view.destruir_container_ativo()
-        self.__controller.view.criar_container_de_atividade()
+        self.view.destruir_container_ativo()
+        self.view.criar_container_aluno()
 
-    def evento_tela_de_grupo(self):
-        if (self.__controller.view.container_ativo == 'grupo'):
+    def evento_tela_atividade(self):
+        if (self.view.container_ativo == 'atividade'):
             return
 
-        self.__controller.view.destruir_container_ativo()
-        self.__controller.view.criar_container_de_grupo()
+        self.view.destruir_container_ativo()
+        self.view.criar_container_atividade()
+
+    def evento_tela_grupo(self):
+        if (self.view.container_ativo == 'grupo'):
+            return
+
+        self.view.destruir_container_ativo()
+        self.view.criar_container_grupo()
+
+    def evento_tela_sobre(self):
+        if (self.view.container_ativo == 'sobre'):
+            return
+
+        self.view.destruir_container_ativo()
+        self.view.criar_container_sobre()
+
+    def evento_elemento_montado(self):
+        self.view.navbar.iniciar()

@@ -32,24 +32,27 @@ class View(TKUtils.Janela()):
 
     def segundo_init(self):
         self.title('StuKi®')
-        self.geometry('960x480')
+        self.geometry('960x490')
         self.resizable(0, 0)
 
         TKUtils.definir_icone(master=self, nome_do_icone='icone')
 
     def iniciar(self):
         self.criar_navbar()
-        self.criar_container_de_aluno()
+        self.criar_container_aluno()
 
         self.mainloop()
 
     def criar_navbar(self):
         eventos = {}
-        eventos['aluno'] = self.controller.navbar.evento_tela_de_aluno
-        eventos['grupo'] = self.controller.navbar.evento_tela_de_grupo
-        eventos['atividade'] = self.controller.navbar.evento_tela_de_atividade
+        eventos['home'] = self.controller.navbar.evento_tela_home
+        eventos['aluno'] = self.controller.navbar.evento_tela_aluno
+        eventos['grupo'] = self.controller.navbar.evento_tela_grupo
+        eventos['atividade'] = self.controller.navbar.evento_tela_atividade
+        eventos['sobre'] = self.controller.navbar.evento_tela_sobre
 
         self.navbar = Navbar(master=self, eventos=eventos)
+        self.controller.navbar.evento_elemento_montado()
 
     def criar_container_home(self):
         eventos = {}
@@ -60,7 +63,7 @@ class View(TKUtils.Janela()):
         self.container_ativo = 'home'
         self.controller.home.evento_elemento_montado()
 
-    def criar_container_de_aluno(self):
+    def criar_container_aluno(self):
         eventos = {}
         eventos['sortear'] = self.controller.sortear
 
@@ -70,7 +73,7 @@ class View(TKUtils.Janela()):
         self.container_ativo = 'aluno'
         self.controller.aluno.evento_elemento_montado()
 
-    def criar_container_de_atividade(self):
+    def criar_container_atividade(self):
         eventos = {}
         eventos['sortear'] = self.controller.sortear
 
@@ -81,7 +84,7 @@ class View(TKUtils.Janela()):
         self.container_ativo = 'atividade'
         self.controller.atividade.evento_elemento_montado()
 
-    def criar_container_de_grupo(self):
+    def criar_container_grupo(self):
         eventos = {}
         eventos['sortear'] = self.controller.sortear
 
