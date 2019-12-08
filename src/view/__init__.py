@@ -14,11 +14,11 @@ class View(TKUtils.Janela()):
     def __init__(self, controller):
         super().__init__()
 
-        self.__controller = controller
+        self.controller = controller
 
-        self.grupo = None
         self.navbar = None
         self.aluno = None
+        self.grupo = None
         self.atividade = None
 
         self.janela_de_erro = None
@@ -41,49 +41,42 @@ class View(TKUtils.Janela()):
 
     def criar_navbar(self):
         eventos = {}
-
-        eventos['aluno'] = self.__controller.navbar.evento_tela_de_aluno
-        eventos['grupo'] = self.__controller.navbar.evento_tela_de_grupo
-        eventos['atividade'] = self.__controller.navbar.evento_tela_de_atividade
+        eventos['aluno'] = self.controller.navbar.evento_tela_de_aluno
+        eventos['grupo'] = self.controller.navbar.evento_tela_de_grupo
+        eventos['atividade'] = self.controller.navbar.evento_tela_de_atividade
 
         self.navbar = Navbar(master=self, eventos=eventos)
 
     def criar_container_de_aluno(self):
         eventos = {}
+        eventos['sortear'] = self.controller.sortear
 
-        eventos['sortear'] = self.__controller.sortear
-
-        controller = self.__controller.aluno
+        controller = self.controller.aluno
         self.aluno = Aluno(master=self, controller=controller, eventos=eventos)
 
         self.container_ativo = 'aluno'
-
-        self.__controller.aluno.evento_montado()
+        self.controller.aluno.evento_elemento_montado()
 
     def criar_container_de_atividade(self):
         eventos = {}
+        eventos['sortear'] = self.controller.sortear
 
-        eventos['sortear'] = self.__controller.sortear
-
-        controller = self.__controller.atividade
+        controller = self.controller.atividade
         self.atividade =\
             Atividade(master=self, controller=controller, eventos=eventos)
 
         self.container_ativo = 'atividade'
-
-        self.__controller.atividade.evento_montado()
+        self.controller.atividade.evento_elemento_montado()
 
     def criar_container_de_grupo(self):
         eventos = {}
+        eventos['sortear'] = self.controller.sortear
 
-        eventos['sortear'] = self.__controller.sortear
-
-        controller = self.__controller.grupo
+        controller = self.controller.grupo
         self.grupo = Grupo(master=self, controller=controller, eventos=eventos)
 
         self.container_ativo = 'grupo'
-
-        self.__controller.grupo.evento_montado()
+        self.controller.grupo.evento_elemento_montado()
 
     def destruir_container_ativo(self):
         if self.container_ativo == 'aluno':

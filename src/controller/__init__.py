@@ -12,8 +12,8 @@ class Controller:
 
         self.navbar = None
         self.aluno = None
-        self.atividade = None
         self.grupo = None
+        self.atividade = None
 
     def segundo_init(self, model, view):
         self.view = view

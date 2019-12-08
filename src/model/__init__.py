@@ -9,7 +9,7 @@ from src.model.grupo import Grupo
 class Model:
 
     def __init__(self, controller):
-        self.__controller = controller
+        self.controller = controller
 
         self.store = None
         self.aluno = None
@@ -18,9 +18,9 @@ class Model:
 
     def segundo_init(self):
         self.store = Store()
-        self.aluno = Aluno(model=self, controller=self.__controller)
-        self.atividade = Atividade(controller=self.__controller, store=self.store)
-        self.grupo = Grupo(controller=self.__controller, store=self.store)
+        self.aluno = Aluno(model=self, controller=self.controller)
+        self.atividade = Atividade(controller=self.controller, store=self.store)
+        self.grupo = Grupo(model=self)
 
     def iniciar(self):
         pass

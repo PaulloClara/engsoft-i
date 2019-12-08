@@ -1,35 +1,53 @@
 from src.utils.tk import TKUtils
 from src.view.grupo.actions import Actions
 from src.view.grupo.cadastro import Formulario
+from src.view.grupo.lista import ListaDeGrupos
 
 
 class Grupo(TKUtils.Container()):
 
     def __init__(self, master, controller, eventos):
         super().__init__(master=master)
-        self.pack()
 
         self.eventos = eventos
-        self.__controller = controller
+        self.controller = controller
 
         self.actions = None
         self.janela_de_cadastro = None
 
+    def iniciar(self):
+        self.criar_lista_de_grupos()
         self.criar_actions()
+
+        self.pack(side='bottom')
+
+    def criar_lista_de_grupos(self):
+        eventos = {}
+
+        eventos['sortear'] = self.eventos['sortear']
+        eventos['remover'] = self.controller.evento_remover_grupo
+
+        self.lista_de_grupos = ListaDeGrupos(master=self, eventos=eventos)
+
+    def destruir_lista_de_grupos(self):
+        for grupo in self.lista_de_grupos.grupos:
+            grupo.destroy()
+
+        self.lista_de_grupos.grupos = []
 
     def criar_actions(self):
         eventos = {}
 
         eventos['sortear'] = self.eventos['sortear']
-        eventos['cadastrar'] = self.__controller.evento_cadastrar
+        eventos['cadastrar'] = self.controller.evento_cadastrar
 
         self.actions = Actions(master=self, eventos=eventos)
 
     def criar_janela_de_cadastro(self):
         eventos = {}
 
-        eventos['cancelar'] = self.__controller.evento_cancelar_cadastro
-        eventos['confirmar'] = self.__controller.evento_confirmar_cadastro
+        eventos['cancelar'] = self.controller.evento_cancelar_cadastro
+        eventos['confirmar'] = self.controller.evento_confirmar_cadastro
 
         self.janela_de_cadastro = Formulario(eventos=eventos)
 

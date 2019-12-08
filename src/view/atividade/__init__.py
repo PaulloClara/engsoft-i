@@ -9,23 +9,25 @@ class Atividade(TKUtils.Container()):
 
     def __init__(self, master, controller, eventos):
         super().__init__(master=master)
-        self.pack(side='bottom')
 
         self.eventos = eventos
-        self.__controller = controller
+        self.controller = controller
 
         self.actions = None
         self.lista_de_atividades = None
         self.janela_de_cadastro = None
 
+    def iniciar(self):
         self.criar_lista_de_atividades()
         self.criar_actions()
+
+        self.pack(side='bottom')
 
     def criar_actions(self):
         eventos = {}
 
         eventos['sortear'] = self.eventos['sortear']
-        eventos['cadastrar'] = self.__controller.evento_cadastrar
+        eventos['cadastrar'] = self.controller.evento_cadastrar
 
         self.actions = Actions(master=self, eventos=eventos)
 
@@ -33,7 +35,7 @@ class Atividade(TKUtils.Container()):
         eventos = {}
 
         eventos['sortear'] = self.eventos['sortear']
-        eventos['remover'] = self.__controller.evento_remover_atividade
+        eventos['remover'] = self.controller.evento_remover_atividade
 
         if not self.lista_de_atividades:
             self.lista_de_atividades =\
@@ -47,8 +49,8 @@ class Atividade(TKUtils.Container()):
 
     def criar_janela_de_cadastro(self):
         eventos = {}
-        eventos['cancelar'] = self.__controller.evento_cancelar_cadastro
-        eventos['confirmar'] = self.__controller.evento_confirmar_cadastro
+        eventos['cancelar'] = self.controller.evento_cancelar_cadastro
+        eventos['confirmar'] = self.controller.evento_confirmar_cadastro
 
         self.janela_de_cadastro = Formulario(eventos=eventos)
 

@@ -1,32 +1,43 @@
 class Grupo:
 
     def __init__(self, controller):
-        self.__controller = controller
+        self.view = controller.view
+        self.model = controller.model
+
+    def carregar_grupos(self):
+        for grupo in self.model.grupo.grupos:
+            self.view.grupo.lista_de_grupos.adicionar(grupo=grupo)
 
     def evento_cadastrar(self):
-        view = self.__controller.view.grupo
-
-        view.criar_janela_de_cadastro()
+        self.view.grupo.criar_janela_de_cadastro()
 
     def evento_cancelar_cadastro(self):
-        view = self.__controller.view.grupo
+        self.view.grupo.destruir_janela_de_cadastro()
 
-        view.destruir_janela_de_cadastro()
+    def evento_remover_grupo(self, id_do_grupo):
+        self.model.grupo.remover_grupo(id_do_grupo=id_do_grupo)
+
+        self.view.grupo.destruir_lista_de_grupos()
+        self.carregar_grupos()
 
     def evento_confirmar_cadastro(self):
-        pass
-        # view = self.__controller.view.grupo
-        # model = self.__controller.model.grupo
-        #
-        # formulario = view.janela_de_cadastro.obter_campos()
-        #
-        # estado_do_formulario = model.validar_campos(formulario=formulario)
-        # if estado_do_formulario != 'ok':
-        #     self.__controller.view.criar_janela_de_erro(erro=estado_do_formulario)
-        #     return
-        #
-        # model.cadastrar_grupo(grupo=formulario)
-        # view.destruir_janela_de_cadastro()
+        formulario = self.view.grupo.janela_de_cadastro.obter_campos()
 
-    def evento_montado(self):
-        pass
+        estado_do_formulario = self.model.grupo.validar_campos(formulario=formulario)
+        if estado_do_formulario != 'ok':
+            self.view.grupo.criar_janela_de_erro(erro=estado_do_formulario)
+            return
+
+        grupos = self.model.grupo.gerar_grupos(formulario=formulario)
+
+        for grupo in grupos:
+            self.model.grupo.cadastrar_grupo(grupo=grupo)
+
+        self.view.grupo.destruir_janela_de_cadastro()
+
+        self.view.grupo.destruir_lista_de_grupos()
+        self.carregar_grupos()
+
+    def evento_elemento_montado(self):
+        self.view.grupo.iniciar()
+        self.carregar_grupos()
