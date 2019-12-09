@@ -13,32 +13,34 @@ class Atividade:
         self.obter_atividades()
 
     def obter_atividade(self, id_da_atividade):
-        condicao = f'id_da_atividade == "{id_da_atividade}"'
-        codigo_sql =\
-            self.store.select(tabela=self.tabela, colunas=self.colunas, condicao=condicao)
+        tab, cols = self.tabela, self.colunas
+        con = f'id_da_atividade == "{id_da_atividade}"'
 
-        return self.store.executar(codigo_sql=codigo_sql, colunas=self.colunas)
+        sql = self.store.select(tabela=tab, colunas=cols, condicao=con)
+
+        return self.store.executar(codigo_sql=sql, colunas=cols)
 
     def obter_atividades(self):
-        codigo_sql = self.store.select(tabela=self.tabela, colunas=self.colunas)
-        self.atividades =\
-            self.store.executar(codigo_sql=codigo_sql, colunas=self.colunas)
+        tab, cols = self.tabela, self.colunas
+
+        sql = self.store.select(tabela=tab, colunas=cols)
+        self.atividades = self.store.executar(codigo_sql=sql, colunas=cols)
 
     def cadastrar_atividade(self, atividade):
-        atividade['titulo'] = atividade['titulo'].capitalize()
-        valores = [atividade['titulo'], atividade['desc']]
+        tab, cols = self.tabela, self.colunas[1:]
+        vals = [atividade['titulo'].capitalize(), atividade['desc']]
 
-        codigo_sql =\
-            self.store.insert(
-                tabela=self.tabela, colunas=self.colunas[1:], valores=valores)
-        self.store.executar(codigo_sql=codigo_sql)
+        sql = self.store.insert(tabela=tab, colunas=cols, valores=vals)
+        self.store.executar(codigo_sql=sql)
 
         self.obter_atividades()
 
     def remover_atividade(self, id_da_atividade):
-        condicao = f'id_da_atividade = {id_da_atividade}'
-        codigo_sql = self.store.delete(tabela=self.tabela, condicao=condicao)
-        self.store.executar(codigo_sql=codigo_sql)
+        tab, cols = self.tabela, self.colunas
+        con = f'id_da_atividade = {id_da_atividade}'
+
+        sql = self.store.delete(tabela=tab, condicao=con)
+        self.store.executar(codigo_sql=sql)
 
         self.obter_atividades()
 
@@ -49,7 +51,7 @@ class Atividade:
         if formulario['desc'] == '':
             return 'O campo "Descrição" não pode estar vazio'
 
-        return 'ok'
+        return None
 
     def limpar_formulario(self, formulario):
         formulario['titulo'] = ''

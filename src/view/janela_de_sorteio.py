@@ -3,46 +3,38 @@ from src.utils.tk import TKUtils
 
 class JanelaDeSorteio(TKUtils.Janela()):
 
-    def __init__(self, aluno, atividade):
+    def __init__(self, elemento, atividade):
         super().__init__()
 
-        self.title('Grande Felizardo(a)')
-        self.geometry(f'{len(aluno) * 18 + 100}x100')
-        self.resizable(0, 0)
-
-        self.nome_do_aluno = aluno
-        self.titulo_da_atividade = atividade
+        self.elemento = elemento
+        self.atividade = atividade
 
         self.container = None
-        self.label_do_aluno = None
+        self.label_do_elemento = None
         self.label_da_atividade = None
-        self.botao_confirmar = None
 
-        self.criar_container()
-        self.criar_label_do_aluno()
-        self.criar_label_da_atividade()
+    def iniciar(self):
+        self.title('Grande Felizardo(a)')
+        self.geometry(f'{len(self.elemento) * 18 + 100}x100')
+        self.resizable(0, 0)
+
+        self.container = self.criar_container()
+
+        texto = f'Aluno: {self.elemento}'
+        self.label_do_elemento = self.criar_label(texto=texto, cor='red')
+
+        texto = f'Atividade: {self.atividade["titulo"]}'
+        self.label_do_elemento = self.criar_label(texto=texto, cor='green')
 
     def criar_container(self):
-        self.container = TKUtils.obter_container(master=self)
+        return TKUtils.obter_container(master=self)
 
-    def criar_label_do_aluno(self):
+    def criar_label(self, texto, cor):
         cnf, pack = {}, {}
 
-        cnf['text'] = f'Aluno: {self.nome_do_aluno}'
+        cnf['text'] = texto
         cnf['bd'] = 4
-        cnf['fg'] = 'red'
-        cnf['font'] = ('arial', 16, 'bold')
+        cnf['fg'] = cor
+        cnf['font'] = ('times new roman', 22, 'bold')
 
-        self.label_do_aluno =\
-            TKUtils.obter_label(master=self.container, cnf=cnf, pack=pack)
-
-    def criar_label_da_atividade(self):
-        cnf, pack = {}, {}
-
-        cnf['text'] = f'Atividade: {self.titulo_da_atividade}'
-        cnf['bd'] = 4
-        cnf['fg'] = 'blue'
-        cnf['font'] = ('arial', 16, 'bold')
-
-        self.label_da_atividade =\
-            TKUtils.obter_label(master=self.container, cnf=cnf, pack=pack)
+        return TKUtils.obter_label(master=self.container, cnf=cnf, pack=pack)

@@ -4,7 +4,7 @@ from src.utils.tk import TKUtils
 class Actions(TKUtils.Container()):
 
     def __init__(self, master, eventos):
-        super().__init__(master=master, cnf={'bd': 10})
+        super().__init__(master=master, bd=10)
 
         self.eventos = eventos
 
@@ -27,7 +27,8 @@ class Actions(TKUtils.Container()):
 
         pack['side'] = 'left'
 
-        self.botao_ordenar = TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
+        self.botao_ordenar =\
+            TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
 
     def criar_botao_cadastrar(self):
         cnf, pack = {}, {}
@@ -39,4 +40,5 @@ class Actions(TKUtils.Container()):
 
         pack['side'] = 'left'
 
-        self.botao_cadastrar = TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
+        self.botao_cadastrar =\
+            TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)

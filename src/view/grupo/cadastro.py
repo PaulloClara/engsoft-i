@@ -12,11 +12,11 @@ class Formulario(JanelaDeCadastro):
         self.campo_nome = {}
         self.campo_quantidade = {}
 
+    def iniciar(self):
+        super().iniciar(texto='Gerar')
+
         self.criar_campo_nome()
         self.criar_campo_quantidade()
-
-        self.criar_botao_cancelar()
-        self.criar_botao_confirmar()
 
     def obter_campos(self):
         campos = {}

@@ -22,5 +22,4 @@ class Home:
 
     def evento_elemento_montado(self):
         self.view.home.iniciar()
-
         self.carregar_apresentacoes()

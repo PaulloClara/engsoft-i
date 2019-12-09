@@ -10,9 +10,6 @@ class ListaDeElementos(Listagem):
         self.eventos = eventos
         self.elementos = []
 
-    def iniciar(self):
-        pass
-
     def adicionar(self, elemento):
         container = self.criar_container(master=self.viewport)
 

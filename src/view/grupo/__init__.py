@@ -1,4 +1,5 @@
 from src.utils.tk import TKUtils
+
 from src.view.grupo.actions import Actions
 from src.view.grupo.cadastro import Formulario
 from src.view.grupo.lista import ListaDeGrupos
@@ -13,11 +14,15 @@ class Grupo(TKUtils.Container()):
         self.controller = controller
 
         self.actions = None
+        self.lista_de_grupos = None
         self.janela_de_cadastro = None
 
     def iniciar(self):
-        self.criar_lista_de_grupos()
         self.criar_actions()
+        self.criar_lista_de_grupos()
+
+        self.lista_de_grupos.iniciar()
+        self.actions.iniciar()
 
         self.pack(side='bottom')
 
@@ -50,6 +55,7 @@ class Grupo(TKUtils.Container()):
         eventos['confirmar'] = self.controller.evento_confirmar_cadastro
 
         self.janela_de_cadastro = Formulario(eventos=eventos)
+        self.janela_de_cadastro.iniciar()
 
     def destruir_janela_de_cadastro(self):
         self.janela_de_cadastro.destroy()

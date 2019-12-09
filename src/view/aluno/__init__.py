@@ -10,14 +10,17 @@ class Aluno(TKUtils.Container()):
         super().__init__(master=master)
 
         self.eventos = eventos
-        self.__controller = controller
+        self.controller = controller
 
         self.actions = None
         self.lista_de_alunos = None
 
     def iniciar(self):
-        self.criar_lista_de_alunos()
         self.criar_actions()
+        self.criar_lista_de_alunos()
+
+        self.lista_de_alunos.iniciar()
+        self.actions.iniciar()
 
         self.pack(side='bottom')
 
@@ -33,6 +36,6 @@ class Aluno(TKUtils.Container()):
         eventos = {}
 
         eventos['sortear'] = self.eventos['sortear']
-        eventos['arquivo'] = self.__controller.evento_carregar_arquivo
+        eventos['arquivo'] = self.controller.evento_carregar_arquivo
 
         self.actions = Actions(master=self, eventos=eventos)

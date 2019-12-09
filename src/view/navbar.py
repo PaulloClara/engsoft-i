@@ -30,7 +30,7 @@ class Navbar(TKUtils.Container()):
         cnf['bg'] = 'orange'
         cnf['width'] = 28
         cnf['pady'] = 9
-        cnf['font'] = ('arial', 14, 'bold')
+        cnf['font'] = ('times new roman', 15, 'bold')
         cnf['command'] = self.eventos['home']
 
         pack['side'] = 'left'
@@ -44,7 +44,7 @@ class Navbar(TKUtils.Container()):
         cnf['bg'] = 'red'
         cnf['width'] = 14
         cnf['pady'] = 9
-        cnf['font'] = ('arial', 14, 'bold')
+        cnf['font'] = ('times new roman', 15, 'bold')
         cnf['command'] = self.eventos['aluno']
 
         pack['side'] = 'left'
@@ -58,12 +58,13 @@ class Navbar(TKUtils.Container()):
         cnf['bg'] = 'blue'
         cnf['width'] = 14
         cnf['pady'] = 9
-        cnf['font'] = ('arial', 14, 'bold')
+        cnf['font'] = ('times new roman', 15, 'bold')
         cnf['command'] = self.eventos['atividade']
 
         pack['side'] = 'left'
 
-        self.botao_atividade = TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
+        self.botao_atividade =\
+            TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
 
     def criar_botao_grupo(self):
         cnf, pack = {}, {}
@@ -72,7 +73,7 @@ class Navbar(TKUtils.Container()):
         cnf['bg'] = 'green'
         cnf['width'] = 14
         cnf['pady'] = 9
-        cnf['font'] = ('arial', 14, 'bold')
+        cnf['font'] = ('times new roman', 15, 'bold')
         cnf['command'] = self.eventos['grupo']
 
         pack['side'] = 'left'
@@ -86,7 +87,7 @@ class Navbar(TKUtils.Container()):
         cnf['bg'] = 'grey'
         cnf['width'] = 14
         cnf['pady'] = 9
-        cnf['font'] = ('arial', 14, 'bold')
+        cnf['font'] = ('times new roman', 15, 'bold')
         cnf['command'] = self.eventos['sobre']
 
         pack['side'] = 'left'

@@ -4,16 +4,18 @@ from src.utils.tk import TKUtils
 class Actions(TKUtils.Container()):
 
     def __init__(self, master, eventos):
-        super().__init__(master=master, cnf={'bd': 10})
-        self.pack(expand=True)
+        super().__init__(master=master, bd=10)
 
         self.eventos = eventos
 
         self.botao_de_sorteio = None
         self.botao_de_cadastro = None
 
+    def iniciar(self):
         self.criar_botao_de_sorteio()
         self.criar_botao_de_cadastro()
+
+        self.pack(expand=True)
 
     def criar_botao_de_sorteio(self):
         cnf, pack = {}, {}
@@ -21,11 +23,12 @@ class Actions(TKUtils.Container()):
         cnf['text'] = 'Sortear Grupo'
         cnf['bg'] = 'blue'
         cnf['width'] = 20
-        # cnf['command'] = self.eventos['sortear']
+        cnf['command'] = self.eventos['sortear']
 
         pack['side'] = 'left'
 
-        self.botao_de_sorteio = TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
+        self.botao_de_sorteio =\
+            TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
 
     def criar_botao_de_cadastro(self):
         cnf, pack = {}, {}
@@ -37,4 +40,5 @@ class Actions(TKUtils.Container()):
 
         pack['side'] = 'right'
 
-        self.botao_de_cadastro = TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
+        self.botao_de_cadastro =\
+            TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)

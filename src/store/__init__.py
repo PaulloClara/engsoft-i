@@ -5,9 +5,12 @@ from src.utils import Utils
 class Store:
 
     def __init__(self):
-        self.caminho_do_bd = Utils.obter_caminho('src/store/banco_de_dados.sqlite')
+        self.caminho = Utils.obter_caminho('src/store/banco_de_dados.sqlite')
         self.conectado = False
         self.conexao = None
+
+    def obter_arquivo(self, caminho, modo):
+        return open(Utils.obter_caminho(caminho), mode=modo)
 
     def executar(self, codigo_sql, converter=True, colunas=[]):
         if self.conectado:
@@ -43,7 +46,7 @@ class Store:
     def conectar(self):
         self.conectado = True
 
-        return sqlite3.connect(self.caminho_do_bd)
+        return sqlite3.connect(self.caminho)
 
     def converter(self, tabela, colunas):
         resultado, resultado_parcial = [], {}

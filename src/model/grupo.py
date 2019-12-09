@@ -16,26 +16,35 @@ class Grupo:
         self.obter_grupos()
 
     def obter_grupo(self, id_do_grupo):
-        condicao = f'id_do_grupo == "{id_do_grupo}"'
-        codigo_sql =\
-            self.store.select(tabela=self.tabela, colunas=self.colunas, condicao=condicao)
+        tab, cols = self.tabela, self.colunas
+        con = f'id_do_grupo == "{id_do_grupo}"'
 
-        return self.store.executar(codigo_sql=codigo_sql, colunas=self.colunas)
+        sql = self.store.select(tabela=tab, colunas=cols, condicao=con)
+
+        return self.store.executar(codigo_sql=sql, colunas=cols)
 
     def obter_grupos(self):
-        codigo_sql = self.store.select(tabela=self.tabela, colunas=self.colunas)
-        self.grupos =\
-            self.store.executar(codigo_sql=codigo_sql, colunas=self.colunas)
+        tab, cols = self.tabela, self.colunas
+
+        sql = self.store.select(tabela=tab, colunas=cols)
+        self.grupos = self.store.executar(codigo_sql=sql, colunas=cols)
 
     def cadastrar_grupo(self, grupo):
-        grupo['nome'] = grupo['nome'].capitalize()
-        tamanho = len(grupo['integrantes'])
-        valores = [grupo['nome'], tamanho, grupo['integrantes']]
+        tab, cols = self.tabela, self.colunas[1:]
+        vals = [grupo['nome'].capitalize(), len(grupo['integrantes']),
+                grupo['integrantes']]
 
-        codigo_sql =\
-            self.store.insert(
-                tabela=self.tabela, colunas=self.colunas[1:], valores=valores)
-        self.store.executar(codigo_sql=codigo_sql)
+        sql = self.store.insert(tabela=tab, colunas=cols, valores=vals)
+        self.store.executar(codigo_sql=sql)
+
+        self.obter_grupos()
+
+    def remover_grupo(self, id_do_grupo):
+        tab = self.tabela
+        con = f'id_do_grupo = {id_do_grupo}'
+
+        sql = self.store.delete(tabela=tab, condicao=con)
+        self.store.executar(codigo_sql=sql)
 
         self.obter_grupos()
 
@@ -43,7 +52,7 @@ class Grupo:
         nome_base = formulario['nome']
         alunos_por_grupo = int(formulario['quantidade'])
 
-        alunos = self.model.aluno.alunos
+        alunos = self.model.aluno.alunos.copy()
 
         grupos_gerados = []
         quantidade_de_grupos = len(alunos) // alunos_por_grupo
@@ -60,31 +69,27 @@ class Grupo:
             grupo['nome'] = f'{nome_base}-{i + 1}'
 
             for j in range(alunos_por_grupo):
-                index_do_aluno = Utils.obter_inteiro_aleatorio(0, len(alunos) - 1)
+                fim = len(alunos) - 1
+                index = Utils.obter_inteiro_aleatorio(inicio=0, fim=fim)
 
-                grupo['integrantes'].append(alunos[index_do_aluno])
+                grupo['integrantes'].append(alunos[index])
                 grupo['tamanho'] += 1
 
-                del alunos[index_do_aluno]
+                del alunos[index]
 
         # alunos sem grupo
-        for aluno in alunos:
-            index_do_grupo = Utils.obter_inteiro_aleatorio(0, quantidade_de_grupos - 1)
+        fim = quantidade_de_grupos - 1
 
-            grupos_gerados[index_do_grupo]['integrantes'].append(aluno)
-            grupos_gerados[index_do_grupo]['tamanho'] += 1
+        for aluno in alunos:
+            index = Utils.obter_inteiro_aleatorio(inicio=0, fim=fim)
+
+            grupos_gerados[index]['integrantes'].append(aluno)
+            grupos_gerados[index]['tamanho'] += 1
 
         return grupos_gerados
 
-    def remover_grupo(self, id_do_grupo):
-        condicao = f'id_do_grupo = {id_do_grupo}'
-        codigo_sql = self.store.delete(tabela=self.tabela, condicao=condicao)
-        self.store.executar(codigo_sql=codigo_sql)
-
-        self.obter_grupos()
-
     def validar_campos(self, formulario):
-        return 'ok'
+        return None
 
     def limpar_formulario(self, formulario):
         formulario['nome'] = ''

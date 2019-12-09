@@ -41,5 +41,4 @@ class Controller:
             self.view.criar_janela_de_erro(erro=erro)
             return
 
-        self.view.criar_janela_de_sorteio(
-            aluno=aluno, atividade=atividade['titulo'])
+        self.view.criar_janela_de_sorteio(aluno=aluno, atividade=atividade)

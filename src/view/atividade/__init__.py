@@ -18,8 +18,11 @@ class Atividade(TKUtils.Container()):
         self.janela_de_cadastro = None
 
     def iniciar(self):
-        self.criar_lista_de_atividades()
         self.criar_actions()
+        self.criar_lista_de_atividades()
+
+        self.lista_de_atividades.iniciar()
+        self.actions.iniciar()
 
         self.pack(side='bottom')
 
@@ -53,6 +56,7 @@ class Atividade(TKUtils.Container()):
         eventos['confirmar'] = self.controller.evento_confirmar_cadastro
 
         self.janela_de_cadastro = Formulario(eventos=eventos)
+        self.janela_de_cadastro.iniciar()
 
     def destruir_janela_de_cadastro(self):
         self.janela_de_cadastro.destroy()

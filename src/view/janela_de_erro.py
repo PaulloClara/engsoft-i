@@ -36,7 +36,8 @@ class JanelaDeErro(TKUtils.Janela()):
 
         pack['pady'] = 10
 
-        self.label_de_erro = TKUtils.obter_label(master=self, cnf=cnf, pack=pack)
+        self.label_de_erro =\
+            TKUtils.obter_label(master=self, cnf=cnf, pack=pack)
 
     def criar_botao_confirmar(self):
         cnf, pack = {}, {}
@@ -48,4 +49,5 @@ class JanelaDeErro(TKUtils.Janela()):
         pack['pady'] = 25
         pack['side'] = 'bottom'
 
-        self.botao_confirmar = TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
+        self.botao_confirmar =\
+            TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)

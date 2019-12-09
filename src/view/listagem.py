@@ -19,6 +19,8 @@ class Listagem(TKUtils.ScrollContainer()):
 
         super().__init__(master=master, cnf=cnf, cs_cnf=canvas_cnf,
                          vt_cnf=viewport_cnf, sr_cnf=scrollbar_cnf)
+
+    def iniciar(self):
         self.pack(expand=True)
 
     def criar_container(self, master):

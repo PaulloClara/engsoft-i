@@ -6,8 +6,8 @@ from random import randint
 class Utils:
 
     @staticmethod
-    def obter_inteiro_aleatorio(start, end):
-        return randint(start, end)
+    def obter_inteiro_aleatorio(inicio, fim):
+        return randint(inicio, fim)
 
     @staticmethod
     def obter_caminho_atual():

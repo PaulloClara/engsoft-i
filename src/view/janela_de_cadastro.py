@@ -7,16 +7,21 @@ class JanelaDeCadastro(TKUtils.Janela()):
         super().__init__()
 
         self.eventos = None
+        self.titulo = titulo
 
         self.corpo = None
         self.botao_cancelar = None
         self.botao_confirmar = None
 
-        self.title(titulo)
+    def iniciar(self, texto):
+        self.title(self.titulo)
         self.geometry('340x240')
         self.resizable(0, 0)
 
         self.criar_corpo()
+
+        self.criar_botao_cancelar()
+        self.criar_botao_confirmar(texto=texto)
 
     def criar_corpo(self):
         self.corpo = TKUtils.obter_container(master=self, cnf={'bd': 10})
@@ -36,10 +41,10 @@ class JanelaDeCadastro(TKUtils.Janela()):
         self.botao_cancelar =\
             TKUtils.obter_botao(master=self.corpo, cnf=cnf, grid=grid)
 
-    def criar_botao_confirmar(self):
+    def criar_botao_confirmar(self, texto):
         cnf, grid = {}, {}
 
-        cnf['text'] = 'Gerar'
+        cnf['text'] = texto
         cnf['bg'] = 'green'
         cnf['command'] = self.eventos['confirmar']
 

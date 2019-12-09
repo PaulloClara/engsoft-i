@@ -1,6 +1,3 @@
-from src.utils import Utils
-
-
 class Aluno:
 
     def __init__(self, model):
@@ -13,7 +10,8 @@ class Aluno:
         self.ler_arquivo()
 
     def ler_arquivo(self):
-        arquivo = open(Utils.obter_caminho('src/store/alunos.csv'), mode='r')
+        caminho = 'src/store/alunos.csv'
+        arquivo = self.store.obter_arquivo(caminho=caminho, modo='r')
 
         for linha in arquivo:
             self.alunos.append(self.limpar_linha(linha=linha))

@@ -11,27 +11,27 @@ class ListaDeGrupos(Listagem):
         self.grupos = []
 
     def adicionar(self, grupo):
-        container = self.criar_container(master=self.viewport)
+        cont = self.criar_container(master=self.viewport)
 
         cnf, pack = {}, {}
         cnf['text'] = grupo['nome']
         cnf['bg'] = 'green'
         cnf['width'] = 93
 
-        container.label =\
-            self.criar_label(master=container, cnf=cnf, pack=pack)
+        cont.label =\
+            self.criar_label(master=cont, cnf=cnf, pack=pack)
 
         cnf, pack, defs = {}, {}, {}
         defs['tipo'] = 'grupo'
         defs['valor'] = grupo
 
-        container.botao_sortear =\
-            self.criar_botao_sortear(master=container, cnf=cnf, pack=pack, defs=defs)
+        cont.botao_sortear =\
+            self.criar_botao_sortear(master=cont, cnf=cnf, pack=pack, defs=defs)
 
         cnf, pack = {}, {}
         id_do_elemento = grupo['id_do_grupo']
 
-        container.botao_remover =\
-            self.criar_botao_remover(master=container, id_do_elemento=id_do_elemento)
+        cont.botao_remover =\
+            self.criar_botao_remover(master=cont, id_do_elemento=id_do_elemento)
 
-        self.grupos.append(container)
+        self.grupos.append(cont)

@@ -115,5 +115,10 @@ class View(TKUtils.Janela()):
     def criar_janela_de_erro(self, erro):
         self.janela_de_erro = JanelaDeErro(erro=erro)
 
-    def criar_janela_de_sorteio(self, aluno, atividade):
-        self.janela_de_sorteio = JanelaDeSorteio(aluno=aluno, atividade=atividade)
+    def criar_janela_de_sorteio(self, atividade, aluno='', grupo=''):
+        elemento = aluno if aluno else grupo['nome']
+
+        self.janela_de_sorteio =\
+            JanelaDeSorteio(elemento=elemento, atividade=atividade)
+
+        self.janela_de_sorteio.iniciar()

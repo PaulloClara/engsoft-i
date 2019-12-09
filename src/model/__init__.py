@@ -1,5 +1,5 @@
-from src.store import Store
 from src.utils import Utils
+from src.store import Store
 
 from src.model.aluno import Aluno
 from src.model.grupo import Grupo
@@ -37,23 +37,33 @@ class Model:
         pass
 
     def sortear(self, defs):
-        alunos = self.aluno.alunos
-        atividades = self.atividade.atividades
+        aluno, atividade = None, None
 
-        if not alunos:
-            return 'Lista de estudantes vazia', None, None
-
-        if not atividades:
-            return 'Lista de atividades vazia', None, None
+        erro = self.validar_sorteio()
+        if erro:
+            return erro, aluno, atividade
 
         if defs and defs['tipo'] == 'aluno':
             aluno = defs['valor']
         else:
-            aluno = alunos[Utils.obter_inteiro_aleatorio(0, len(alunos)-1)]
+            fim = len(self.aluno.alunos) - 1
+            index = Utils.obter_inteiro_aleatorio(inicio=0, fim=fim)
+            aluno = self.aluno.alunos[index]
 
         if defs and defs['tipo'] == 'atividade':
             atividade = defs['valor']
         else:
-            atividade = atividades[Utils.obter_inteiro_aleatorio(0, len(atividades)-1)]
+            fim = len(self.atividade.atividades) - 1
+            index = Utils.obter_inteiro_aleatorio(inicio=0, fim=fim)
+            atividade = self.atividade.atividades[index]
 
-        return None, aluno, atividade
+        return erro, aluno, atividade
+
+    def validar_sorteio(self):
+        if not self.aluno.alunos:
+            return 'Lista de estudantes vazia'
+
+        if not self.atividade.atividades:
+            return 'Lista de atividades vazia'
+
+        return None

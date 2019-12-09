@@ -21,14 +21,14 @@ class Grupo:
         self.carregar_grupos()
 
     def evento_confirmar_cadastro(self):
-        formulario = self.view.grupo.janela_de_cadastro.obter_campos()
+        form = self.view.grupo.janela_de_cadastro.obter_campos()
 
-        estado_do_formulario = self.model.grupo.validar_campos(formulario=formulario)
-        if estado_do_formulario != 'ok':
-            self.view.grupo.criar_janela_de_erro(erro=estado_do_formulario)
+        erro = self.model.grupo.validar_campos(formulario=form)
+        if erro:
+            self.view.grupo.criar_janela_de_erro(erro=erro)
             return
 
-        grupos = self.model.grupo.gerar_grupos(formulario=formulario)
+        grupos = self.model.grupo.gerar_grupos(formulario=form)
 
         for grupo in grupos:
             self.model.grupo.cadastrar_grupo(grupo=grupo)
