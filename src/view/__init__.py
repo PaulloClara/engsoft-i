@@ -39,7 +39,7 @@ class View(TKUtils.Janela()):
 
     def iniciar(self):
         self.criar_navbar()
-        self.criar_container_aluno()
+        self.criar_container_home()
 
         self.mainloop()
 
@@ -58,7 +58,8 @@ class View(TKUtils.Janela()):
         eventos = {}
         eventos['click'] = self.controller.home.evento_click_no_label
 
-        self.home = Home(master=self, eventos=eventos)
+        controller = self.controller.home
+        self.home = Home(master=self, controller=controller)
 
         self.container_ativo = 'home'
         self.controller.home.evento_elemento_montado()

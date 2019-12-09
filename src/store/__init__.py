@@ -57,10 +57,15 @@ class Store:
 
         return resultado
 
-    def select(self, tabela, colunas):
+    def select(self, tabela, colunas, condicao=None):
         colunas = ', '.join(colunas)
 
-        return f'SELECT {colunas} FROM {tabela}'
+        codigo = f'SELECT {colunas} FROM {tabela}'
+
+        if condicao:
+            codigo = f'{codigo} WHERE {condicao}'
+
+        return codigo
 
     def insert(self, tabela, colunas, valores):
         valores = map(lambda valor: f'"{valor}"', valores)

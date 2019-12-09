@@ -15,7 +15,7 @@ class TKUtils:
         cnf_padrao = {}
 
         cnf_padrao['text'] = '...'
-        cnf_padrao['font'] = ('arial', 12, 'bold')
+        cnf_padrao['font'] = ('times new roman', 14, 'bold')
 
         label = tk.Label(master=master, cnf=cnf_padrao)
         label.configure(cnf=cnf)
@@ -38,7 +38,7 @@ class TKUtils:
         cnf_padrao['pady'] = 6
         cnf_padrao['padx'] = 6
         cnf_padrao['fg'] = 'white'
-        cnf_padrao['font'] = ('arial', 12, 'bold')
+        cnf_padrao['font'] = ('times new roman', 14, 'bold')
 
         botao = tk.Button(master=master, cnf=cnf_padrao)
         botao.configure(cnf=cnf)
@@ -59,7 +59,7 @@ class TKUtils:
         cnf_padrao['fg'] = 'black'
         cnf_padrao['bd'] = 0
         cnf_padrao['justify'] = 'left'
-        cnf_padrao['font'] = ('arial', 12, 'italic')
+        cnf_padrao['font'] = ('times new roman', 14, 'italic')
 
         _input = tk.Entry(master=master, cnf=cnf_padrao)
         _input.configure(cnf=cnf)

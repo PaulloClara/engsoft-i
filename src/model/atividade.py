@@ -12,6 +12,13 @@ class Atividade:
 
         self.obter_atividades()
 
+    def obter_atividade(self, id_da_atividade):
+        condicao = f'id_da_atividade == "{id_da_atividade}"'
+        codigo_sql =\
+            self.store.select(tabela=self.tabela, colunas=self.colunas, condicao=condicao)
+
+        return self.store.executar(codigo_sql=codigo_sql, colunas=self.colunas)
+
     def obter_atividades(self):
         codigo_sql = self.store.select(tabela=self.tabela, colunas=self.colunas)
         self.atividades =\

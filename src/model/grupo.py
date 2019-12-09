@@ -15,6 +15,13 @@ class Grupo:
 
         self.obter_grupos()
 
+    def obter_grupo(self, id_do_grupo):
+        condicao = f'id_do_grupo == "{id_do_grupo}"'
+        codigo_sql =\
+            self.store.select(tabela=self.tabela, colunas=self.colunas, condicao=condicao)
+
+        return self.store.executar(codigo_sql=codigo_sql, colunas=self.colunas)
+
     def obter_grupos(self):
         codigo_sql = self.store.select(tabela=self.tabela, colunas=self.colunas)
         self.grupos =\

@@ -16,7 +16,7 @@ class ListaDeAlunos(Listagem):
         cnf, pack = {}, {}
         cnf['text'] = nome_do_aluno
         cnf['bg'] = 'red'
-        cnf['width'] = 98
+        cnf['width'] = 97
 
         container.label =\
             self.criar_label(master=container, cnf=cnf, pack=pack)
