@@ -25,7 +25,7 @@ class Grupo:
 
         erro = self.model.grupo.validar_campos(formulario=form)
         if erro:
-            self.view.grupo.criar_janela_de_erro(erro=erro)
+            self.view.criar_janela_de_erro(erro=erro)
             return
 
         grupos = self.model.grupo.gerar_grupos(formulario=form)
