@@ -1,4 +1,4 @@
-"""Controller -> Nivel ROOT."""
+"""Controller Root."""
 
 from src.controller.navbar import Navbar
 from src.controller.home import Home
@@ -8,12 +8,12 @@ from src.controller.atividade import Atividade
 from src.controller.sobre import Sobre
 
 
-class Controller:
+class Controller(object):
     """Classe responsavel por gerenciar o fluxo de execucao da aplicacao.
 
     Attributes:
-        view (View:obj): Padrao None.
-        model (Model:obj): Padrao None.
+        view (View:obj): Objeto root View.
+        model (Model:obj): Objeto root Model.
 
         navbar (Controller:Navbar:obj): Padrao None.
         home (Controller:Home:obj): Padrao None.
@@ -36,12 +36,17 @@ class Controller:
         self.sobre = None
 
     def segundo_init(self, model: object, view: object) -> None:
-        """Segundo contrutor, recebe os objetos Model e View instanciados."""
+        """Segundo contrutor, recebe os objetos Model e View instanciados.
+
+        Args:
+            model (Model:obj): Objeto root Model
+            view (View:obj): Objeto root View
+        """
         self.view = view
         self.model = model
 
     def iniciar(self) -> None:
-        """Inicializador, instancia/cria os sub-objetos."""
+        """Instancia/cria os sub-objetos e inicializa Model root e View root."""
         self.navbar = Navbar(controller=self)
         self.home = Home(controller=self)
         self.aluno = Aluno(controller=self)
@@ -53,7 +58,19 @@ class Controller:
         self.view.iniciar()
 
     def sortear(self, defs: dict) -> None:
-        """Sorteador, realiza o sorteio de aluno/atividade."""
+        """Realiza o sorteio de aluno/atividade.
+
+        Args:
+            defs (dict): Possui chave 'tipo' e 'valor'
+                tipo (str): String 'atividade' ou 'aluno'
+                valor (dict): Elemento aluno ou atividade
+
+        - Solicita o sorteio para Model
+        - Verifica se ouve erro
+            - sim -> cria janela de erro
+            - nao -> continua
+        - Cria janela de sorteio
+        """
         erro, aluno, atividade = self.model.sortear(defs=defs)
 
         if erro:
