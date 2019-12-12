@@ -2,6 +2,7 @@ from src.utils.tk import TKUtils
 
 from src.view.home.actions import Actions
 from src.view.home.lista import ListaDeElementos
+from src.view.home.cadastro import Formulario
 
 
 class Home(TKUtils.Container()):
@@ -13,6 +14,7 @@ class Home(TKUtils.Container()):
 
         self.actions = None
         self.lista_de_elementos = None
+        self.janela_de_cadastro = None
 
     def iniciar(self):
         self.criar_lista_de_elementos()
@@ -44,3 +46,16 @@ class Home(TKUtils.Container()):
         eventos['cadastrar'] = self.controller.evento_cadastrar_apresentacao
 
         self.actions = Actions(master=self, eventos=eventos)
+
+    def criar_janela_de_cadastro(self):
+        eventos = {}
+
+        eventos['cancelar'] = self.controller.evento_cancelar_cadastro
+        eventos['confirmar'] = self.controller.evento_confirmar_cadastro
+
+        self.janela_de_cadastro = Formulario(eventos=eventos)
+        self.janela_de_cadastro.iniciar()
+
+    def destruir_janela_de_cadastro(self):
+        self.janela_de_cadastro.destroy()
+        self.janela_de_cadastro = None

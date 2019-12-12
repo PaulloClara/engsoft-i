@@ -13,7 +13,7 @@ class Formulario(JanelaDeCadastro):
         self.campo_quantidade = {}
 
     def iniciar(self):
-        super().iniciar(texto='Gerar')
+        super().iniciar(texto='Gerar', campos=2)
 
         self.criar_campo_nome()
         self.criar_campo_quantidade()

@@ -13,12 +13,6 @@ class Apresentacao:
 
         self.obter_apresentacoes()
 
-    def cadastrar_apresetacao(self, evento):
-        tab, cols, vals = self.tabela, self.colunas[1:], []
-
-        sql = self.store.insert(tabela=tab, colunas=cols, valores=vals)
-        self.store.executar(codigo_sql=sql)
-
     def obter_apresentacao(self, id_da_apresentacao):
         tab, cols = self.tabela, self.colunas
         con = f'id_da_apresentacao == "{id_da_apresentacao}"'
@@ -52,3 +46,14 @@ class Apresentacao:
             nome_do_grupo = apresentacao['grupo']['nome']
             titulo_da_atividade = apresentacao['atividade']['titulo']
             apresentacao['titulo'] = f'{nome_do_grupo} - {titulo_da_atividade}'
+
+    def cadastrar_apresetacao(self, apresentacao):
+        pass
+        # tab, cols = self.tabela, self.colunas[1:]
+        # vals = [apresentacao[]]
+        #
+        # sql = self.store.insert(tabela=tab, colunas=cols, valores=vals)
+        # self.store.executar(codigo_sql=sql)
+
+    def validar_campos(self, formulario):
+        return None

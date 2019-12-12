@@ -9,6 +9,25 @@ class Home:
             self.view.home.lista_de_elementos.adicionar(elemento=apresentacao)
 
     def evento_cadastrar_apresentacao(self):
+        self.view.home.criar_janela_de_cadastro()
+
+    def evento_confirmar_cadastro(self):
+        pass
+        # form = self.view.home.janela_de_cadastro.obter_campos()
+        #
+        # erro = self.model.apresentacao.validar_campos(formulario=form)
+        # if erro:
+        #     self.view.criar_janela_de_erro(erro=erro)
+        #     return
+        #
+        # self.model.apresentacao.cadastrar_apresetacao(apresentacao=form)
+        #
+        # self.view.home.destruir_janela_de_cadastro()
+        #
+        # self.view.home.destruir_lista_de_elementos()
+        # self.carregar_apresentacoes()
+
+    def evento_cancelar_cadastro(self):
         pass
 
     def evento_remover_apresentacao(self):

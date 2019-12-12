@@ -13,7 +13,10 @@ class JanelaDeCadastro(TKUtils.Janela()):
         self.botao_cancelar = None
         self.botao_confirmar = None
 
-    def iniciar(self, texto):
+    def iniciar(self, texto, campos):
+        self.texto = texto
+        self.quantidade_de_campos = campos
+
         self.title(self.titulo)
         self.geometry('340x240')
         self.resizable(0, 0)
@@ -21,7 +24,7 @@ class JanelaDeCadastro(TKUtils.Janela()):
         self.criar_corpo()
 
         self.criar_botao_cancelar()
-        self.criar_botao_confirmar(texto=texto)
+        self.criar_botao_confirmar()
 
     def criar_corpo(self):
         self.corpo = TKUtils.obter_container(master=self, cnf={'bd': 10})
@@ -33,25 +36,24 @@ class JanelaDeCadastro(TKUtils.Janela()):
         cnf['bg'] = 'red'
         cnf['command'] = self.eventos['cancelar']
 
-        grid['row'] = 3
+        grid['row'] = self.quantidade_de_campos
         grid['column'] = 0
         grid['sticky'] = 'W'
-        grid['pady'] = 320 - self.winfo_screenmmheight()
 
         self.botao_cancelar =\
             TKUtils.obter_botao(master=self.corpo, cnf=cnf, grid=grid)
 
-    def criar_botao_confirmar(self, texto):
+    def criar_botao_confirmar(self):
         cnf, grid = {}, {}
 
-        cnf['text'] = texto
+        cnf['text'] = self.texto
         cnf['bg'] = 'green'
         cnf['command'] = self.eventos['confirmar']
 
-        grid['row'] = 3
+        grid['row'] = self.quantidade_de_campos
         grid['column'] = 1
         grid['sticky'] = 'E'
-        grid['pady'] = 320 - self.winfo_screenmmheight()
+        grid['pady'] = 170 - self.quantidade_de_campos * 24
 
         self.botao_confirmar =\
             TKUtils.obter_botao(master=self.corpo, cnf=cnf, grid=grid)
