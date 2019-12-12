@@ -1,3 +1,5 @@
+"""Controller -> Nivel ROOT."""
+
 from src.controller.navbar import Navbar
 from src.controller.home import Home
 from src.controller.aluno import Aluno
@@ -7,8 +9,22 @@ from src.controller.sobre import Sobre
 
 
 class Controller:
+    """Classe responsavel por gerenciar o fluxo de execucao da aplicacao.
 
-    def __init__(self):
+    Attributes:
+        view (View:obj): Padrao None.
+        model (Model:obj): Padrao None.
+
+        navbar (Controller:Navbar:obj): Padrao None.
+        home (Controller:Home:obj): Padrao None.
+        aluno (Controller:Aluno:obj): Padrao None.
+        grupo (Controller:Grupo:obj): Padrao None.
+        atividade (Controller:Atividade:obj): Padrao None.
+        sobre (Controller:Sobre:obj): Padrao None.
+    """
+
+    def __init__(self) -> None:
+        """Contrutor padrao, declara os atributos da classe."""
         self.view = None
         self.model = None
 
@@ -19,11 +35,13 @@ class Controller:
         self.atividade = None
         self.sobre = None
 
-    def segundo_init(self, model, view):
+    def segundo_init(self, model: object, view: object) -> None:
+        """Segundo contrutor, recebe os objetos Model e View instanciados."""
         self.view = view
         self.model = model
 
-    def iniciar(self):
+    def iniciar(self) -> None:
+        """Inicializador, instancia/cria os sub-objetos."""
         self.navbar = Navbar(controller=self)
         self.home = Home(controller=self)
         self.aluno = Aluno(controller=self)
@@ -34,7 +52,8 @@ class Controller:
         self.model.iniciar()
         self.view.iniciar()
 
-    def sortear(self, defs={}):
+    def sortear(self, defs: dict) -> None:
+        """Sorteador, realiza o sorteio de aluno/atividade."""
         erro, aluno, atividade = self.model.sortear(defs=defs)
 
         if erro:
