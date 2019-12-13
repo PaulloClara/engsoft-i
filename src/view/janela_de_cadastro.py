@@ -18,7 +18,7 @@ class JanelaDeCadastro(TKUtils.Janela()):
         self.quantidade_de_campos = campos
 
         self.title(self.titulo)
-        self.geometry('340x240')
+        self.geometry('360x280')
         self.resizable(0, 0)
 
         self.criar_corpo()
@@ -53,7 +53,7 @@ class JanelaDeCadastro(TKUtils.Janela()):
         grid['row'] = self.quantidade_de_campos
         grid['column'] = 1
         grid['sticky'] = 'E'
-        grid['pady'] = 170 - self.quantidade_de_campos * 24
+        grid['pady'] = 200 - self.quantidade_de_campos * 24
 
         self.botao_confirmar =\
             TKUtils.obter_botao(master=self.corpo, cnf=cnf, grid=grid)

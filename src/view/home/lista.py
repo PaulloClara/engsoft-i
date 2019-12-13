@@ -11,19 +11,19 @@ class ListaDeElementos(Listagem):
         self.elementos = []
 
     def adicionar(self, elemento):
-        container = self.criar_container(master=self.viewport)
+        cont = self.criar_container(master=self.viewport)
 
         cnf, pack = {}, {}
         cnf['text'] = elemento['titulo']
         cnf['bg'] = 'orange'
         cnf['width'] = 97
 
-        container.label =\
-            self.criar_label(master=container, cnf=cnf, pack=pack)
+        cont.label =\
+            self.criar_label(master=cont, cnf=cnf, pack=pack)
 
-        id_do_elemento = elemento['id_da_apresentacao']
+        id_do_elemento = elemento['id_apresentacao']
 
-        container.botao_remover =\
-            self.criar_botao_remover(master=container, id_do_elemento=id_do_elemento)
+        cont.botao_remover =\
+            self.criar_botao_remover(master=cont, id_do_elemento=id_do_elemento)
 
-        self.elementos.append(container)
+        self.elementos.append(cont)

@@ -29,7 +29,7 @@ class Formulario(JanelaDeCadastro):
     def criar_campo_nome(self):
         cnf, grid = {}, {}
 
-        cnf['text'] = 'Nome Base'
+        cnf['text'] = 'Nome'
         cnf['pady'] = 4
 
         grid['row'] = 0
@@ -40,6 +40,8 @@ class Formulario(JanelaDeCadastro):
             TKUtils.obter_label(master=self.corpo, cnf=cnf, grid=grid)
 
         cnf, grid = {}, {}
+
+        cnf['placeholder'] = 'Segundo Periodo'
 
         grid['row'] = 0
         grid['column'] = 1
@@ -61,6 +63,8 @@ class Formulario(JanelaDeCadastro):
             TKUtils.obter_label(master=self.corpo, cnf=cnf, grid=grid)
 
         cnf, grid = {}, {}
+
+        cnf['placeholder'] = '6'
 
         grid['row'] = 1
         grid['column'] = 1

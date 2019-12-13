@@ -9,20 +9,20 @@ class Formulario(JanelaDeCadastro):
 
         self.eventos = eventos
 
-        self.campo_desc = {}
+        self.campo_descricao = {}
         self.campo_titulo = {}
 
     def iniciar(self):
         super().iniciar(texto='Cadastrar', campos=2)
 
         self.criar_campo_titulo()
-        self.criar_campo_desc()
+        self.criar_campo_descricao()
 
     def obter_campos(self):
         campos = {}
 
-        campos['desc'] = self.campo_desc['input'].get()
         campos['titulo'] = self.campo_titulo['input'].get()
+        campos['descricao'] = self.campo_descricao['input'].get()
 
         return campos
 
@@ -41,13 +41,15 @@ class Formulario(JanelaDeCadastro):
 
         cnf, grid = {}, {}
 
+        cnf['placeholder'] = 'Capinar um lote'
+
         grid['row'] = 0
         grid['column'] = 1
 
         self.campo_titulo['input'] =\
             TKUtils.obter_input(master=self.corpo, cnf=cnf, grid=grid)
 
-    def criar_campo_desc(self):
+    def criar_campo_descricao(self):
         cnf, grid = {}, {}
 
         cnf['text'] = 'Descrição'
@@ -57,13 +59,15 @@ class Formulario(JanelaDeCadastro):
         grid['column'] = 0
         grid['sticky'] = 'W'
 
-        self.campo_desc['label'] =\
+        self.campo_descricao['label'] =\
             TKUtils.obter_label(master=self.corpo, cnf=cnf, grid=grid)
 
         cnf, grid = {}, {}
 
+        cnf['placeholder'] = 'Programar um drone para capinar um lote'
+
         grid['row'] = 1
         grid['column'] = 1
 
-        self.campo_desc['input'] =\
+        self.campo_descricao['input'] =\
             TKUtils.obter_input(master=self.corpo, cnf=cnf, grid=grid)

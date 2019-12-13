@@ -44,20 +44,12 @@ class View(TKUtils.Janela()):
         self.mainloop()
 
     def criar_navbar(self):
-        eventos = {}
-        eventos['home'] = self.controller.navbar.evento_tela_home
-        eventos['aluno'] = self.controller.navbar.evento_tela_aluno
-        eventos['grupo'] = self.controller.navbar.evento_tela_grupo
-        eventos['atividade'] = self.controller.navbar.evento_tela_atividade
-        eventos['sobre'] = self.controller.navbar.evento_tela_sobre
+        controller = self.controller.navbar
+        self.navbar = Navbar(master=self, controller=controller)
 
-        self.navbar = Navbar(master=self, eventos=eventos)
         self.controller.navbar.evento_elemento_montado()
 
     def criar_container_home(self):
-        eventos = {}
-        eventos['click'] = self.controller.home.evento_click_no_label
-
         controller = self.controller.home
         self.home = Home(master=self, controller=controller)
 
@@ -65,32 +57,22 @@ class View(TKUtils.Janela()):
         self.controller.home.evento_elemento_montado()
 
     def criar_container_aluno(self):
-        eventos = {}
-        eventos['sortear'] = self.controller.sortear
-
         controller = self.controller.aluno
-        self.aluno = Aluno(master=self, controller=controller, eventos=eventos)
+        self.aluno = Aluno(master=self, controller=controller)
 
         self.container_ativo = 'aluno'
         self.controller.aluno.evento_elemento_montado()
 
     def criar_container_atividade(self):
-        eventos = {}
-        eventos['sortear'] = self.controller.sortear
-
         controller = self.controller.atividade
-        self.atividade =\
-            Atividade(master=self, controller=controller, eventos=eventos)
+        self.atividade = Atividade(master=self, controller=controller)
 
         self.container_ativo = 'atividade'
         self.controller.atividade.evento_elemento_montado()
 
     def criar_container_grupo(self):
-        eventos = {}
-        eventos['sortear'] = self.controller.sortear
-
         controller = self.controller.grupo
-        self.grupo = Grupo(master=self, controller=controller, eventos=eventos)
+        self.grupo = Grupo(master=self, controller=controller)
 
         self.container_ativo = 'grupo'
         self.controller.grupo.evento_elemento_montado()

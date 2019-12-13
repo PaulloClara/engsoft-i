@@ -23,6 +23,14 @@ class Atividade(object):
         for atv in self.model.atividade.atividades:
             self.view.atividade.lista_de_atividades.adicionar(atividade=atv)
 
+    def evento_sortear(self, valor):
+        self.model.atividade.atividade = valor
+
+        self.view.destruir_container_ativo()
+        self.view.criar_container_home()
+
+        self.view.home.criar_janela_de_cadastro()
+
     def evento_cadastrar(self) -> None:
         """Evento click do botao cadastrar.
 
@@ -30,20 +38,22 @@ class Atividade(object):
         """
         self.view.atividade.criar_janela_de_cadastro()
 
-    def evento_remover_atividade(self, id_da_atividade: str) -> None:
+    def evento_remover_atividade(self, id_atividade: str) -> None:
         """Evento click do botao remover atividade no label da listagem.
 
         Args:
-            id_da_atividade (str): id da atividade que sera removida do bd
+            id_atividade (str): id da atividade que sera removida do bd
 
         - Remove atividade do id passado como parametro
         - Destroi a listagem de atividades na view
         - Carrega a nova lista de atividades na view
         """
-        self.model.atividade.remover_atividade(id_da_atividade=id_da_atividade)
+        self.model.atividade.remover_atividade(id_atividade=id_atividade)
 
         self.view.atividade.destruir_lista_de_atividades()
         self.carregar_atividades()
+
+        self.model.apresentacao.obter_apresentacoes()
 
     def evento_confirmar_cadastro(self) -> None:
         """Evento click do botao confirmar cadastro.

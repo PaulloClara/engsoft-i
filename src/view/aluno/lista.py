@@ -11,21 +11,16 @@ class ListaDeAlunos(Listagem):
         self.alunos = []
 
     def adicionar(self, nome_do_aluno):
-        container = self.criar_container(master=self.viewport)
+        cont = self.criar_container(master=self.viewport)
 
         cnf, pack = {}, {}
         cnf['text'] = nome_do_aluno
         cnf['bg'] = 'red'
         cnf['width'] = 97
 
-        container.label =\
-            self.criar_label(master=container, cnf=cnf, pack=pack)
+        cont.label = self.criar_label(master=cont, cnf=cnf, pack=pack)
 
-        cnf, pack, defs = {}, {}, {}
-        defs['tipo'] = 'aluno'
-        defs['valor'] = nome_do_aluno
+        cont.botao_sortear =\
+            self.criar_botao_sortear(master=cont, valor=nome_do_aluno)
 
-        container.botao_sortear =\
-            self.criar_botao_sortear(master=container, cnf=cnf, pack=pack, defs=defs)
-
-        self.alunos.append(container)
+        self.alunos.append(cont)

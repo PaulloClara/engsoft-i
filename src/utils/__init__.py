@@ -1,6 +1,7 @@
 from sys import argv
 from os import getcwd
 from random import randint
+from datetime import datetime
 
 
 class Utils:
@@ -8,6 +9,10 @@ class Utils:
     @staticmethod
     def obter_inteiro_aleatorio(inicio, fim):
         return randint(inicio, fim)
+
+    @staticmethod
+    def obter_data_e_hora_atual():
+        return datetime.now().strftime('%d/%m/%Y %H:%M')
 
     @staticmethod
     def obter_caminho_atual():

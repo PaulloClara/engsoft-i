@@ -20,9 +20,9 @@ class Actions(TKUtils.Container()):
     def criar_botao_ordenar(self):
         cnf, pack = {}, {}
 
-        cnf['text'] = 'Ordenar'
+        cnf['text'] = 'Ordenar Apresentações'
         cnf['bg'] = 'blue'
-        cnf['width'] = 20
+        cnf['width'] = 30
         cnf['command'] = self.eventos['ordenar']
 
         pack['side'] = 'left'
@@ -33,9 +33,9 @@ class Actions(TKUtils.Container()):
     def criar_botao_cadastrar(self):
         cnf, pack = {}, {}
 
-        cnf['text'] = 'Cadastrar'
+        cnf['text'] = 'Cadastrar Apresentação'
         cnf['bg'] = 'green'
-        cnf['width'] = 20
+        cnf['width'] = 30
         cnf['command'] = self.eventos['cadastrar']
 
         pack['side'] = 'left'

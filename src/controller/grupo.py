@@ -19,6 +19,14 @@ class Grupo(object):
         for grupo in self.model.grupo.grupos:
             self.view.grupo.lista_de_grupos.adicionar(grupo=grupo)
 
+    def evento_sortear(self, valor: dict) -> None:
+        self.model.grupo.grupo = valor
+
+        self.view.destruir_container_ativo()
+        self.view.criar_container_home()
+
+        self.view.home.criar_janela_de_cadastro()
+
     def evento_cadastrar(self) -> None:
         """Evento click do botao cadastrar.
 
@@ -33,20 +41,22 @@ class Grupo(object):
         """
         self.view.grupo.destruir_janela_de_cadastro()
 
-    def evento_remover_grupo(self, id_do_grupo: str) -> None:
+    def evento_remover_grupo(self, id_grupo: str) -> None:
         """Evento click do botao remover da lista de grupos.
 
         Args:
-            id_do_grupo (str): ID do grupo que sera removido
+            id_grupo (str): ID do grupo que sera removido
 
         - Remove o grupo do bd
         - Destroi a lista de grupos
         - Carrega a lista de grupos
         """
-        self.model.grupo.remover_grupo(id_do_grupo=id_do_grupo)
+        self.model.grupo.remover_grupo(id_grupo=id_grupo)
 
         self.view.grupo.destruir_lista_de_grupos()
         self.carregar_grupos()
+
+        self.model.apresentacao.obter_apresentacoes()
 
     def evento_confirmar_cadastro(self) -> None:
         """Evento click do botao confirmar do formulario de cadastro.

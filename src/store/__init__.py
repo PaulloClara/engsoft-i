@@ -77,5 +77,8 @@ class Store:
 
         return f'INSERT INTO {tabela}({colunas}) VALUES({valores})'
 
+    def update(self, tabela, campos, condicao):
+        return f'UPDATE {tabela} SET {campos} WHERE {condicao}'
+
     def delete(self, tabela, condicao):
         return f'DELETE FROM {tabela} WHERE {condicao}'

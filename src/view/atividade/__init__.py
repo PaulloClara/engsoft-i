@@ -7,10 +7,9 @@ from src.view.atividade.cadastro import Formulario
 
 class Atividade(TKUtils.Container()):
 
-    def __init__(self, master, controller, eventos):
+    def __init__(self, master, controller):
         super().__init__(master=master)
 
-        self.eventos = eventos
         self.controller = controller
 
         self.actions = None
@@ -29,7 +28,7 @@ class Atividade(TKUtils.Container()):
     def criar_actions(self):
         eventos = {}
 
-        eventos['sortear'] = self.eventos['sortear']
+        eventos['sortear'] = self.controller.evento_sortear
         eventos['cadastrar'] = self.controller.evento_cadastrar
 
         self.actions = Actions(master=self, eventos=eventos)
@@ -37,7 +36,7 @@ class Atividade(TKUtils.Container()):
     def criar_lista_de_atividades(self):
         eventos = {}
 
-        eventos['sortear'] = self.eventos['sortear']
+        eventos['sortear'] = self.controller.evento_sortear
         eventos['remover'] = self.controller.evento_remover_atividade
 
         if not self.lista_de_atividades:

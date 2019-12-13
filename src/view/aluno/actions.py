@@ -23,7 +23,7 @@ class Actions(TKUtils.Container()):
         cnf['text'] = 'Sortear Aluno'
         cnf['bg'] = 'blue'
         cnf['width'] = 20
-        cnf['command'] = self.eventos['sortear']
+        cnf['command'] = lambda evt=None: self.eventos['sortear']({})
 
         pack['side'] = 'left'
 

@@ -56,25 +56,3 @@ class Controller(object):
 
         self.model.iniciar()
         self.view.iniciar()
-
-    def sortear(self, defs: dict) -> None:
-        """Realiza o sorteio de aluno/atividade.
-
-        Args:
-            defs (dict): Possui chave 'tipo' e 'valor'
-                tipo (str): String 'atividade' ou 'aluno'
-                valor (dict): Elemento aluno ou atividade
-
-        - Solicita o sorteio para Model
-        - Verifica se ouve erro
-            - sim -> cria janela de erro
-            - nao -> continua
-        - Cria janela de sorteio
-        """
-        erro, aluno, atividade = self.model.sortear(defs=defs)
-
-        if erro:
-            self.view.criar_janela_de_erro(erro=erro)
-            return
-
-        self.view.criar_janela_de_sorteio(aluno=aluno, atividade=atividade)

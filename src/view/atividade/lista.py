@@ -15,20 +15,15 @@ class ListaDeAtividades(Listagem):
 
         cnf, pack = {}, {}
         cnf['text'] = atividade['titulo']
-        cnf['bg'] = 'blue'
+        cnf['bg'] = 'blue' if not atividade['em_uso'] else 'purple'
         cnf['width'] = 93
 
         cont.label = self.criar_label(master=cont, cnf=cnf, pack=pack)
 
-        cnf, pack, defs = {}, {}, {}
-        defs['tipo'] = 'atividade'
-        defs['valor'] = atividade
-
         cont.botao_sortear =\
-            self.criar_botao_sortear(master=cont, cnf=cnf, pack=pack, defs=defs)
+            self.criar_botao_sortear(master=cont, valor=atividade)
 
-        cnf, pack, defs = {}, {}, {}
-        id_do_elemento = atividade['id_da_atividade']
+        id_do_elemento = atividade['id_atividade']
 
         cont.botao_remover =\
             self.criar_botao_remover(master=cont, id_do_elemento=id_do_elemento)

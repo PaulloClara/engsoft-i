@@ -15,21 +15,15 @@ class ListaDeGrupos(Listagem):
 
         cnf, pack = {}, {}
         cnf['text'] = grupo['nome']
-        cnf['bg'] = 'green'
+        cnf['bg'] = 'green' if not grupo['em_uso'] else 'purple'
         cnf['width'] = 93
 
-        cont.label =\
-            self.criar_label(master=cont, cnf=cnf, pack=pack)
+        cont.label = self.criar_label(master=cont, cnf=cnf, pack=pack)
 
-        cnf, pack, defs = {}, {}, {}
-        defs['tipo'] = 'grupo'
-        defs['valor'] = grupo
-
-        cont.botao_sortear =\
-            self.criar_botao_sortear(master=cont, cnf=cnf, pack=pack, defs=defs)
+        cont.botao_sortear = self.criar_botao_sortear(master=cont, valor=grupo)
 
         cnf, pack = {}, {}
-        id_do_elemento = grupo['id_do_grupo']
+        id_do_elemento = grupo['id_grupo']
 
         cont.botao_remover =\
             self.criar_botao_remover(master=cont, id_do_elemento=id_do_elemento)

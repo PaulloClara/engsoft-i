@@ -36,29 +36,6 @@ class Model:
     def iniciar(self):
         pass
 
-    def sortear(self, defs):
-        aluno, atividade = None, None
-
-        erro = self.validar_sorteio()
-        if erro:
-            return erro, aluno, atividade
-
-        if defs and defs['tipo'] == 'aluno':
-            aluno = defs['valor']
-        else:
-            fim = len(self.aluno.alunos) - 1
-            index = Utils.obter_inteiro_aleatorio(inicio=0, fim=fim)
-            aluno = self.aluno.alunos[index]
-
-        if defs and defs['tipo'] == 'atividade':
-            atividade = defs['valor']
-        else:
-            fim = len(self.atividade.atividades) - 1
-            index = Utils.obter_inteiro_aleatorio(inicio=0, fim=fim)
-            atividade = self.atividade.atividades[index]
-
-        return erro, aluno, atividade
-
     def validar_sorteio(self):
         if not self.aluno.alunos:
             return 'Lista de estudantes vazia'

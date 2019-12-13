@@ -43,11 +43,14 @@ class Listagem(TKUtils.ScrollContainer()):
 
         return label
 
-    def criar_botao_sortear(self, master, defs, cnf={}, pack={}):
+    def criar_botao_sortear(self, master, valor, cnf={}, pack={}):
+        desativado = isinstance(valor, dict) and valor['em_uso']
+
         cnf['text'] = 'O'
-        cnf['bg'] = 'orange'
+        cnf['bg'] = 'grey' if desativado else 'orange'
+        cnf['state'] = 'disabled' if desativado else 'normal'
         cnf['width'] = 2
-        cnf['command'] = lambda evt=None: self.eventos['sortear'](defs=defs)
+        cnf['command'] = lambda evt=None: self.eventos['sortear'](valor=valor)
 
         pack['side'] = 'left'
 

@@ -7,10 +7,9 @@ from src.view.grupo.lista import ListaDeGrupos
 
 class Grupo(TKUtils.Container()):
 
-    def __init__(self, master, controller, eventos):
+    def __init__(self, master, controller):
         super().__init__(master=master)
 
-        self.eventos = eventos
         self.controller = controller
 
         self.actions = None
@@ -29,7 +28,7 @@ class Grupo(TKUtils.Container()):
     def criar_lista_de_grupos(self):
         eventos = {}
 
-        eventos['sortear'] = self.eventos['sortear']
+        eventos['sortear'] = self.controller.evento_sortear
         eventos['remover'] = self.controller.evento_remover_grupo
 
         self.lista_de_grupos = ListaDeGrupos(master=self, eventos=eventos)
@@ -43,7 +42,7 @@ class Grupo(TKUtils.Container()):
     def criar_actions(self):
         eventos = {}
 
-        eventos['sortear'] = self.eventos['sortear']
+        eventos['sortear'] = self.controller.evento_sortear
         eventos['cadastrar'] = self.controller.evento_cadastrar
 
         self.actions = Actions(master=self, eventos=eventos)

@@ -28,28 +28,61 @@ class Home(object):
 
     def evento_confirmar_cadastro(self) -> None:
         """Evento click do botao confirmar no formulario de cadastro."""
-        pass
-        # form = self.view.home.janela_de_cadastro.obter_campos()
-        #
-        # erro = self.model.apresentacao.validar_campos(formulario=form)
-        # if erro:
-        #     self.view.criar_janela_de_erro(erro=erro)
-        #     return
-        #
-        # self.model.apresentacao.cadastrar_apresetacao(apresentacao=form)
-        #
-        # self.view.home.destruir_janela_de_cadastro()
-        #
-        # self.view.home.destruir_lista_de_elementos()
-        # self.carregar_apresentacoes()
+        form = self.view.home.janela_de_cadastro.obter_campos()
+
+        erro = self.model.apresentacao.validar_campos(formulario=form)
+        if erro:
+            self.view.criar_janela_de_erro(erro=erro)
+            return
+
+        if not self.model.atividade.atividades:
+            erro = 'Lista de Atividades vazia'
+            self.view.criar_janela_de_erro(erro=erro)
+            return
+
+        if not self.model.grupo.grupos:
+            erro = 'Lista de Grupos vazia'
+            self.view.criar_janela_de_erro(erro=erro)
+            return
+
+        grupo = self.model.grupo.sortear()
+        if not grupo:
+            erro = 'Todos os Grupos estão em uso'
+            self.view.criar_janela_de_erro(erro=erro)
+            return
+
+        id_grupo = grupo['id_grupo']
+        form['id_grupo'] = id_grupo
+
+        atividade = self.model.atividade.sortear()
+        if not atividade:
+            erro = 'Todas as Atividades estão em uso'
+            self.view.criar_janela_de_erro(erro=erro)
+            return
+
+        id_atividade = atividade['id_atividade']
+        form['id_atividade'] = id_atividade
+
+        self.model.apresentacao.cadastrar_apresentacao(apresentacao=form)
+
+        self.model.grupo.atualizar_uso(id_grupo=id_grupo)
+        self.model.atividade.atualizar_uso(id_atividade=id_atividade)
+
+        self.view.home.destruir_janela_de_cadastro()
+
+        self.view.home.destruir_lista_de_elementos()
+        self.carregar_apresentacoes()
 
     def evento_cancelar_cadastro(self) -> None:
         """Evento click do botao cancelar no formulario de cadastro."""
-        pass
+        self.view.home.destruir_janela_de_cadastro()
 
-    def evento_remover_apresentacao(self) -> None:
+    def evento_remover_apresentacao(self, id_apr: str) -> None:
         """Evento click do botao remover na lista de apresentacoes."""
-        pass
+        self.model.apresentacao.remover_apresentacao(id_apr=id_apr)
+
+        self.view.home.destruir_lista_de_elementos()
+        self.carregar_apresentacoes()
 
     def evento_ordenar_lista(self) -> None:
         """Evento click do botao ordenar na actions."""

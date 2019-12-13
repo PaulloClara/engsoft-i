@@ -3,10 +3,10 @@ from src.utils.tk import TKUtils
 
 class Navbar(TKUtils.Container()):
 
-    def __init__(self, master, eventos):
+    def __init__(self, master, controller):
         super().__init__(master=master)
 
-        self.eventos = eventos
+        self.controller = controller
 
         self.botao_home = None
         self.botao_aluno = None
@@ -31,7 +31,7 @@ class Navbar(TKUtils.Container()):
         cnf['width'] = 28
         cnf['pady'] = 9
         cnf['font'] = ('times new roman', 15, 'bold')
-        cnf['command'] = self.eventos['home']
+        cnf['command'] = self.controller.evento_tela_home
 
         pack['side'] = 'left'
 
@@ -45,7 +45,7 @@ class Navbar(TKUtils.Container()):
         cnf['width'] = 14
         cnf['pady'] = 9
         cnf['font'] = ('times new roman', 15, 'bold')
-        cnf['command'] = self.eventos['aluno']
+        cnf['command'] = self.controller.evento_tela_aluno
 
         pack['side'] = 'left'
 
@@ -59,7 +59,7 @@ class Navbar(TKUtils.Container()):
         cnf['width'] = 14
         cnf['pady'] = 9
         cnf['font'] = ('times new roman', 15, 'bold')
-        cnf['command'] = self.eventos['atividade']
+        cnf['command'] = self.controller.evento_tela_atividade
 
         pack['side'] = 'left'
 
@@ -74,7 +74,7 @@ class Navbar(TKUtils.Container()):
         cnf['width'] = 14
         cnf['pady'] = 9
         cnf['font'] = ('times new roman', 15, 'bold')
-        cnf['command'] = self.eventos['grupo']
+        cnf['command'] = self.controller.evento_tela_grupo
 
         pack['side'] = 'left'
 
@@ -88,7 +88,7 @@ class Navbar(TKUtils.Container()):
         cnf['width'] = 14
         cnf['pady'] = 9
         cnf['font'] = ('times new roman', 15, 'bold')
-        cnf['command'] = self.eventos['sobre']
+        cnf['command'] = self.controller.evento_tela_sobre
 
         pack['side'] = 'left'
 

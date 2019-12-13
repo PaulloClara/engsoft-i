@@ -1,3 +1,6 @@
+from src.utils import Utils
+
+
 class Aluno:
 
     def __init__(self, model):
@@ -8,6 +11,12 @@ class Aluno:
         self.alunos = []
 
         self.ler_arquivo()
+
+    def sortear(self):
+        fim = len(self.alunos) - 1
+        index = Utils.obter_inteiro_aleatorio(inicio=0, fim=fim)
+
+        return self.alunos[index]
 
     def ler_arquivo(self):
         caminho = 'src/store/alunos.csv'

@@ -9,15 +9,38 @@ class Grupo:
         self.controller = self.model.controller.grupo
 
         self.tabela = 'grupo'
-        self.colunas = ['id_do_grupo', 'nome', 'tamanho', 'integrantes']
+        self.colunas = ['id_grupo', 'nome', 'integrantes', 'em_uso',
+                        'data_cadastro']
 
         self.grupos = []
+        self.grupo = None
 
         self.obter_grupos()
 
-    def obter_grupo(self, id_do_grupo):
+    def sortear(self):
+        grupos_disponiveis = []
+
+        grupo = self.grupo
+        if grupo:
+            self.grupo = None
+
+            return grupo
+
+        for grupo in self.grupos:
+            if not grupo['em_uso']:
+                grupos_disponiveis.append(grupo)
+
+        if grupos_disponiveis:
+            fim = len(grupos_disponiveis) - 1
+            index = Utils.obter_inteiro_aleatorio(inicio=0, fim=fim)
+
+            return grupos_disponiveis[index]
+
+        return None
+
+    def obter_grupo(self, id_grupo):
         tab, cols = self.tabela, self.colunas
-        con = f'id_do_grupo == "{id_do_grupo}"'
+        con = f'id_grupo == "{id_grupo}"'
 
         sql = self.store.select(tabela=tab, colunas=cols, condicao=con)
 
@@ -30,18 +53,31 @@ class Grupo:
         self.grupos = self.store.executar(codigo_sql=sql, colunas=cols)
 
     def cadastrar_grupo(self, grupo):
-        tab, cols = self.tabela, self.colunas[1:]
-        vals = [grupo['nome'].capitalize(), len(grupo['integrantes']),
-                grupo['integrantes']]
+        tab, cols, vals = self.tabela, self.colunas[1:], []
+
+        vals.append(grupo['nome'].capitalize())
+        vals.append(grupo['integrantes'])
+        vals.append(0)
+        vals.append(Utils.obter_data_e_hora_atual())
 
         sql = self.store.insert(tabela=tab, colunas=cols, valores=vals)
         self.store.executar(codigo_sql=sql)
 
         self.obter_grupos()
 
-    def remover_grupo(self, id_do_grupo):
+    def atualizar_uso(self, id_grupo, valor=1):
         tab = self.tabela
-        con = f'id_do_grupo = {id_do_grupo}'
+        cam = f'em_uso = {valor}'
+        con = f'id_grupo = {id_grupo}'
+
+        sql = self.store.update(tabela=tab, campos=cam, condicao=con)
+        self.store.executar(codigo_sql=sql)
+
+        self.obter_grupos()
+
+    def remover_grupo(self, id_grupo):
+        tab = self.tabela
+        con = f'id_grupo = {id_grupo}'
 
         sql = self.store.delete(tabela=tab, condicao=con)
         self.store.executar(codigo_sql=sql)
@@ -60,7 +96,6 @@ class Grupo:
         for i in range(quantidade_de_grupos):
             grupo = {}
             grupo['nome'] = ''
-            grupo['tamanho'] = 0
             grupo['integrantes'] = []
 
             grupos_gerados.append(grupo)
@@ -73,7 +108,6 @@ class Grupo:
                 index = Utils.obter_inteiro_aleatorio(inicio=0, fim=fim)
 
                 grupo['integrantes'].append(alunos[index])
-                grupo['tamanho'] += 1
 
                 del alunos[index]
 
@@ -84,7 +118,6 @@ class Grupo:
             index = Utils.obter_inteiro_aleatorio(inicio=0, fim=fim)
 
             grupos_gerados[index]['integrantes'].append(aluno)
-            grupos_gerados[index]['tamanho'] += 1
 
         return grupos_gerados
 

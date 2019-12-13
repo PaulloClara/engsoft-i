@@ -62,6 +62,11 @@ class TKUtils:
         cnf_padrao['font'] = ('times new roman', 14, 'italic')
 
         _input = tk.Entry(master=master, cnf=cnf_padrao)
+
+        if 'placeholder' in cnf:
+            _input.insert(0, cnf['placeholder'])
+            cnf.pop('placeholder')
+
         _input.configure(cnf=cnf)
 
         if grid:
