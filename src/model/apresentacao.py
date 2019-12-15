@@ -82,55 +82,58 @@ class Apresentacao:
         self.obter_apresentacoes()
 
     def validar_campos(self, formulario):
-        alunos = self.model.aluno.alunos.copy()
+        data = formulario['data_apresentacao']
+        duracao = formulario['duracao']
 
-        if formulario['data_apresentacao'] == '':
+        if not data:
             return 'O campo "Apresentação" não pode estar vazio!'
 
-        if formulario['duracao'] == '':
+        if not duracao:
             return 'O campo "Duração" não pode estar vazio!'
 
-        if formulario['data_apresentacao'][2] != '/' or \
-        formulario['data_apresentacao'][5] != '/':
+        if data[2] != '/' or data[5] != '/':
             return 'Formato invalido! Entre com o formato dd/mm/aaaa'
 
-        d = formulario['data_apresentacao'].split('/')[0]
-        m = formulario['data_apresentacao'].split('/')[1]
-        a = formulario['data_apresentacao'].split('/')[2]
+        dia, mes, ano = data.split('/')
 
-        dia = int(d)
-        mes = int(m)
-        ano = int(a)
-        
-        valida_data = False
-    
-        if mes == 1 or mes == 3 or mes == 5 or mes == 7 or mes == 8 or mes == 10 or mes == 12:
-            if dia <= 31:       # Meses com até 31 dias (01, 03, 05, 07, 08, 010 e 12)
-                valida_data = True
+        try:
+            dia, mes, ano = int(dia), int(mes), int(ano)
+        except Exception as e:
+            return 'Os valores em dd, mm e aaaa precisam ser numeros!'
 
-        if mes == 4 or mes == 6 or mes == 9 or mes == 11:
-            if dia <= 30:       # Meses com até 30 dias (04, 06, 09 e 11)
-                valida_data = True
+        data_valida = False
+
+        meses_com_ate_31_dias = [1, 3, 5, 7, 8, 10, 12]
+        if mes in meses_com_ate_31_dias:
+            if dia <= 31:
+                data_valida = True
+
+        meses_com_ate_30_dias = [4, 6, 9, 11]
+        if mes in meses_com_ate_30_dias:
+            if dia <= 30:
+                data_valida = True
 
         if mes == 2:
-            if (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0):
-                if dia <= 29:       #Ano Bisexto! Fevereiro com possíveis 29 dias
-                    valida_data = True
-            if dia <= 28:
-                    valida_data = True
+            if ano % 4 == 0 and ano % 100 != 0 or ano % 400 == 0:
+                # Ano Bisexto! Fevereiro com possíveis 29 dias
+                if dia <= 29:
+                    data_valida = True
 
-        if valida_data == False:
+            if dia <= 28:
+                data_valida = True
+
+        if not data_valida:
             return 'Data INVALIDA!'
 
         try:
-            tempo = int(formulario['duracao'])
-        except:
+            duracao = int(duracao)
+        except Exception as e:
             return 'O campo "Duração" só aceita valor inteiro!'
 
-        if tempo < 5:
-            return 'O tempo mínimo da presentação é 5 min!'
+        if duracao < 5:
+            return 'O tempo mínimo da apresentação é 5 min!'
 
-        if tempo > 60:
+        if duracao > 60:
             return 'Duração máxima de cada apresentação é 60 min!'
 
         return None
