@@ -27,11 +27,15 @@ class Listagem(TKUtils.ScrollContainer()):
         if elemento.selecionado:
             elemento.label.configure(height=2)
             elemento.label.configure(width=elemento.label.cnf['width'])
+
             elemento.selecionado = False
+            elemento.botao_remover.pack_configure()
         else:
             elemento.label.configure(height=6)
             elemento.label.configure(width=110)
+
             elemento.selecionado = True
+            elemento.botao_remover.pack_forget()
 
     def criar_container(self, master, elemento):
         cnf = {}
