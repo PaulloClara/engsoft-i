@@ -51,6 +51,9 @@ class Aluno(object):
         """Evento click do botao para carregar arquivo csv."""
         pass
 
+    def evento_expandir_label(self, evento, elemento):
+        pass
+
     def evento_elemento_montado(self) -> None:
         """Evento disparado quando o container Aluno for criado.
 

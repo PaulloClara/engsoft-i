@@ -11,8 +11,7 @@ class ListaDeGrupos(Listagem):
         self.grupos = []
 
     def adicionar(self, grupo):
-        estado = grupo['em_uso']
-        cont = self.criar_container(master=self.viewport, desativado=estado)
+        cont = self.criar_container(master=self.viewport, elemento=grupo)
 
         cnf, pack = {}, {}
         cnf['text'] = grupo['nome']
@@ -21,7 +20,7 @@ class ListaDeGrupos(Listagem):
 
         cont.label = self.criar_label(master=cont, cnf=cnf, pack=pack)
 
-        cont.botao_sortear = self.criar_botao_sortear(master=cont, valor=grupo)
+        cont.botao_sortear = self.criar_botao_sortear(master=cont)
 
         cnf, pack = {}, {}
         id_do_elemento = grupo['id_grupo']

@@ -25,13 +25,16 @@ class Aluno(TKUtils.Container()):
 
     def criar_lista_de_alunos(self):
         eventos = {}
+
         eventos['sortear'] = self.controller.evento_sortear
+        eventos['expandir'] = self.controller.evento_expandir_label
 
         if not self.lista_de_alunos:
             self.lista_de_alunos = ListaDeAlunos(master=self, eventos=eventos)
 
     def criar_actions(self):
         eventos = {}
+
         eventos['sortear'] = self.controller.evento_sortear
         eventos['arquivo'] = self.controller.evento_carregar_arquivo
 

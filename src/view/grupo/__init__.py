@@ -30,6 +30,7 @@ class Grupo(TKUtils.Container()):
 
         eventos['sortear'] = self.controller.evento_sortear
         eventos['remover'] = self.controller.evento_remover_grupo
+        eventos['expandir'] = self.controller.evento_expandir_label
 
         self.lista_de_grupos = ListaDeGrupos(master=self, eventos=eventos)
 

@@ -78,8 +78,7 @@ class Home(object):
         """Evento click do botao ordenar na actions."""
         pass
 
-    def evento_click_no_label(self) -> None:
-        """Evento click do label na lista de apresentacoes."""
+    def evento_expandir_label(self, evento, elemento):
         pass
 
     def evento_elemento_montado(self) -> None:

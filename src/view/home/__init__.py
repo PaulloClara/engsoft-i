@@ -28,7 +28,7 @@ class Home(TKUtils.Container()):
     def criar_lista_de_elementos(self):
         eventos = {}
 
-        eventos['click'] = self.controller.evento_click_no_label
+        eventos['expandir'] = self.controller.evento_expandir_label
         eventos['remover'] = self.controller.evento_remover_apresentacao
 
         self.lista_de_elementos = ListaDeElementos(master=self, eventos=eventos)

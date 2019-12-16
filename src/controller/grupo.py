@@ -34,30 +34,6 @@ class Grupo(object):
         """
         self.view.grupo.criar_janela_de_cadastro()
 
-    def evento_cancelar_cadastro(self) -> None:
-        """Evento click do botao cancelar no formulario.
-
-        - Destroi a janela de cadastro
-        """
-        self.view.grupo.destruir_janela_de_cadastro()
-
-    def evento_remover_grupo(self, id_grupo: str) -> None:
-        """Evento click do botao remover da lista de grupos.
-
-        Args:
-            id_grupo (str): ID do grupo que sera removido
-
-        - Remove o grupo do bd
-        - Destroi a lista de grupos
-        - Carrega a lista de grupos
-        """
-        self.model.grupo.remover_grupo(id_grupo=id_grupo)
-
-        self.view.grupo.destruir_lista_de_grupos()
-        self.carregar_grupos()
-
-        self.model.apresentacao.obter_apresentacoes()
-
     def evento_confirmar_cadastro(self) -> None:
         """Evento click do botao confirmar do formulario de cadastro.
 
@@ -87,6 +63,33 @@ class Grupo(object):
 
         self.view.grupo.destruir_lista_de_grupos()
         self.carregar_grupos()
+
+    def evento_cancelar_cadastro(self) -> None:
+        """Evento click do botao cancelar no formulario.
+
+        - Destroi a janela de cadastro
+        """
+        self.view.grupo.destruir_janela_de_cadastro()
+
+    def evento_remover_grupo(self, id_grupo: str) -> None:
+        """Evento click do botao remover da lista de grupos.
+
+        Args:
+            id_grupo (str): ID do grupo que sera removido
+
+        - Remove o grupo do bd
+        - Destroi a lista de grupos
+        - Carrega a lista de grupos
+        """
+        self.model.grupo.remover_grupo(id_grupo=id_grupo)
+
+        self.view.grupo.destruir_lista_de_grupos()
+        self.carregar_grupos()
+
+        self.model.apresentacao.obter_apresentacoes()
+
+    def evento_expandir_label(self, evento, elemento):
+        pass
 
     def evento_elemento_montado(self) -> None:
         """Evento disparado quando o componente/container Grupo e montado.

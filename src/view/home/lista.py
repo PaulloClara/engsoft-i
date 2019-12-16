@@ -11,7 +11,7 @@ class ListaDeElementos(Listagem):
         self.elementos = []
 
     def adicionar(self, elemento):
-        cont = self.criar_container(master=self.viewport)
+        cont = self.criar_container(master=self.viewport, elemento=elemento)
 
         cnf, pack = {}, {}
         cnf['text'] = elemento['titulo']

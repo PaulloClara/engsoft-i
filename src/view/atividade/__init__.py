@@ -38,6 +38,7 @@ class Atividade(TKUtils.Container()):
 
         eventos['sortear'] = self.controller.evento_sortear
         eventos['remover'] = self.controller.evento_remover_atividade
+        eventos['expandir'] = self.controller.evento_expandir_label
 
         if not self.lista_de_atividades:
             self.lista_de_atividades =\
@@ -51,6 +52,7 @@ class Atividade(TKUtils.Container()):
 
     def criar_janela_de_cadastro(self):
         eventos = {}
+
         eventos['cancelar'] = self.controller.evento_cancelar_cadastro
         eventos['confirmar'] = self.controller.evento_confirmar_cadastro
 

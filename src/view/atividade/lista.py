@@ -11,8 +11,7 @@ class ListaDeAtividades(Listagem):
         self.atividades = []
 
     def adicionar(self, atividade):
-        estado = atividade['em_uso']
-        cont = self.criar_container(master=self.viewport, desativado=estado)
+        cont = self.criar_container(master=self.viewport, elemento=atividade)
 
         cnf, pack = {}, {}
         cnf['text'] = atividade['titulo']
@@ -21,8 +20,7 @@ class ListaDeAtividades(Listagem):
 
         cont.label = self.criar_label(master=cont, cnf=cnf, pack=pack)
 
-        cont.botao_sortear =\
-            self.criar_botao_sortear(master=cont, valor=atividade)
+        cont.botao_sortear = self.criar_botao_sortear(master=cont)
 
         id_do_elemento = atividade['id_atividade']
 
