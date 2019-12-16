@@ -16,7 +16,7 @@ class ListaDeGrupos(Listagem):
         cnf, pack = {}, {}
         cnf['text'] = grupo['nome']
         cnf['bg'] = 'green'
-        cnf['width'] = 93
+        cnf['width'] = 92
 
         cont.label = self.criar_label(master=cont, cnf=cnf, pack=pack)
 

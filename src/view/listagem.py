@@ -23,6 +23,16 @@ class Listagem(TKUtils.ScrollContainer()):
     def iniciar(self):
         self.pack(expand=True)
 
+    def expandir(self, elemento):
+        if elemento.selecionado:
+            elemento.label.configure(height=2)
+            elemento.label.configure(width=elemento.label.cnf['width'])
+            elemento.selecionado = False
+        else:
+            elemento.label.configure(height=6)
+            elemento.label.configure(width=110)
+            elemento.selecionado = True
+
     def criar_container(self, master, elemento):
         cnf = {}
 
@@ -53,13 +63,16 @@ class Listagem(TKUtils.ScrollContainer()):
         comando = self.eventos['expandir']
         label.bind('<Button-1>', lambda evt=None: comando(evt, master))
 
+        label.cnf = cnf
+
         return label
 
     def criar_botao_sortear(self, master, cnf={}, pack={}):
         cnf['text'] = 'O'
         cnf['bg'] = 'grey' if master.desativado else 'orange'
-        cnf['state'] = 'disabled' if master.desativado else 'normal'
+        cnf['bd'] = 4
         cnf['width'] = 2
+        cnf['state'] = 'disabled' if master.desativado else 'normal'
         cnf['command'] =\
             lambda evt=None: self.eventos['sortear'](valor=master.dados)
 
@@ -72,6 +85,7 @@ class Listagem(TKUtils.ScrollContainer()):
     def criar_botao_remover(self, master, id_do_elemento, cnf={}, pack={}):
         cnf['text'] = 'X'
         cnf['bg'] = 'red'
+        cnf['bd'] = 4
         cnf['width'] = 2
         cnf['command'] =\
             lambda evt=None: self.eventos['remover'](id_do_elemento)

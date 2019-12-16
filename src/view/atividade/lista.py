@@ -16,7 +16,7 @@ class ListaDeAtividades(Listagem):
         cnf, pack = {}, {}
         cnf['text'] = atividade['titulo']
         cnf['bg'] = 'blue'
-        cnf['width'] = 93
+        cnf['width'] = 92
 
         cont.label = self.criar_label(master=cont, cnf=cnf, pack=pack)
 

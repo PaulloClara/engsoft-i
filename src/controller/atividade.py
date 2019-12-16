@@ -88,12 +88,7 @@ class Atividade(object):
         self.view.atividade.destruir_janela_de_cadastro()
 
     def evento_expandir_label(self, evento, elemento):
-        if elemento.selecionado:
-            elemento.label.configure(height=2)
-            elemento.selecionado = False
-        else:
-            elemento.label.configure(height=6)
-            elemento.selecionado = True
+        self.view.atividade.lista_de_atividades.expandir(elemento=elemento)
 
     def evento_elemento_montado(self) -> None:
         """Evento disparado quando o componente Atividade da View e montado.

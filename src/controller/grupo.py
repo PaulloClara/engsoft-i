@@ -89,7 +89,7 @@ class Grupo(object):
         self.model.apresentacao.obter_apresentacoes()
 
     def evento_expandir_label(self, evento, elemento):
-        pass
+        self.view.grupo.lista_de_grupos.expandir(elemento=elemento)
 
     def evento_elemento_montado(self) -> None:
         """Evento disparado quando o componente/container Grupo e montado.

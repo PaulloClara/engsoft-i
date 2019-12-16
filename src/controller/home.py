@@ -79,7 +79,7 @@ class Home(object):
         pass
 
     def evento_expandir_label(self, evento, elemento):
-        pass
+        self.view.home.lista_de_elementos.expandir(elemento=elemento)
 
     def evento_elemento_montado(self) -> None:
         """Evento disparado quando o componente Home na View e montado.
