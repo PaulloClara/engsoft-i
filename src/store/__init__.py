@@ -5,9 +5,9 @@ from src.utils import Utils
 class Store:
 
     def __init__(self):
-        self.caminho = Utils.obter_caminho('src/store/banco_de_dados.sqlite')
-        self.conectado = False
         self.conexao = None
+        self.conectado = False
+        self.caminho = Utils.obter_caminho('src/store/banco_de_dados.sqlite')
 
     def obter_arquivo(self, caminho, modo):
         return open(Utils.obter_caminho(caminho), mode=modo)

@@ -11,11 +11,12 @@ class ListaDeAtividades(Listagem):
         self.atividades = []
 
     def adicionar(self, atividade):
-        cont = self.criar_container(master=self.viewport)
+        estado = atividade['em_uso']
+        cont = self.criar_container(master=self.viewport, desativado=estado)
 
         cnf, pack = {}, {}
         cnf['text'] = atividade['titulo']
-        cnf['bg'] = 'blue' if not atividade['em_uso'] else 'purple'
+        cnf['bg'] = 'blue'
         cnf['width'] = 93
 
         cont.label = self.criar_label(master=cont, cnf=cnf, pack=pack)

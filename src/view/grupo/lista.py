@@ -11,11 +11,12 @@ class ListaDeGrupos(Listagem):
         self.grupos = []
 
     def adicionar(self, grupo):
-        cont = self.criar_container(master=self.viewport)
+        estado = grupo['em_uso']
+        cont = self.criar_container(master=self.viewport, desativado=estado)
 
         cnf, pack = {}, {}
         cnf['text'] = grupo['nome']
-        cnf['bg'] = 'green' if not grupo['em_uso'] else 'purple'
+        cnf['bg'] = 'green'
         cnf['width'] = 93
 
         cont.label = self.criar_label(master=cont, cnf=cnf, pack=pack)

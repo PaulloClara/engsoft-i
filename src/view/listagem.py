@@ -23,18 +23,20 @@ class Listagem(TKUtils.ScrollContainer()):
     def iniciar(self):
         self.pack(expand=True)
 
-    def criar_container(self, master):
+    def criar_container(self, master, desativado=False):
         cnf = {}
 
         cnf['bd'] = 1
         cnf['bg'] = 'grey'
 
         container = TKUtils.obter_container(master=master, cnf=cnf)
+        container.desativado = desativado
 
         return container
 
     def criar_label(self, master, cnf={}, pack={}):
         cnf['fg'] = 'white'
+        cnf['bg'] = 'grey' if master.desativado else cnf['bg']
         cnf['height'] = 2
 
         pack['side'] = 'left'
@@ -44,11 +46,9 @@ class Listagem(TKUtils.ScrollContainer()):
         return label
 
     def criar_botao_sortear(self, master, valor, cnf={}, pack={}):
-        desativado = isinstance(valor, dict) and valor['em_uso']
-
         cnf['text'] = 'O'
-        cnf['bg'] = 'grey' if desativado else 'orange'
-        cnf['state'] = 'disabled' if desativado else 'normal'
+        cnf['bg'] = 'grey' if master.desativado else 'orange'
+        cnf['state'] = 'disabled' if master.desativado else 'normal'
         cnf['width'] = 2
         cnf['command'] = lambda evt=None: self.eventos['sortear'](valor=valor)
 
