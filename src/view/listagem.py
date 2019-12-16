@@ -84,7 +84,8 @@ class Listagem(TKUtils.ScrollContainer()):
 
     def criar_botao_remover(self, master, id_do_elemento, cnf={}, pack={}):
         cnf['text'] = 'X'
-        cnf['bg'] = 'red'
+        cnf['bg'] = 'grey' if master.desativado else 'red'
+        cnf['state'] = 'disabled' if master.desativado else 'normal'
         cnf['bd'] = 4
         cnf['width'] = 2
         cnf['command'] =\
