@@ -15,6 +15,7 @@ class Grupo:
         self.grupos = []
         self.grupo = None
 
+    def iniciar(self):
         self.obter_grupos()
 
     def sortear(self):
@@ -137,10 +138,10 @@ class Grupo:
 
         if quantidade < 2:
             return 'A quantidade mínima de integrantes é 2'
-        
+
         if quantidade > len(alunos):
             return 'Quantidade de integrantes maior que a quantidade de alunos!'
-        
+
         if (len(alunos) / quantidade) < 2:
             return 'Numero de integrantes insuficientes para gerar grupos!'
 

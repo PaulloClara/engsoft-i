@@ -15,6 +15,7 @@ class Atividade:
         self.atividades = []
         self.atividade = None
 
+    def iniciar(self):
         self.obter_atividades()
 
     def sortear(self):

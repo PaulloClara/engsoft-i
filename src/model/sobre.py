@@ -10,6 +10,7 @@ class Sobre:
 
         self.cartoes = []
 
+    def iniciar(self):
         self.obter_cartoes()
 
     def obter_cartoes(self):

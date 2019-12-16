@@ -10,6 +10,7 @@ class Aluno:
 
         self.alunos = []
 
+    def iniciar(self):
         self.ler_arquivo()
 
     def sortear(self):
