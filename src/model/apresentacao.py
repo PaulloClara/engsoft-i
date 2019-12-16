@@ -82,9 +82,15 @@ class Apresentacao:
 
         self.obter_apresentacoes()
 
-    def validar_campos(self, formulario):
+    def validar_cadastro(self, formulario):
         data = formulario['data_apresentacao']
         duracao = formulario['duracao']
+
+        if not self.model.atividade.atividades:
+            return 'Lista de Atividades vazia'
+
+        if not self.model.grupo.grupos:
+            return 'Lista de Grupos vazia'
 
         if not data:
             return 'O campo "Apresentação" não pode estar vazio!'

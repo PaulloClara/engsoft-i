@@ -28,20 +28,10 @@ class Home(object):
 
     def evento_confirmar_cadastro(self) -> None:
         """Evento click do botao confirmar no formulario de cadastro."""
-        form = self.view.home.janela_de_cadastro.obter_campos()
+        formulario = self.view.home.janela_de_cadastro.obter_campos()
 
-        erro = self.model.apresentacao.validar_campos(formulario=form)
+        erro = self.model.apresentacao.validar_cadastro(formulario=formulario)
         if erro:
-            self.view.criar_janela_de_erro(erro=erro)
-            return
-
-        if not self.model.atividade.atividades:
-            erro = 'Lista de Atividades vazia'
-            self.view.criar_janela_de_erro(erro=erro)
-            return
-
-        if not self.model.grupo.grupos:
-            erro = 'Lista de Grupos vazia'
             self.view.criar_janela_de_erro(erro=erro)
             return
 
@@ -52,7 +42,7 @@ class Home(object):
             return
 
         id_grupo = grupo['id_grupo']
-        form['id_grupo'] = id_grupo
+        formulario['id_grupo'] = id_grupo
 
         atividade = self.model.atividade.sortear()
         if not atividade:
@@ -61,9 +51,9 @@ class Home(object):
             return
 
         id_atividade = atividade['id_atividade']
-        form['id_atividade'] = id_atividade
+        formulario['id_atividade'] = id_atividade
 
-        self.model.apresentacao.cadastrar_apresentacao(apresentacao=form)
+        self.model.apresentacao.cadastrar_apresentacao(apresentacao=formulario)
 
         self.model.grupo.atualizar_uso(id_grupo=id_grupo)
         self.model.atividade.atualizar_uso(id_atividade=id_atividade)
