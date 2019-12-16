@@ -44,12 +44,3 @@ class Model:
 
         self.tarefa.iniciar()
         self.apresentacao.iniciar()
-
-    def validar_sorteio(self):
-        if not self.aluno.alunos:
-            return 'Lista de estudantes vazia'
-
-        if not self.atividade.atividades:
-            return 'Lista de atividades vazia'
-
-        return None
