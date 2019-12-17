@@ -8,22 +8,20 @@ class ListaDeElementos(Listagem):
         super().__init__(master=master)
 
         self.eventos = eventos
-        self.elementos = []
 
-    def adicionar(self, elemento):
-        cont = self.criar_container(master=self.viewport, elemento=elemento)
+    def adicionar(self, apresentacao):
+        id_elemento = apresentacao['id_apresentacao']
+
+        elemento =\
+            self.criar_container(master=self.viewport, elemento=apresentacao)
 
         cnf, pack = {}, {}
-        cnf['text'] = elemento['titulo']
+        cnf['text'] = apresentacao['titulo']
         cnf['bg'] = 'orange'
         cnf['width'] = 97
 
-        cont.label =\
-            self.criar_label(master=cont, cnf=cnf, pack=pack)
+        elemento.label = self.criar_label(master=elemento, cnf=cnf, pack=pack)
+        elemento.botao_remover =\
+            self.criar_botao_remover(master=elemento, id_elemento=id_elemento)
 
-        id_do_elemento = elemento['id_apresentacao']
-
-        cont.botao_remover =\
-            self.criar_botao_remover(master=cont, id_do_elemento=id_do_elemento)
-
-        self.elementos.append(cont)
+        self.elementos.append(elemento)

@@ -80,7 +80,11 @@ class Apresentacao:
         sql = self.store.delete(tabela=tab, condicao=con)
         self.store.executar(codigo_sql=sql)
 
-        self.obter_apresentacoes()
+        for i, apresentacao in enumerate(self.apresentacoes):
+            if apresentacao['id_apresentacao'] == id_apr:
+                del self.apresentacoes[i]
+
+        return id_atividade, id_grupo
 
     def validar_cadastro(self, formulario):
         data = formulario['data_apresentacao']

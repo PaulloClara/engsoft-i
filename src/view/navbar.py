@@ -31,7 +31,7 @@ class Navbar(TKUtils.Container()):
         cnf['width'] = 28
         cnf['pady'] = 9
         cnf['font'] = ('times new roman', 15, 'bold')
-        cnf['command'] = self.controller.evento_tela_home
+        cnf['command'] = self.controller.tela_home
 
         pack['side'] = 'left'
 
@@ -45,7 +45,7 @@ class Navbar(TKUtils.Container()):
         cnf['width'] = 14
         cnf['pady'] = 9
         cnf['font'] = ('times new roman', 15, 'bold')
-        cnf['command'] = self.controller.evento_tela_aluno
+        cnf['command'] = self.controller.tela_aluno
 
         pack['side'] = 'left'
 
@@ -59,7 +59,7 @@ class Navbar(TKUtils.Container()):
         cnf['width'] = 14
         cnf['pady'] = 9
         cnf['font'] = ('times new roman', 15, 'bold')
-        cnf['command'] = self.controller.evento_tela_atividade
+        cnf['command'] = self.controller.tela_atividade
 
         pack['side'] = 'left'
 
@@ -74,7 +74,7 @@ class Navbar(TKUtils.Container()):
         cnf['width'] = 14
         cnf['pady'] = 9
         cnf['font'] = ('times new roman', 15, 'bold')
-        cnf['command'] = self.controller.evento_tela_grupo
+        cnf['command'] = self.controller.tela_grupo
 
         pack['side'] = 'left'
 
@@ -88,7 +88,7 @@ class Navbar(TKUtils.Container()):
         cnf['width'] = 14
         cnf['pady'] = 9
         cnf['font'] = ('times new roman', 15, 'bold')
-        cnf['command'] = self.controller.evento_tela_sobre
+        cnf['command'] = self.controller.tela_sobre
 
         pack['side'] = 'left'
 

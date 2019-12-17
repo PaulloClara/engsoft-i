@@ -8,23 +8,23 @@ class ListaDeAtividades(Listagem):
         super().__init__(master=master)
 
         self.eventos = eventos
-        self.atividades = []
 
     def adicionar(self, atividade):
-        cont = self.criar_container(master=self.viewport, elemento=atividade)
+        elemento =\
+            self.criar_container(master=self.viewport, elemento=atividade)
 
         cnf, pack = {}, {}
         cnf['text'] = atividade['titulo']
         cnf['bg'] = 'blue'
         cnf['width'] = 92
 
-        cont.label = self.criar_label(master=cont, cnf=cnf, pack=pack)
+        id_elemento = atividade['id_atividade']
 
-        cont.botao_sortear = self.criar_botao_sortear(master=cont)
+        elemento.label = self.criar_label(master=elemento, cnf=cnf, pack=pack)
+        elemento.botao_sortear = self.criar_botao_sortear(master=elemento)
+        elemento.botao_remover =\
+            self.criar_botao_remover(master=elemento, id_elemento=id_elemento)
 
-        id_do_elemento = atividade['id_atividade']
+        self.elementos.append(elemento)
 
-        cont.botao_remover =\
-            self.criar_botao_remover(master=cont, id_do_elemento=id_do_elemento)
-
-        self.atividades.append(cont)
+        self.mudar_estado(id_elemento, 'id_atividade', atividade['em_uso'])

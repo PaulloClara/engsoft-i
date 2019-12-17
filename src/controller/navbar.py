@@ -16,7 +16,7 @@ class Navbar(object):
         """
         self.view = controller.view
 
-    def evento_tela_home(self) -> None:
+    def tela_home(self) -> None:
         """Evento click do botao home.
 
         - Verifica se o container Home ja esta ativo
@@ -28,10 +28,12 @@ class Navbar(object):
         if self.view.container_ativo == 'home':
             return
 
-        self.view.destruir_container_ativo()
-        self.view.criar_container_home()
+        self.view.desativar_container_ativo()
 
-    def evento_tela_aluno(self) -> None:
+        self.view.home.ativar()
+        self.view.container_ativo = 'home'
+
+    def tela_aluno(self) -> None:
         """Evento click do botao aluno.
 
         - Verifica se o container Aluno ja esta ativo
@@ -43,10 +45,12 @@ class Navbar(object):
         if self.view.container_ativo == 'aluno':
             return
 
-        self.view.destruir_container_ativo()
-        self.view.criar_container_aluno()
+        self.view.desativar_container_ativo()
 
-    def evento_tela_atividade(self) -> None:
+        self.view.aluno.ativar()
+        self.view.container_ativo = 'aluno'
+
+    def tela_atividade(self) -> None:
         """Evento click do botao atividade.
 
         - Verifica se o container Atividade ja esta ativo
@@ -58,10 +62,12 @@ class Navbar(object):
         if self.view.container_ativo == 'atividade':
             return
 
-        self.view.destruir_container_ativo()
-        self.view.criar_container_atividade()
+        self.view.desativar_container_ativo()
 
-    def evento_tela_grupo(self) -> None:
+        self.view.atividade.ativar()
+        self.view.container_ativo = 'atividade'
+
+    def tela_grupo(self) -> None:
         """Evento click do botao grupo.
 
         - Verifica se o container Grupo ja esta ativo
@@ -73,10 +79,12 @@ class Navbar(object):
         if self.view.container_ativo == 'grupo':
             return
 
-        self.view.destruir_container_ativo()
-        self.view.criar_container_grupo()
+        self.view.desativar_container_ativo()
 
-    def evento_tela_sobre(self) -> None:
+        self.view.grupo.ativar()
+        self.view.container_ativo = 'grupo'
+
+    def tela_sobre(self) -> None:
         """Evento click do botao sobre.
 
         - Verifica se o container Sobre ja esta ativo
@@ -88,10 +96,12 @@ class Navbar(object):
         if self.view.container_ativo == 'sobre':
             return
 
-        self.view.destruir_container_ativo()
-        self.view.criar_container_sobre()
+        self.view.desativar_container_ativo()
 
-    def evento_elemento_montado(self) -> None:
+        self.view.sobre.ativar()
+        self.view.container_ativo = 'sober'
+
+    def elemento_montado(self) -> None:
         """Evento disparado quando o componente Navbar e montado.
 
         - Inicia o componente Navbar

@@ -1,40 +1,27 @@
-"""Controller do Grupo."""
+class Eventos(object):
 
-
-class Grupo(object):
-    """Classe responsavel por gerenciar a View e Model relacionados a Grupo.
-
-    Attributes:
-        view (View:obj): Objeto root View
-        model (Model:obj): Objeto root Model
-    """
-
-    def __init__(self, controller: object) -> None:
-        """Construtor padrao, define os atributos view e model."""
+    def __init__(self, controller):
         self.view = controller.view
         self.model = controller.model
 
-    def carregar_grupos(self) -> None:
-        """Busca os grupos no Model e carrega a listagem dos grupos na View."""
-        for grupo in self.model.grupo.grupos:
-            self.view.grupo.lista_de_grupos.adicionar(grupo=grupo)
-
-    def evento_sortear(self, valor: dict) -> None:
+    def sortear(self, valor: dict) -> None:
         self.model.grupo.grupo = valor
 
-        self.view.destruir_container_ativo()
-        self.view.criar_container_home()
+        self.view.desativar_container_ativo()
+
+        self.view.home.ativar()
+        self.view.container_ativo = 'home'
 
         self.view.home.criar_janela_de_cadastro()
 
-    def evento_cadastrar(self) -> None:
+    def cadastrar(self) -> None:
         """Evento click do botao cadastrar.
 
         - Cria a janela de cadastro
         """
         self.view.grupo.criar_janela_de_cadastro()
 
-    def evento_confirmar_cadastro(self) -> None:
+    def confirmar_cadastro(self) -> None:
         """Evento click do botao confirmar do formulario de cadastro.
 
         - Obtem os campos do formulario
@@ -61,17 +48,18 @@ class Grupo(object):
 
         self.view.grupo.destruir_janela_de_cadastro()
 
-        self.view.grupo.destruir_lista_de_grupos()
-        self.carregar_grupos()
+        index = len(self.model.grupo.grupos) - len(grupos)
+        for grupo in self.model.grupo.grupos[index:]:
+            self.view.grupo.lista.adicionar(grupo=grupo)
 
-    def evento_cancelar_cadastro(self) -> None:
+    def cancelar_cadastro(self) -> None:
         """Evento click do botao cancelar no formulario.
 
         - Destroi a janela de cadastro
         """
         self.view.grupo.destruir_janela_de_cadastro()
 
-    def evento_remover_grupo(self, id_grupo: str) -> None:
+    def remover_grupo(self, id_grupo: str) -> None:
         """Evento click do botao remover da lista de grupos.
 
         Args:
@@ -82,20 +70,7 @@ class Grupo(object):
         - Carrega a lista de grupos
         """
         self.model.grupo.remover_grupo(id_grupo=id_grupo)
+        self.view.grupo.lista.remover_elemento(id_grupo, 'id_grupo')
 
-        self.view.grupo.destruir_lista_de_grupos()
-        self.carregar_grupos()
-
-        self.model.apresentacao.obter_apresentacoes()
-
-    def evento_expandir_label(self, evento, elemento):
-        self.view.grupo.lista_de_grupos.expandir(elemento=elemento)
-
-    def evento_elemento_montado(self) -> None:
-        """Evento disparado quando o componente/container Grupo e montado.
-
-        - Inicia o componente/container Grupo
-        - Carrea a lista de grupos
-        """
-        self.view.grupo.iniciar()
-        self.carregar_grupos()
+    def expandir_label(self, evento, elemento):
+        self.view.grupo.lista.expandir(elemento=elemento)

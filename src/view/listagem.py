@@ -20,8 +20,25 @@ class Listagem(TKUtils.ScrollContainer()):
         super().__init__(master=master, cnf=cnf, cs_cnf=canvas_cnf,
                          vt_cnf=viewport_cnf, sr_cnf=scrollbar_cnf)
 
+        self.elementos = []
+
     def iniciar(self):
         self.pack(expand=True)
+
+    def mudar_estado(self, id_elemento, chave, desativar=True):
+        for elemento in self.elementos:
+            if elemento.dados[chave] == id_elemento:
+                if desativar:
+                    self.desativar_elemento(elemento=elemento)
+                else:
+                    self.ativar_elemento(elemento=elemento)
+                return
+
+    def remover_elemento(self, id_elemento, chave):
+        for i, elemento in enumerate(self.elementos):
+            if elemento.dados[chave] == id_elemento:
+                elemento.destroy()
+                del self.elementos[i]
 
     def expandir(self, elemento):
         if elemento.selecionado:
@@ -37,6 +54,26 @@ class Listagem(TKUtils.ScrollContainer()):
             elemento.selecionado = True
             elemento.botao_remover.pack_forget()
 
+    def ativar_elemento(self, elemento):
+        elemento.label.configure(bg=elemento.label.cnf['bg'])
+
+        if 'botao_remover' in dir(elemento):
+            elemento.botao_remover.configure(state='normal', bg='red')
+        if 'botao_sortear' in dir(elemento):
+            elemento.botao_sortear.configure(state='normal', bg='orange')
+
+        elemento.desativado = False
+
+    def desativar_elemento(self, elemento):
+        elemento.label.configure(bg='grey')
+
+        if 'botao_remover' in dir(elemento):
+            elemento.botao_remover.configure(state='disabled', bg='grey')
+        if 'botao_sortear' in dir(elemento):
+            elemento.botao_sortear.configure(state='disabled', bg='grey')
+
+        elemento.desativado = True
+
     def criar_container(self, master, elemento):
         cnf = {}
 
@@ -45,58 +82,53 @@ class Listagem(TKUtils.ScrollContainer()):
 
         container = TKUtils.obter_container(master=master, cnf=cnf)
 
-        try:
-            container.desativado = elemento['em_uso']
-        except Exception as e:
-            container.desativado = False
-
+        container.desativado = False
         container.selecionado = False
+
         container.dados = elemento
 
         return container
 
     def criar_label(self, master, cnf={}, pack={}):
         cnf['fg'] = 'white'
-        cnf['bg'] = 'grey' if master.desativado else cnf['bg']
         cnf['height'] = 2
 
         pack['side'] = 'left'
 
         label = TKUtils.obter_label(master=master, cnf=cnf, pack=pack)
+        label.cnf = cnf
 
         comando = self.eventos['expandir']
         label.bind('<Button-1>', lambda evt=None: comando(evt, master))
-
-        label.cnf = cnf
 
         return label
 
     def criar_botao_sortear(self, master, cnf={}, pack={}):
         cnf['text'] = 'O'
-        cnf['bg'] = 'grey' if master.desativado else 'orange'
+        cnf['bg'] = 'orange'
         cnf['bd'] = 4
         cnf['width'] = 2
-        cnf['state'] = 'disabled' if master.desativado else 'normal'
         cnf['command'] =\
             lambda evt=None: self.eventos['sortear'](valor=master.dados)
 
         pack['side'] = 'left'
 
         botao = TKUtils.obter_botao(master=master, cnf=cnf, pack=pack)
+        botao.cnf = cnf
 
         return botao
 
-    def criar_botao_remover(self, master, id_do_elemento, cnf={}, pack={}):
+    def criar_botao_remover(self, master, id_elemento, cnf={}, pack={}):
         cnf['text'] = 'X'
-        cnf['bg'] = 'grey' if master.desativado else 'red'
-        cnf['state'] = 'disabled' if master.desativado else 'normal'
+        cnf['bg'] = 'red'
         cnf['bd'] = 4
         cnf['width'] = 2
         cnf['command'] =\
-            lambda evt=None: self.eventos['remover'](id_do_elemento)
+            lambda evt=None: self.eventos['remover'](id_elemento)
 
         pack['side'] = 'right'
 
         botao = TKUtils.obter_botao(master=master, cnf=cnf, pack=pack)
+        botao.cnf = cnf
 
         return botao

@@ -8,24 +8,21 @@ class ListaDeGrupos(Listagem):
         super().__init__(master=master)
 
         self.eventos = eventos
-        self.grupos = []
 
     def adicionar(self, grupo):
-        cont = self.criar_container(master=self.viewport, elemento=grupo)
+        id_elemento = grupo['id_grupo']
+
+        elemento = self.criar_container(master=self.viewport, elemento=grupo)
 
         cnf, pack = {}, {}
         cnf['text'] = grupo['nome']
         cnf['bg'] = 'green'
         cnf['width'] = 92
 
-        cont.label = self.criar_label(master=cont, cnf=cnf, pack=pack)
+        elemento.label = self.criar_label(master=elemento, cnf=cnf, pack=pack)
+        elemento.botao_sortear = self.criar_botao_sortear(master=elemento)
+        elemento.botao_remover =\
+            self.criar_botao_remover(master=elemento, id_elemento=id_elemento)
 
-        cont.botao_sortear = self.criar_botao_sortear(master=cont)
-
-        cnf, pack = {}, {}
-        id_do_elemento = grupo['id_grupo']
-
-        cont.botao_remover =\
-            self.criar_botao_remover(master=cont, id_do_elemento=id_do_elemento)
-
-        self.grupos.append(cont)
+        self.elementos.append(elemento)
+        self.mudar_estado(id_elemento, 'id_grupo', grupo['em_uso'])

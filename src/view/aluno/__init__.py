@@ -11,31 +11,36 @@ class Aluno(TKUtils.Container()):
 
         self.controller = controller
 
+        self.lista = None
         self.actions = None
-        self.lista_de_alunos = None
 
     def iniciar(self):
         self.criar_actions()
-        self.criar_lista_de_alunos()
+        self.criar_listagem_de_alunos()
 
-        self.lista_de_alunos.iniciar()
+        self.lista.iniciar()
         self.actions.iniciar()
 
         self.pack(side='bottom')
 
-    def criar_lista_de_alunos(self):
+    def criar_listagem_de_alunos(self):
         eventos = {}
 
-        eventos['sortear'] = self.controller.evento_sortear
-        eventos['expandir'] = self.controller.evento_expandir_label
+        eventos['sortear'] = self.controller.eventos.sortear
+        eventos['expandir'] = self.controller.eventos.expandir_label
 
-        if not self.lista_de_alunos:
-            self.lista_de_alunos = ListaDeAlunos(master=self, eventos=eventos)
+        self.lista = ListaDeAlunos(master=self, eventos=eventos)
 
     def criar_actions(self):
         eventos = {}
 
-        eventos['sortear'] = self.controller.evento_sortear
-        eventos['arquivo'] = self.controller.evento_carregar_arquivo
+        eventos['sortear'] = self.controller.eventos.sortear
+        eventos['arquivo'] = self.controller.eventos.carregar_arquivo
 
         self.actions = Actions(master=self, eventos=eventos)
+
+    def ativar(self):
+        self.pack_configure(side='bottom')
+
+    def desativar(self):
+        self.pack_forget()

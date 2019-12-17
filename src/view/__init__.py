@@ -39,7 +39,15 @@ class View(TKUtils.Janela()):
 
     def iniciar(self):
         self.criar_navbar()
+
         self.criar_container_home()
+        self.criar_container_aluno()
+        self.criar_container_atividade()
+        self.criar_container_grupo()
+        self.criar_container_sobre()
+
+        self.home.ativar()
+        self.container_ativo = 'home'
 
         self.mainloop()
 
@@ -47,50 +55,49 @@ class View(TKUtils.Janela()):
         controller = self.controller.navbar
         self.navbar = Navbar(master=self, controller=controller)
 
-        self.controller.navbar.evento_elemento_montado()
+        self.controller.navbar.elemento_montado()
 
     def criar_container_home(self):
         controller = self.controller.home
         self.home = Home(master=self, controller=controller)
 
-        self.container_ativo = 'home'
-        self.controller.home.evento_elemento_montado()
+        self.controller.home.elemento_montado()
 
     def criar_container_aluno(self):
         controller = self.controller.aluno
         self.aluno = Aluno(master=self, controller=controller)
 
-        self.container_ativo = 'aluno'
-        self.controller.aluno.evento_elemento_montado()
+        self.controller.aluno.elemento_montado()
 
     def criar_container_atividade(self):
         controller = self.controller.atividade
         self.atividade = Atividade(master=self, controller=controller)
 
-        self.container_ativo = 'atividade'
-        self.controller.atividade.evento_elemento_montado()
+        self.controller.atividade.elemento_montado()
 
     def criar_container_grupo(self):
         controller = self.controller.grupo
         self.grupo = Grupo(master=self, controller=controller)
 
-        self.container_ativo = 'grupo'
-        self.controller.grupo.evento_elemento_montado()
+        self.controller.grupo.elemento_montado()
 
     def criar_container_sobre(self):
-        pass
+        controller = self.controller.sobre
+        self.sobre = Sobre(master=self, controller=controller)
 
-    def destruir_container_ativo(self):
+        self.controller.sobre.elemento_montado()
+
+    def desativar_container_ativo(self):
         if self.container_ativo == 'home':
-            self.home.destroy()
+            self.home.desativar()
         elif self.container_ativo == 'aluno':
-            self.aluno.destroy()
+            self.aluno.desativar()
         elif self.container_ativo == 'atividade':
-            self.atividade.destroy()
+            self.atividade.desativar()
         elif self.container_ativo == 'grupo':
-            self.grupo.destroy()
+            self.grupo.desativar()
         elif self.container_ativo == 'sobre':
-            self.sobre.destroy()
+            self.sobre.desativar()
 
         self.container_ativo = ''
 

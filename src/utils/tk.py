@@ -97,6 +97,10 @@ class TKUtils:
         return janela
 
     @staticmethod
+    def Botao():
+        return tk.Button
+
+    @staticmethod
     def Janela():
         return tk.Tk
 

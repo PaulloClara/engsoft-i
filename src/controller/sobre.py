@@ -18,9 +18,10 @@ class Sobre(object):
         self.view = controller.view
         self.model = controller.model
 
-    def evento_elemento_montado(self) -> None:
+    def elemento_montado(self) -> None:
         """Evento disparado quando o componente Sobre e montado.
 
         - Inicia o container Sobre
         """
         self.view.sobre.iniciar()
+        self.view.sobre.desativar()

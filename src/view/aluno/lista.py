@@ -8,10 +8,9 @@ class ListaDeAlunos(Listagem):
         super().__init__(master=master)
 
         self.eventos = eventos
-        self.alunos = []
 
     def adicionar(self, nome_do_aluno):
-        cont =\
+        elemento =\
             self.criar_container(master=self.viewport, elemento=nome_do_aluno)
 
         cnf, pack = {}, {}
@@ -19,8 +18,7 @@ class ListaDeAlunos(Listagem):
         cnf['bg'] = 'red'
         cnf['width'] = 97
 
-        cont.label = self.criar_label(master=cont, cnf=cnf, pack=pack)
+        elemento.label = self.criar_label(master=elemento, cnf=cnf, pack=pack)
+        elemento.botao_sortear = self.criar_botao_sortear(master=elemento)
 
-        cont.botao_sortear = self.criar_botao_sortear(master=cont)
-
-        self.alunos.append(cont)
+        self.elementos.append(elemento)
