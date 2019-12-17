@@ -7,8 +7,10 @@ class Eventos(object):
     def sortear(self, valor):
         self.model.atividade.atividade = valor
 
-        self.view.destruir_container_ativo()
-        self.view.criar_container_home()
+        self.view.desativar_container_ativo()
+
+        self.view.home.ativar()
+        self.view.container_ativo = 'home'
 
         self.view.home.criar_janela_de_cadastro()
 
