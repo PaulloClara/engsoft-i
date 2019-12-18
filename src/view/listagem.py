@@ -40,52 +40,43 @@ class Listagem(TKUtils.ScrollContainer()):
                 elemento.destroy()
                 del self.elementos[i]
 
-    def expandir(self, elemento):
-        if elemento.selecionado:
-            elemento.label.configure(height=2)
-            elemento.label.configure(width=elemento.label.cnf['width'])
-
-            elemento.selecionado = False
-            elemento.botao_remover.pack_configure()
-        else:
-            elemento.label.configure(height=6)
-            elemento.label.configure(width=110)
-
-            elemento.selecionado = True
-            elemento.botao_remover.pack_forget()
-
     def ativar_elemento(self, elemento):
-        elemento.label.configure(bg=elemento.label.cnf['bg'])
+        header = elemento.header
 
-        if 'botao_remover' in dir(elemento):
-            elemento.botao_remover.configure(state='normal', bg='red')
-        if 'botao_sortear' in dir(elemento):
-            elemento.botao_sortear.configure(state='normal', bg='orange')
+        header.label.configure(bg=header.label.cnf['bg'])
+
+        if 'botao_remover' in dir(header):
+            header.botao_remover.configure(state='normal', bg='red')
+        if 'botao_sortear' in dir(header):
+            header.botao_sortear.configure(state='normal', bg='orange')
 
         elemento.desativado = False
 
     def desativar_elemento(self, elemento):
-        elemento.label.configure(bg='grey')
+        header = elemento.header
 
-        if 'botao_remover' in dir(elemento):
-            elemento.botao_remover.configure(state='disabled', bg='grey')
-        if 'botao_sortear' in dir(elemento):
-            elemento.botao_sortear.configure(state='disabled', bg='grey')
+        header.label.configure(bg='grey')
+
+        if 'botao_remover' in dir(header):
+            header.botao_remover.configure(state='disabled', bg='grey')
+        if 'botao_sortear' in dir(header):
+            header.botao_sortear.configure(state='disabled', bg='grey')
 
         elemento.desativado = True
 
-    def criar_container(self, master, elemento):
+    def criar_elemento(self, dados):
         cnf = {}
 
-        cnf['bd'] = 1
+        cnf['bd'] = 2
         cnf['bg'] = 'grey'
+        cnf['relief'] = 'ridge'
 
-        container = TKUtils.obter_container(master=master, cnf=cnf)
+        container = TKUtils.obter_container(master=self.viewport, cnf=cnf)
 
         container.desativado = False
         container.selecionado = False
 
-        container.dados = elemento
+        container.dados = dados
 
         return container
 
@@ -99,17 +90,21 @@ class Listagem(TKUtils.ScrollContainer()):
         label.cnf = cnf
 
         comando = self.eventos['expandir']
-        label.bind('<Button-1>', lambda evt=None: comando(evt, master))
+        label.bind('<Button-1>', lambda evt=None: comando(evt, master.master))
 
         return label
 
     def criar_botao_sortear(self, master, cnf={}, pack={}):
+        if 'dados' in dir(master.master):
+            dados = master.master.dados
+        else:
+            dados = master.dados
+
         cnf['text'] = 'O'
         cnf['bg'] = 'orange'
         cnf['bd'] = 4
         cnf['width'] = 2
-        cnf['command'] =\
-            lambda evt=None: self.eventos['sortear'](valor=master.dados)
+        cnf['command'] = lambda evt=None: self.eventos['sortear'](valor=dados)
 
         pack['side'] = 'left'
 
@@ -123,10 +118,9 @@ class Listagem(TKUtils.ScrollContainer()):
         cnf['bg'] = 'red'
         cnf['bd'] = 4
         cnf['width'] = 2
-        cnf['command'] =\
-            lambda evt=None: self.eventos['remover'](id_elemento)
+        cnf['command'] = lambda evt=None: self.eventos['remover'](id_elemento)
 
-        pack['side'] = 'right'
+        pack['side'] = 'left'
 
         botao = TKUtils.obter_botao(master=master, cnf=cnf, pack=pack)
         botao.cnf = cnf

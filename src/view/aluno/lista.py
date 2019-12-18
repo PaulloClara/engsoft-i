@@ -10,8 +10,7 @@ class ListaDeAlunos(Listagem):
         self.eventos = eventos
 
     def adicionar(self, nome_do_aluno):
-        elemento =\
-            self.criar_container(master=self.viewport, elemento=nome_do_aluno)
+        elemento = self.criar_elemento(dados=nome_do_aluno)
 
         cnf, pack = {}, {}
         cnf['text'] = nome_do_aluno

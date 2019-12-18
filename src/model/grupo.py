@@ -53,6 +53,10 @@ class Grupo:
         sql = self.store.select(tabela=tab, colunas=cols)
         self.grupos = self.store.executar(codigo_sql=sql, colunas=cols)
 
+        for grupo in self.grupos:
+            grupo['integrantes'] =\
+                grupo['integrantes'][1:-2].replace("'", '').split(', ')
+
     def cadastrar_grupo(self, grupo):
         tab, cols, vals = self.tabela, self.colunas[1:], []
 
