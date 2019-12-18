@@ -107,6 +107,16 @@ class Apresentacao:
 
         dia, mes, ano = data.split('/')
 
+        data_atual = Utils.obter_data_e_hora_atual().split(' ')[0].split('/')
+
+        erro = 'Data INVALIDA'
+        if data_atual[2] > ano:
+            return erro
+        elif data_atual[2] == ano and data_atual[1] > mes:
+            return erro
+        elif data_atual[2] == ano and data_atual[1] == mes and data_atual[0] > dia:
+            return erro
+
         try:
             dia, mes, ano = int(dia), int(mes), int(ano)
         except Exception as e:
