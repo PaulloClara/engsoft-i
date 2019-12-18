@@ -16,6 +16,7 @@ class Apresentacao:
 
     def iniciar(self):
         self.obter_apresentacoes()
+        self.ordenar()
 
     def obter_apresentacao(self, id_apresentacao):
         tab, cols = self.tabela, self.colunas
@@ -85,6 +86,10 @@ class Apresentacao:
                 del self.apresentacoes[i]
 
         return id_atividade, id_grupo
+
+    def ordenar(self):
+        self.apresentacoes.sort(
+            key=lambda a: a['data_apresentacao'].split('/')[::-1])
 
     def validar_cadastro(self, formulario):
         data = formulario['data_apresentacao']

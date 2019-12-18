@@ -39,13 +39,15 @@ class Eventos(object):
         formulario['id_atividade'] = id_atividade
 
         self.model.apresentacao.cadastrar_apresentacao(apresentacao=formulario)
+        elemento = self.model.apresentacao.apresentacoes[-1]
+
+        self.model.apresentacao.ordenar()
 
         self.model.grupo.atualizar_uso(id_grupo=id_grupo)
         self.model.atividade.atualizar_uso(id_atividade=id_atividade)
 
         self.view.home.destruir_janela_de_cadastro()
 
-        elemento = self.model.apresentacao.apresentacoes[-1]
         self.view.home.lista.adicionar(elemento)
 
         self.view.atividade.lista.mudar_estado(id_atividade, 'id_atividade')
