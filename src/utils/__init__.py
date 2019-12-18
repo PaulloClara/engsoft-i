@@ -16,11 +16,14 @@ class Utils:
 
     @staticmethod
     def obter_caminho_atual():
-        caminho = getcwd()
-
+        caminho = ''
+        caminho_absoluto = getcwd()
         caminho_de_execucao = Utils.obter_caminho_de_execucao()
-        if caminho_de_execucao != '':
-            caminho = f'{caminho}/{caminho_de_execucao}'
+
+        if caminho_de_execucao == '' or caminho_de_execucao[0] != '/':
+            caminho = f'{caminho_absoluto}/{caminho_de_execucao}'
+        else:
+            caminho = caminho_de_execucao
 
         return caminho
 
