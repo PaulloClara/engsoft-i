@@ -2,6 +2,12 @@
 
 Projeto referente à disciplina de Engenharia de Software I - IFPI
 
+### Instalar/Usar
+
+`$ git clone https://github.com/PaulloClara/stuki.git ~/.stuki && python3 ~/.stuki/install.py`\
+`$ source <arquivo_bash>` ou reinicie o terminal\
+`$ stuki`
+
 #### Clonar/Configurar
 
 `$ git clone https://github.com/PaulloClara/stuki.git`\
