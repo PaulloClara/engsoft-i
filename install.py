@@ -25,14 +25,15 @@ def main():
             break
 
     if not instalado or '--update' in argv:
-        caminho = path.expanduser('~/.stuki/dist')
+        caminho_dist = path.expanduser('~/.stuki/dist')
+        caminho_arquivo = path.expanduser('~/.stuki/run.py')
 
         try:
-            run(['cxfreeze', 'run.py', '--target-dir', caminho])
+            run(['cxfreeze', caminho_arquivo, '--target-dir', caminho_dist])
         except Exception as e:
             try:
                 run(['pip3', 'install', 'cx-Freeze', '--user'])
-                run(['cxfreeze', 'run.py', '--target-dir', caminho])
+                run(['cxfreeze', caminho_arquivo, '--target-dir', caminho_dist])
             except Exception as e:
                 print('Não foi possivel instalar o cxfreeze, pip necessario')
                 return
