@@ -25,6 +25,8 @@ class TesteDoModel:
     def teste_do_init_do_aluno(self):
         local = 'model.aluno.__init__'
 
+        self.model.aluno.iniciar()
+
         if self.model.aluno.alunos == []:
             erro = 'arquivo nao foi carregado'
             raise ExceptionNoTeste(local=local, erro=erro)
