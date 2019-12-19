@@ -25,6 +25,9 @@ class TKUtils:
         else:
             label.pack(pack)
 
+        label.style_cnf = cnf
+        label.default_style_cnf = cnf_padrao
+
         return label
 
     @staticmethod
@@ -47,6 +50,9 @@ class TKUtils:
             botao.grid(grid)
         else:
             botao.pack(pack)
+
+        botao.style_cnf = cnf
+        botao.default_style_cnf = cnf_padrao
 
         return botao
 
@@ -74,6 +80,9 @@ class TKUtils:
         else:
             _input.pack(pack)
 
+        _input.style_cnf = cnf
+        _input.default_style_cnf = cnf_padrao
+
         return _input
 
     @staticmethod
@@ -85,6 +94,8 @@ class TKUtils:
         else:
             container.pack(pack)
 
+        container.style_cnf = cnf
+
         return container
 
     @staticmethod
@@ -94,11 +105,10 @@ class TKUtils:
         janela.title(titulo)
         janela.geometry(tamanho)
 
-        return janela
+        janela.style_cnf = cnf
+        janela.default_style_cnf = cnf_padrao
 
-    @staticmethod
-    def Botao():
-        return tk.Button
+        return janela
 
     @staticmethod
     def Janela():
