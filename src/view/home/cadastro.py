@@ -1,4 +1,5 @@
 from src.utils.tk import TKUtils
+from src.utils import Utils
 from src.view.janela_de_cadastro import JanelaDeCadastro
 
 
@@ -40,7 +41,7 @@ class Formulario(JanelaDeCadastro):
             TKUtils.obter_label(master=self.corpo, cnf=cnf, grid=grid)
 
         cnf, grid = {}, {}
-        cnf['placeholder'] = '21/11/2020'
+        cnf['placeholder'] = Utils.obter_data_e_hora_atual().split(' ')[0]
 
         grid['row'] = linha
         grid['column'] = 1
