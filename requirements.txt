@@ -1,5 +1,10 @@
 altgraph==0.16.1
 autopep8==1.4.4
 cx-Freeze==6.0
+mccabe==0.6.1
 pep8==1.7.1
 pycodestyle==2.5.0
+pydocstyle==5.0.1
+pyflakes==2.1.1
+pylama==7.7.1
+snowballstemmer==2.0.0
