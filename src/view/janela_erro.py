@@ -49,7 +49,7 @@ class JanelaDeErro(TKUtils.obter_janela()):
         """."""
         self.subelemento.confirmar.defs.cnf['text'] = 'OK'
         self.subelemento.confirmar.defs.cnf['bg'] = 'green'
-        self.subelemento.confirmar.defs.cnf['command'] = self.destroy
+        self.subelemento.confirmar.defs.cnf['command'] = self.fechar
 
         self.subelemento.confirmar.defs.pack['pady'] = 25
         self.subelemento.confirmar.defs.pack['side'] = 'bottom'
