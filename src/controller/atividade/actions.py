@@ -11,9 +11,14 @@ class Actions(object):
 
     def configurar(self) -> None:
         """Disparado quando o componente Atividade da View e montado."""
-        actions = self.view.atividade.actions
+        actions = self.view.atividade.actions.subelemento
 
-        actions.subelemento.sortear.evento['<Button-1>'] = self.sortear
-        actions.subelemento.cadastrar.evento['<Button-1>'] = self.cadastrar
+        actions.sortear.evento['<Button-1>'] = self.sortear
+        actions.cadastrar.evento['<Button-1>'] = self.cadastrar
 
-        actions.carregar_eventos()
+        self.view.atividade.actions.carregar_eventos()
+
+        self.view.atividade.cadastro.defs.mcnf['<Start>'] =\
+            actions.cadastrar.desativar
+        self.view.atividade.cadastro.defs.mcnf['<Destroy>'] =\
+            actions.cadastrar.ativar
