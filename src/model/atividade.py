@@ -1,91 +1,65 @@
 from src.utils import Utils
+from src.model.modelo import Modelo
 
 
-class Atividade:
+class Atividade(Modelo):
 
-    def __init__(self, model):
-        self.model = model
-        self.store = self.model.store
-        self.controller = self.model.controller.atividade
+    def __init__(self):
+        super().__init__()
 
         self.tabela = 'atividade'
-        self.colunas = ['id_atividade', 'titulo', 'descricao', 'em_uso',
-                        'data_cadastro']
 
-        self.atividades = []
         self.atividade = None
+        self.atividades = []
 
-    def iniciar(self):
-        self.obter_atividades()
+    def iniciar(self, model):
+        super().iniciar(model)
+        self.carregar()
 
-    def sortear(self):
-        atividades_disponiveis = []
-
-        atividade = self.atividade
-        if atividade:
-            self.atividade = None
+    def sortear(self) -> dict or None:
+        if self.atividade:
+            atividade, self.atividade = self.atividade, None
 
             return atividade
 
-        for atividade in self.atividades:
-            if not atividade['em_uso']:
-                atividades_disponiveis.append(atividade)
+        if not self.atividades:
+            return None
 
-        if atividades_disponiveis:
-            fim = len(atividades_disponiveis) - 1
-            index = Utils.obter_inteiro_aleatorio(inicio=0, fim=fim)
+        return super().sortear(lista=self.atividades)
 
-            return atividades_disponiveis[index]
+    def obter(self, id_atividade):
+        return super().obter(_id=id_atividade)
 
-        return None
+    def carregar(self):
+        self.atividades = super().carregar()
 
-    def obter_atividade(self, id_atividade):
-        tab, cols = self.tabela, self.colunas
-        con = f'id_atividade == "{id_atividade}"'
-
-        sql = self.store.select(tabela=tab, colunas=cols, condicao=con)
-
-        return self.store.executar(codigo_sql=sql, colunas=cols)
-
-    def obter_atividades(self):
-        tab, cols = self.tabela, self.colunas
-
-        sql = self.store.select(tabela=tab, colunas=cols)
-        self.atividades = self.store.executar(codigo_sql=sql, colunas=cols)
-
-    def cadastrar_atividade(self, atividade):
-        tab, cols, vals = self.tabela, self.colunas[1:], []
-
+    def cadastrar(self, atividade):
+        vals = []
         vals.append(atividade['titulo'].capitalize())
         vals.append(atividade['descricao'].capitalize())
         vals.append(0)
-        vals.append(Utils.obter_data_e_hora_atual())
+        vals.append(Utils.data_e_hora_atual())
 
-        sql = self.store.insert(tabela=tab, colunas=cols, valores=vals)
-        self.store.executar(codigo_sql=sql)
+        super().cadastrar(vals)
 
-        self.obter_atividades()
+        self.carregar()
 
-    def atualizar_uso(self, id_atividade, valor=1):
-        tab = self.tabela
-        cam = f'em_uso = {valor}'
-        con = f'id_atividade = {id_atividade}'
+        return self.atividades[-1]
 
-        sql = self.store.update(tabela=tab, campos=cam, condicao=con)
-        self.store.executar(codigo_sql=sql)
+    def atualizar(self, id_atividade, campos: dict):
+        super().atualizar(_id=id_atividade, campos=campos)
 
-        self.obter_atividades()
+        self.carregar()
 
-    def remover_atividade(self, id_atividade):
-        tab, cols = self.tabela, self.colunas
-        con = f'id_atividade = {id_atividade}'
+    def remover(self, id_atividade):
+        super().remover(_id=id_atividade)
 
-        sql = self.store.delete(tabela=tab, condicao=con)
-        self.store.executar(codigo_sql=sql)
+        for i, atividade in enumerate(self.atividades):
+            if atividade['id_atividade'] == id_atividade:
+                del self.atividades[i]
+                break
 
-        self.obter_atividades()
-
-    def validar_campos(self, formulario):
+    def validar(self, formulario):
         if formulario['titulo'] == '':
             return 'O campo "Titulo" não pode estar vazio'
 
@@ -94,6 +68,6 @@ class Atividade:
 
         return None
 
-    def limpar_formulario(self, formulario):
+    def limpar(self, formulario):
         formulario['titulo'] = ''
         formulario['descricao'] = ''

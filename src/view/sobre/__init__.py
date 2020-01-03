@@ -1,16 +1,14 @@
 from src.utils.tk import TKUtils
 
 
-class Sobre(TKUtils.Container()):
+class Sobre(TKUtils.obter_container()):
 
-    def __init__(self, master, controller):
-        super().__init__(master=master)
+    def __init__(self):
+        super().__init__()
 
-    def iniciar(self):
-        self.pack(side='bottom')
+        self.defs.pack['side'] = 'bottom'
 
-    def ativar(self):
-        self.pack_configure(side='bottom')
+    def iniciar(self, master):
+        super().iniciar(master=master)
 
-    def desativar(self):
-        self.pack_forget()
+        self.ocultar()

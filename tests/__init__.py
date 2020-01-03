@@ -2,72 +2,71 @@ from tests.exception import ExceptionNoTeste
 
 from tests.view import TesteDaView
 from tests.model import TesteDoModel
-from tests.controller import TesteDoController
-from tests.utils import TesteDoUtils
+from tests.utils import TUtils
 from tests.store import TesteDoStore
+from tests.controller import TesteDoController
 
 
-class Tests:
+class Tests(object):
 
     def __init__(self):
-        self.numero_de_testes = 10
+        self.qtd_testes = 10
 
     def iniciar(self):
-        print('\n')
-
         try:
-            print('Testando View...', end='')
-            self.testar_view()
-
-            print('Testando Model...', end='')
-            self.testar_model()
-
-            print('Testando Controller...', end='')
-            self.testar_controller()
-
-            print('Testando Utils...', end='')
-            self.testar_utils()
-
-            print('Testando Store...', end='')
-            self.testar_store()
+            self.view()
+            self.model()
+            self.utils()
+            self.store()
+            self.controller()
         except Exception as erro:
-            if 'erro_msg' in dir(erro):
-                self.mostrar_erro(erro_msg=erro)
-            else:
-                self.mostrar_erro(erro_msg='Erro inesperado...')
+            if not isinstance(erro, ExceptionNoTeste):
+                print('\n\n\t Erro inesperado... \n\n')
                 raise
+            print(erro)
 
-        print('\n')
+            exit(1)
+        exit(0)
 
-    def testar_view(self):
-        for i in range(self.numero_de_testes):
+    def view(self):
+        print('Testando View...', end='')
+
+        for i in range(self.qtd_testes):
             TesteDaView(loop=i).iniciar()
 
-        print('\b\b\b       ->\033[1;32m OK', end='\033[0;0m\n')
+        self.mostrar_ok(qtd_espacos=7)
 
-    def testar_model(self):
-        for i in range(self.numero_de_testes):
+    def model(self):
+        print('Testando Model...', end='')
+
+        for i in range(self.qtd_testes):
             TesteDoModel(loop=i).iniciar()
 
-        print('\b\b\b      ->\033[1;32m OK', end='\033[0;0m\n')
+        self.mostrar_ok(qtd_espacos=6)
 
-    def testar_controller(self):
-        for i in range(self.numero_de_testes):
+    def controller(self):
+        print('Testando Controller...', end='')
+
+        for i in range(self.qtd_testes):
             TesteDoController(loop=i).iniciar()
 
-        print('\b\b\b ->\033[1;32m OK', end='\033[0;0m\n')
+        self.mostrar_ok(qtd_espacos=1)
 
-    def testar_utils(self):
-        for i in range(self.numero_de_testes):
-            TesteDoUtils(loop=i).iniciar()
+    def utils(self):
+        print('Testando Utils...', end='')
 
-        print('\b\b\b      ->\033[1;32m OK', end='\033[0;0m\n')
+        for i in range(self.qtd_testes):
+            TUtils(loop=i).iniciar()
 
-    def testar_store(self):
-        for i in range(self.numero_de_testes):
+        self.mostrar_ok(qtd_espacos=6)
+
+    def store(self):
+        print('Testando Store...', end='')
+
+        for i in range(self.qtd_testes):
             TesteDoStore(loop=i).iniciar()
 
-        print('\b\b\b      ->\033[1;32m OK', end='\033[0;0m\n')
+        self.mostrar_ok(qtd_espacos=6)
 
-    def mostrar_erro(self, erro_msg):
-        print(f'\n\t\033[1;33m {erro_msg}', end='\033[0;0m\n')
+    def mostrar_ok(self, qtd_espacos):
+        print(f'\b\b\b{" " * qtd_espacos}->\033[1;32m OK', end='\033[0;0m\n')

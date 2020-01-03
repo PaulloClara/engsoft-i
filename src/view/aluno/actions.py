@@ -1,44 +1,38 @@
 from src.utils.tk import TKUtils
 
 
-class Actions(TKUtils.Container()):
+class Actions(TKUtils.obter_container()):
 
-    def __init__(self, master, eventos):
-        super().__init__(master=master, bd=10)
+    def __init__(self):
+        super().__init__()
 
-        self.eventos = eventos
+        self.defs.cnf['bd'] = 10
+        self.defs.pack['expand'] = True
+        self.defs.pack['side'] = 'bottom'
 
-        self.botao_de_sorteio = None
-        self.botao_de_carregar_arquivo = None
+        self.subelemento.sortear = TKUtils.obter_botao()
+        self.subelemento.arquivo = TKUtils.obter_botao()
 
-    def iniciar(self):
-        self.criar_botao_de_sorteio()
-        self.criar_botao_de_carregar_arquivo()
+    def iniciar(self, master):
+        super().iniciar(master=master)
 
-        self.pack(expand=True)
+        self.inicializar_botao_sorteio()
+        self.inicializar_botao_carregar_arquivo()
 
-    def criar_botao_de_sorteio(self):
-        cnf, pack = {}, {}
+    def inicializar_botao_sorteio(self):
+        self.subelemento.sortear.defs.cnf['text'] = 'Sortear Aluno'
+        self.subelemento.sortear.defs.cnf['bg'] = 'blue'
+        self.subelemento.sortear.defs.cnf['width'] = 20
 
-        cnf['text'] = 'Sortear Aluno'
-        cnf['bg'] = 'blue'
-        cnf['width'] = 20
-        cnf['command'] = lambda evt=None: self.eventos['sortear']({})
+        self.subelemento.sortear.defs.pack['side'] = 'left'
 
-        pack['side'] = 'left'
+        self.subelemento.sortear.iniciar(master=self)
 
-        self.botao_de_sorteio =\
-            TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
+    def inicializar_botao_carregar_arquivo(self):
+        self.subelemento.arquivo.defs.cnf['text'] = 'Procurar CSV'
+        self.subelemento.arquivo.defs.cnf['bg'] = 'green'
+        self.subelemento.arquivo.defs.cnf['width'] = 20
 
-    def criar_botao_de_carregar_arquivo(self):
-        cnf, pack = {}, {}
+        self.subelemento.arquivo.defs.pack['side'] = 'right'
 
-        cnf['text'] = 'Procurar CSV'
-        cnf['bg'] = 'green'
-        cnf['width'] = 20
-        cnf['command'] = self.eventos['arquivo']
-
-        pack['side'] = 'right'
-
-        self.botao_de_carregar_arquivo =\
-            TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
+        self.subelemento.arquivo.iniciar(master=self)

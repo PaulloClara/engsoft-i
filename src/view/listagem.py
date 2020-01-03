@@ -1,128 +1,114 @@
 from src.utils.tk import TKUtils
 
 
-class Listagem(TKUtils.ScrollContainer()):
+class Listagem(TKUtils.obter_scrollview()):
 
-    def __init__(self, master):
-        cnf, canvas_cnf, viewport_cnf, scrollbar_cnf = {}, {}, {}, {}
+    def __init__(self):
+        super().__init__()
 
-        cnf['bd'] = 2
-        cnf['bg'] = 'grey'
-        cnf['relief'] = 'flat'
+        self.defs.cnf['bd'] = 2
+        self.defs.cnf['bg'] = 'grey'
+        self.defs.cnf['relief'] = 'flat'
 
-        canvas_cnf['width'] = 920
-        canvas_cnf['height'] = 360
+        self.defs.pack['expand'] = True
+        self.defs.pack['side'] = 'bottom'
 
-        scrollbar_cnf['bd'] = 4
-        scrollbar_cnf['bg'] = 'grey'
-        scrollbar_cnf['relief'] = 'flat'
+        self.defs.canvas['width'] = 920
+        self.defs.canvas['height'] = 360
 
-        super().__init__(master=master, cnf=cnf, cs_cnf=canvas_cnf,
-                         vt_cnf=viewport_cnf, sr_cnf=scrollbar_cnf)
+        self.defs.scrollbar['bd'] = 4
+        self.defs.scrollbar['bg'] = 'grey'
+        self.defs.scrollbar['relief'] = 'flat'
 
+        self.elemento = None
         self.elementos = []
+        self.classe_pai = ''
 
-    def iniciar(self):
-        self.pack(expand=True)
+    def iniciar(self, master):
+        super().iniciar(master=master)
+        self.classe_pai = master.__str__().replace('.!', '')
 
-    def mudar_estado(self, id_elemento, chave, desativar=True):
-        for elemento in self.elementos:
-            if elemento.dados[chave] == id_elemento:
-                if desativar:
-                    self.desativar_elemento(elemento=elemento)
-                else:
-                    self.ativar_elemento(elemento=elemento)
-                return
+    def obter(self, _id, chave=''):
+        if not chave:
+            chave = f'id_{self.classe_pai}'
 
-    def remover_elemento(self, id_elemento, chave):
         for i, elemento in enumerate(self.elementos):
-            if elemento.dados[chave] == id_elemento:
-                elemento.destroy()
-                del self.elementos[i]
+            if chave in elemento.dados and elemento.dados[chave] == _id:
+                return {'elemento': elemento, 'index': i}
 
-    def ativar_elemento(self, elemento):
-        header = elemento.header
+    def remover(self, _id, chave=''):
+        resultado = self.obter(_id, chave)
 
-        header.label.configure(bg=header.label.cnf['bg'])
-
-        if 'botao_remover' in dir(header):
-            header.botao_remover.configure(state='normal', bg='red')
-        if 'botao_sortear' in dir(header):
-            header.botao_sortear.configure(state='normal', bg='orange')
-
-        elemento.desativado = False
-
-    def desativar_elemento(self, elemento):
-        header = elemento.header
-
-        header.label.configure(bg='grey')
-
-        if 'botao_remover' in dir(header):
-            header.botao_remover.configure(state='disabled', bg='grey')
-        if 'botao_sortear' in dir(header):
-            header.botao_sortear.configure(state='disabled', bg='grey')
-
-        elemento.desativado = True
+        resultado['elemento'].destroy()
+        del self.elementos[resultado['index']]
 
     def criar_elemento(self, dados):
-        cnf = {}
+        instanciar = True
 
-        cnf['bd'] = 2
-        cnf['bg'] = 'grey'
-        cnf['relief'] = 'ridge'
+        elemento = TKUtils.obter_container(instanciar)
+        elemento.subelemento.primario = TKUtils.obter_container(instanciar)
+        elemento.subelemento.secundario = TKUtils.obter_container(instanciar)
 
-        container = TKUtils.obter_container(master=self.viewport, cnf=cnf)
+        elemento.defs.cnf['bd'] = 2
+        elemento.defs.cnf['bg'] = 'grey'
+        elemento.defs.cnf['relief'] = 'ridge'
 
-        container.desativado = False
-        container.selecionado = False
+        elemento.dados = dados
 
-        container.dados = dados
+        elemento.subelemento.primario.defs.cnf['bd'] = 1
+        elemento.subelemento.primario.defs.cnf['bg'] = 'grey'
+        elemento.subelemento.primario.defs.cnf['relief'] = 'ridge'
 
-        return container
+        elemento.subelemento.primario.defs.pack['side'] = 'top'
 
-    def criar_label(self, master, cnf={}, pack={}):
-        cnf['fg'] = 'white'
-        cnf['height'] = 2
+        elemento.subelemento.secundario.defs.cnf['bd'] = 1
+        elemento.subelemento.secundario.defs.cnf['bg'] = 'grey'
+        elemento.subelemento.secundario.defs.cnf['relief'] = 'ridge'
 
-        pack['side'] = 'left'
+        elemento.subelemento.secundario.defs.pack['side'] = 'bottom'
 
-        label = TKUtils.obter_label(master=master, cnf=cnf, pack=pack)
-        label.cnf = cnf
+        if self.classe_pai == 'grupo':
+            elemento.subelemento.integrantes =\
+                TKUtils.obter_container(instanciar)
+            elemento.subelemento.integrantes.defs.cnf['bd'] = 1
+            elemento.subelemento.integrantes.defs.cnf['bg'] = 'grey'
+            elemento.subelemento.integrantes.defs.cnf['relief'] = 'ridge'
+            elemento.subelemento.integrantes.lista = []
 
-        comando = self.eventos['expandir']
-        label.bind('<Button-1>', lambda evt=None: comando(evt, master.master))
+        elemento.iniciar(master=self.viewport)
+
+        return elemento
+
+    def criar_label(self):
+        label = TKUtils.obter_label()
+
+        label.defs.cnf['fg'] = 'white'
+        label.defs.cnf['height'] = 2
+
+        label.defs.pack['side'] = 'left'
 
         return label
 
-    def criar_botao_sortear(self, master, cnf={}, pack={}):
-        if 'dados' in dir(master.master):
-            dados = master.master.dados
-        else:
-            dados = master.dados
+    def criar_botao_sortear(self):
+        botao = TKUtils.obter_botao()
 
-        cnf['text'] = 'O'
-        cnf['bg'] = 'orange'
-        cnf['bd'] = 4
-        cnf['width'] = 2
-        cnf['command'] = lambda evt=None: self.eventos['sortear'](valor=dados)
+        botao.defs.cnf['text'] = 'O'
+        botao.defs.cnf['bg'] = 'orange'
+        botao.defs.cnf['bd'] = 4
+        botao.defs.cnf['width'] = 2
 
-        pack['side'] = 'left'
-
-        botao = TKUtils.obter_botao(master=master, cnf=cnf, pack=pack)
-        botao.cnf = cnf
+        botao.defs.pack['side'] = 'left'
 
         return botao
 
-    def criar_botao_remover(self, master, id_elemento, cnf={}, pack={}):
-        cnf['text'] = 'X'
-        cnf['bg'] = 'red'
-        cnf['bd'] = 4
-        cnf['width'] = 2
-        cnf['command'] = lambda evt=None: self.eventos['remover'](id_elemento)
+    def criar_botao_remover(self):
+        botao = TKUtils.obter_botao()
 
-        pack['side'] = 'left'
+        botao.defs.cnf['text'] = 'X'
+        botao.defs.cnf['bg'] = 'red'
+        botao.defs.cnf['bd'] = 4
+        botao.defs.cnf['width'] = 2
 
-        botao = TKUtils.obter_botao(master=master, cnf=cnf, pack=pack)
-        botao.cnf = cnf
+        botao.defs.pack['side'] = 'right'
 
         return botao

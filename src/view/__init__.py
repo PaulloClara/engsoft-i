@@ -1,113 +1,59 @@
+from src import ICONE_MAIN
 from src.utils.tk import TKUtils
 
 from src.view.navbar import Navbar
+
 from src.view.home import Home
 from src.view.aluno import Aluno
 from src.view.grupo import Grupo
-from src.view.atividade import Atividade
 from src.view.sobre import Sobre
+from src.view.atividade import Atividade
 
-from src.view.janela_de_erro import JanelaDeErro
-from src.view.janela_de_sorteio import JanelaDeSorteio
+from src.view.janela_erro import JanelaDeErro
+from src.view.janela_sorteio import JanelaDeSorteio
 
 
-class View(TKUtils.Janela()):
+class View(TKUtils.obter_janela()):
 
-    def __init__(self, controller):
+    def __init__(self):
         super().__init__()
 
-        self.controller = controller
+        self.defs.cnf['icon'] = ICONE_MAIN
+        self.defs.cnf['title'] = 'StuKi®'
+        self.defs.cnf['geometry'] = '960x490'
 
-        self.navbar = None
-        self.home = None
-        self.aluno = None
-        self.grupo = None
-        self.atividade = None
-        self.sobre = None
+        self.navbar = Navbar()
 
-        self.janela_de_erro = None
-        self.janela_de_sorteio = None
+        self.home = Home()
+        self.aluno = Aluno()
+        self.grupo = Grupo()
+        self.sobre = Sobre()
+        self.atividade = Atividade()
+
+        self.janela_erro = JanelaDeErro()
+        self.janela_sorteio = JanelaDeSorteio()
 
         self.container_ativo = ''
-
-    def segundo_init(self):
-        self.title('StuKi®')
-        self.geometry('960x490')
-        self.resizable(0, 0)
-
-        TKUtils.definir_icone(master=self, nome_do_icone='icone')
 
     def iniciar(self):
-        self.criar_navbar()
+        super().iniciar()
 
-        self.criar_container_home()
-        self.criar_container_aluno()
-        self.criar_container_atividade()
-        self.criar_container_grupo()
-        self.criar_container_sobre()
+        self.navbar.iniciar(master=self)
 
-        self.home.ativar()
-        self.container_ativo = 'home'
+        self.home.iniciar(master=self)
+        self.aluno.iniciar(master=self)
+        self.grupo.iniciar(master=self)
+        self.sobre.iniciar(master=self)
+        self.atividade.iniciar(master=self)
 
-        self.mainloop()
+        self.mostrar_container('home')
 
-    def criar_navbar(self):
-        controller = self.controller.navbar
-        self.navbar = Navbar(master=self, controller=controller)
+    def mostrar_container(self, container):
+        getattr(self, container).mostrar()
 
-        self.controller.navbar.elemento_montado()
+        self.container_ativo = container
 
-    def criar_container_home(self):
-        controller = self.controller.home
-        self.home = Home(master=self, controller=controller)
-
-        self.controller.home.elemento_montado()
-
-    def criar_container_aluno(self):
-        controller = self.controller.aluno
-        self.aluno = Aluno(master=self, controller=controller)
-
-        self.controller.aluno.elemento_montado()
-
-    def criar_container_atividade(self):
-        controller = self.controller.atividade
-        self.atividade = Atividade(master=self, controller=controller)
-
-        self.controller.atividade.elemento_montado()
-
-    def criar_container_grupo(self):
-        controller = self.controller.grupo
-        self.grupo = Grupo(master=self, controller=controller)
-
-        self.controller.grupo.elemento_montado()
-
-    def criar_container_sobre(self):
-        controller = self.controller.sobre
-        self.sobre = Sobre(master=self, controller=controller)
-
-        self.controller.sobre.elemento_montado()
-
-    def desativar_container_ativo(self):
-        if self.container_ativo == 'home':
-            self.home.desativar()
-        elif self.container_ativo == 'aluno':
-            self.aluno.desativar()
-        elif self.container_ativo == 'atividade':
-            self.atividade.desativar()
-        elif self.container_ativo == 'grupo':
-            self.grupo.desativar()
-        elif self.container_ativo == 'sobre':
-            self.sobre.desativar()
+    def ocultar_container_ativo(self):
+        getattr(self, self.container_ativo).ocultar()
 
         self.container_ativo = ''
-
-    def criar_janela_de_erro(self, erro):
-        self.janela_de_erro = JanelaDeErro(erro=erro)
-
-    def criar_janela_de_sorteio(self, atividade, aluno='', grupo=''):
-        elemento = aluno if aluno else grupo['nome']
-
-        self.janela_de_sorteio =\
-            JanelaDeSorteio(elemento=elemento, atividade=atividade)
-
-        self.janela_de_sorteio.iniciar()

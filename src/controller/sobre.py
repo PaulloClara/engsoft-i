@@ -2,26 +2,18 @@
 
 
 class Sobre(object):
-    """Classe responsavel por gerenciar View e Model relacionados a Sobre.
+    """Classe responsavel por gerenciar View e Model relacionados a Sobre."""
 
-    Attributes:
-        view (View:obj): Objeto root View
-        model (Model:obj): Objeto root Model
-    """
+    def __init__(self) -> None:
+        """Construtor padrao, define view e model."""
+        pass
 
-    def __init__(self, controller: object) -> None:
-        """Construtor padrao, define view e model.
-
-        Args:
-            controller (Controller:obj): Objeto root Controller
-        """
+    def iniciar(self, controller: object):
         self.view = controller.view
         self.model = controller.model
 
-    def elemento_montado(self) -> None:
-        """Evento disparado quando o componente Sobre e montado.
+        self.configurar()
 
-        - Inicia o container Sobre
-        """
-        self.view.sobre.iniciar()
-        self.view.sobre.desativar()
+    def configurar(self) -> None:
+        """Evento disparado quando o componente Sobre e montado."""
+        pass

@@ -1,38 +1,28 @@
 """Controller da Atividade."""
-from src.controller.atividade.eventos import Eventos
+
+from src.controller.atividade.actions import Actions
+from src.controller.atividade.listagem import Listagem
+from src.controller.atividade.cadastro import Cadastro
 
 
-class Atividade(object):
-    """Classe responsavel por gerenciar os componentes de Atividade.
+class Atividade(Actions, Listagem, Cadastro):
+    """Classe responsavel por gerenciar os componentes de Atividade."""
 
-    Attributes:
-        view (View:obj): Objeto root View
-        model (Mode:obj): Objeto root Model
-    """
+    def __init__(self) -> None:
+        """Classe responsavel por gerenciar os componentes de Atividade."""
+        Actions.__init__(self)
+        Listagem.__init__(self)
+        Cadastro.__init__(self)
 
-    def __init__(self, controller: object) -> None:
-        """Classe responsavel por gerenciar os componentes de Atividade.
-
-        Args:
-            controller (Controller:obj): Objeto Pai
-        """
+    def iniciar(self, controller: object):
         self.view = controller.view
         self.model = controller.model
+        self.cadastrar_apresentacao = controller.apresentacao.cadastrar
 
-        self.eventos = Eventos(controller=self)
+        Actions.configurar(self)
+        Listagem.configurar(self)
 
-    def carregar_atividades(self) -> None:
-        """Busca as atividades no Model e cria os componentes visuais."""
-        for atv in self.model.atividade.atividades:
-            self.view.atividade.lista.adicionar(atividade=atv)
-
-    def elemento_montado(self) -> None:
-        """Disparado quando o componente Atividade da View e montado.
-
-        - Inicia o componente/container visual da Atividade
-        - Carrega a listagem das atividades na view
-        """
-        self.view.atividade.iniciar()
-        self.carregar_atividades()
-
-        self.view.atividade.desativar()
+    def cadastrar(self, evt) -> None:
+        """Evento click do botao cadastrar."""
+        self.view.atividade.cadastro.iniciar()
+        Cadastro.configurar(self)

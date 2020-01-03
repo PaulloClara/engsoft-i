@@ -1,73 +1,69 @@
 from src.utils.tk import TKUtils
-from src.view.janela_de_cadastro import JanelaDeCadastro
+from src.utils.atributo import Atributo
+
+from src.view.janela_cadastro import JanelaDeCadastro
 
 
 class Formulario(JanelaDeCadastro):
 
-    def __init__(self, eventos):
-        super().__init__(titulo='Gerar Grupos')
+    def __init__(self):
+        super().__init__()
 
-        self.eventos = eventos
+        self.defs.cnf['title'] = 'Gerar Grupos'
 
-        self.campo_nome = {}
-        self.campo_quantidade = {}
+        self.subelemento.nome = Atributo()
+        self.subelemento.nome.label = TKUtils.obter_label()
+        self.subelemento.nome.input = TKUtils.obter_input()
+
+        self.subelemento.quantidade = Atributo()
+        self.subelemento.quantidade.label = TKUtils.obter_label()
+        self.subelemento.quantidade.input = TKUtils.obter_input()
 
     def iniciar(self):
-        super().iniciar(texto='Gerar', campos=2)
+        super().iniciar()
 
-        self.criar_campo_nome()
-        self.criar_campo_quantidade()
+        self.inicializar_campo_nome()
+        self.inicializar_campo_quantidade()
 
     def obter_campos(self):
         campos = {}
 
-        campos['nome'] = self.campo_nome['input'].get()
-        campos['quantidade'] = self.campo_quantidade['input'].get()
+        campos['nome'] = self.subelemento.nome.input.get()
+        campos['quantidade'] = self.subelemento.quantidade.input.get()
 
         return campos
 
-    def criar_campo_nome(self):
-        cnf, grid = {}, {}
+    def inicializar_campo_nome(self):
+        self.subelemento.nome.label.defs.cnf['text'] = 'Nome'
+        self.subelemento.nome.label.defs.cnf['pady'] = 4
 
-        cnf['text'] = 'Nome'
-        cnf['pady'] = 4
+        self.subelemento.nome.label.defs.grid['row'] = 0
+        self.subelemento.nome.label.defs.grid['column'] = 0
+        self.subelemento.nome.label.defs.grid['sticky'] = 'W'
 
-        grid['row'] = 0
-        grid['column'] = 0
-        grid['sticky'] = 'W'
+        self.subelemento.nome.input.defs.cnf['width'] = 30
+        self.subelemento.nome.input.defs.mcnf['focus'] = True
+        self.subelemento.nome.input.defs.mcnf['placeholder'] = 'Segundo Periodo'
 
-        self.campo_nome['label'] =\
-            TKUtils.obter_label(master=self.corpo, cnf=cnf, grid=grid)
+        self.subelemento.nome.input.defs.grid['row'] = 0
+        self.subelemento.nome.input.defs.grid['column'] = 1
 
-        cnf, grid = {}, {}
+        self.subelemento.nome.input.iniciar(master=self.subelemento.main)
+        self.subelemento.nome.label.iniciar(master=self.subelemento.main)
 
-        cnf['placeholder'] = 'Segundo Periodo'
+    def inicializar_campo_quantidade(self):
+        self.subelemento.quantidade.label.defs.cnf['text'] = 'Quantidade'
+        self.subelemento.quantidade.label.defs.cnf['pady'] = 4
 
-        grid['row'] = 0
-        grid['column'] = 1
+        self.subelemento.quantidade.label.defs.grid['row'] = 1
+        self.subelemento.quantidade.label.defs.grid['column'] = 0
+        self.subelemento.quantidade.label.defs.grid['sticky'] = 'W'
 
-        self.campo_nome['input'] =\
-            TKUtils.obter_input(master=self.corpo, cnf=cnf, grid=grid)
+        self.subelemento.quantidade.input.defs.cnf['width'] = 30
+        self.subelemento.quantidade.input.defs.mcnf['placeholder'] = '6'
 
-    def criar_campo_quantidade(self):
-        cnf, grid = {}, {}
+        self.subelemento.quantidade.input.defs.grid['row'] = 1
+        self.subelemento.quantidade.input.defs.grid['column'] = 1
 
-        cnf['text'] = 'Quantidade'
-        cnf['pady'] = 4
-
-        grid['row'] = 1
-        grid['column'] = 0
-        grid['sticky'] = 'W'
-
-        self.campo_quantidade['label'] =\
-            TKUtils.obter_label(master=self.corpo, cnf=cnf, grid=grid)
-
-        cnf, grid = {}, {}
-
-        cnf['placeholder'] = '6'
-
-        grid['row'] = 1
-        grid['column'] = 1
-
-        self.campo_quantidade['input'] =\
-            TKUtils.obter_input(master=self.corpo, cnf=cnf, grid=grid)
+        self.subelemento.quantidade.input.iniciar(master=self.subelemento.main)
+        self.subelemento.quantidade.label.iniciar(master=self.subelemento.main)

@@ -1,95 +1,79 @@
 from src.utils.tk import TKUtils
 
 
-class Navbar(TKUtils.Container()):
+class Navbar(TKUtils.obter_container()):
 
-    def __init__(self, master, controller):
-        super().__init__(master=master)
+    def __init__(self):
+        super().__init__()
 
-        self.controller = controller
+        self.defs.pack['side'] = 'top'
 
-        self.botao_home = None
-        self.botao_aluno = None
-        self.botao_grupo = None
-        self.botao_atividade = None
-        self.botao_sobre = None
+        self.subelemento.home = TKUtils.obter_botao()
+        self.subelemento.aluno = TKUtils.obter_botao()
+        self.subelemento.grupo = TKUtils.obter_botao()
+        self.subelemento.atividade = TKUtils.obter_botao()
+        self.subelemento.sobre = TKUtils.obter_botao()
 
-    def iniciar(self):
-        self.criar_botao_aluno()
-        self.criar_botao_grupo()
-        self.criar_botao_home()
-        self.criar_botao_atividade()
-        self.criar_botao_sobre()
+    def iniciar(self, master):
+        super().iniciar(master=master)
 
-        self.pack(side='top')
+        self.inicializar_botao_aluno()
+        self.inicializar_botao_grupo()
+        self.inicializar_botao_home()
+        self.inicializar_botao_atividade()
+        self.inicializar_botao_sobre()
 
-    def criar_botao_home(self):
-        cnf, pack = {}, {}
+    def inicializar_botao_home(self):
+        self.subelemento.home.defs.cnf['text'] = 'Home'
+        self.subelemento.home.defs.cnf['bg'] = 'orange'
+        self.subelemento.home.defs.cnf['width'] = 28
+        self.subelemento.home.defs.cnf['pady'] = 9
+        self.subelemento.home.defs.mcnf['fz'] = 15
 
-        cnf['text'] = 'Home'
-        cnf['bg'] = 'orange'
-        cnf['width'] = 28
-        cnf['pady'] = 9
-        cnf['font'] = ('times new roman', 15, 'bold')
-        cnf['command'] = self.controller.tela_home
+        self.subelemento.home.defs.pack['side'] = 'left'
 
-        pack['side'] = 'left'
+        self.subelemento.home.iniciar(master=self)
 
-        self.botao_home = TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
+    def inicializar_botao_aluno(self):
+        self.subelemento.aluno.defs.cnf['text'] = 'Alunos'
+        self.subelemento.aluno.defs.cnf['bg'] = 'red'
+        self.subelemento.aluno.defs.cnf['width'] = 14
+        self.subelemento.aluno.defs.cnf['pady'] = 9
+        self.subelemento.aluno.defs.mcnf['fz'] = 15
 
-    def criar_botao_aluno(self):
-        cnf, pack = {}, {}
+        self.subelemento.aluno.defs.pack['side'] = 'left'
 
-        cnf['text'] = 'Alunos'
-        cnf['bg'] = 'red'
-        cnf['width'] = 14
-        cnf['pady'] = 9
-        cnf['font'] = ('times new roman', 15, 'bold')
-        cnf['command'] = self.controller.tela_aluno
+        self.subelemento.aluno.iniciar(master=self)
 
-        pack['side'] = 'left'
+    def inicializar_botao_atividade(self):
+        self.subelemento.atividade.defs.cnf['text'] = 'Atividades'
+        self.subelemento.atividade.defs.cnf['bg'] = 'blue'
+        self.subelemento.atividade.defs.cnf['width'] = 14
+        self.subelemento.atividade.defs.cnf['pady'] = 9
+        self.subelemento.atividade.defs.mcnf['fz'] = 15
 
-        self.botao_aluno = TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
+        self.subelemento.atividade.defs.pack['side'] = 'left'
 
-    def criar_botao_atividade(self):
-        cnf, pack = {}, {}
+        self.subelemento.atividade.iniciar(master=self)
 
-        cnf['text'] = 'Atividades'
-        cnf['bg'] = 'blue'
-        cnf['width'] = 14
-        cnf['pady'] = 9
-        cnf['font'] = ('times new roman', 15, 'bold')
-        cnf['command'] = self.controller.tela_atividade
+    def inicializar_botao_grupo(self):
+        self.subelemento.grupo.defs.cnf['text'] = 'Grupos'
+        self.subelemento.grupo.defs.cnf['bg'] = 'green'
+        self.subelemento.grupo.defs.cnf['width'] = 14
+        self.subelemento.grupo.defs.cnf['pady'] = 9
+        self.subelemento.grupo.defs.mcnf['fz'] = 15
 
-        pack['side'] = 'left'
+        self.subelemento.grupo.defs.pack['side'] = 'left'
 
-        self.botao_atividade =\
-            TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
+        self.subelemento.grupo.iniciar(master=self)
 
-    def criar_botao_grupo(self):
-        cnf, pack = {}, {}
+    def inicializar_botao_sobre(self):
+        self.subelemento.sobre.defs.cnf['text'] = 'Sobre'
+        self.subelemento.sobre.defs.cnf['bg'] = 'grey'
+        self.subelemento.sobre.defs.cnf['width'] = 14
+        self.subelemento.sobre.defs.cnf['pady'] = 9
+        self.subelemento.sobre.defs.mcnf['fz'] = 15
 
-        cnf['text'] = 'Grupos'
-        cnf['bg'] = 'green'
-        cnf['width'] = 14
-        cnf['pady'] = 9
-        cnf['font'] = ('times new roman', 15, 'bold')
-        cnf['command'] = self.controller.tela_grupo
+        self.subelemento.sobre.defs.pack['side'] = 'left'
 
-        pack['side'] = 'left'
-
-        self.botao_grupo = TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
-
-    def criar_botao_sobre(self):
-        cnf, pack = {}, {}
-
-        cnf['text'] = 'Sobre'
-        cnf['bg'] = 'grey'
-        cnf['width'] = 14
-        cnf['pady'] = 9
-        cnf['font'] = ('times new roman', 15, 'bold')
-        cnf['command'] = self.controller.tela_sobre
-
-        pack['side'] = 'left'
-
-        self.botao_sobre = TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
+        self.subelemento.sobre.iniciar(master=self)

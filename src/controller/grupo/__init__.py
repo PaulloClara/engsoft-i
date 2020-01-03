@@ -1,34 +1,28 @@
 """Controller do Grupo."""
-from src.controller.grupo.eventos import Eventos
+
+from src.controller.grupo.actions import Actions
+from src.controller.grupo.listagem import Listagem
+from src.controller.grupo.cadastro import Cadastro
 
 
-class Grupo(object):
-    """Classe responsavel por gerenciar a View e Model relacionados a Grupo.
+class Grupo(Actions, Listagem, Cadastro):
+    """Classe responsavel por gerenciar a View e Model relacionados a Grupo."""
 
-    Attributes:
-        view (View:obj): Objeto root View
-        model (Model:obj): Objeto root Model
-    """
+    def __init__(self) -> None:
+        """Classe responsavel por gerenciar os componentes de Atividade."""
+        Actions.__init__(self)
+        Listagem.__init__(self)
+        Cadastro.__init__(self)
 
-    def __init__(self, controller: object) -> None:
-        """Construtor padrao, define os atributos view e model."""
+    def iniciar(self, controller: object):
         self.view = controller.view
         self.model = controller.model
+        self.cadastrar_apresentacao = controller.apresentacao.cadastrar
 
-        self.eventos = Eventos(controller=self)
+        Actions.configurar(self)
+        Listagem.configurar(self)
 
-    def carregar_grupos(self) -> None:
-        """Busca os grupos no Model e carrega a listagem dos grupos na View."""
-        for grupo in self.model.grupo.grupos:
-            self.view.grupo.lista.adicionar(grupo=grupo)
-
-    def elemento_montado(self) -> None:
-        """Disparado quando o componente/container Grupo e montado.
-
-        - Inicia o componente/container Grupo
-        - Carrea a lista de grupos
-        """
-        self.view.grupo.iniciar()
-        self.carregar_grupos()
-
-        self.view.grupo.desativar()
+    def cadastrar(self, evt) -> None:
+        """Evento click do botao cadastrar."""
+        self.view.grupo.cadastro.iniciar()
+        Cadastro.configurar(self)

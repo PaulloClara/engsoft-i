@@ -2,108 +2,65 @@
 
 
 class Navbar(object):
-    """Classe responsavle por gerenciar View e Model relacionados com Navbar.
+    """Classe responsavle por gerenciar View e Model relacionados com Navbar."""
 
-    Attributes:
-        view (View:obj): Objeto root View
-    """
+    def __init__(self) -> None:
+        """Construtor padrao, define o atributo view."""
+        pass
 
-    def __init__(self, controller: object) -> None:
-        """Construtor padrao, define o atributo view.
-
-        Args:
-            controller (Controller:obj): Objeto root Controller
-        """
+    def iniciar(self, controller: object):
         self.view = controller.view
+        self.model = controller.model
 
-    def tela_home(self) -> None:
-        """Evento click do botao home.
+        self.configurar()
 
-        - Verifica se o container Home ja esta ativo
-            - sim -> para o evento
-            - nao -> continua
-        - Destroi container ativo
-        - Cria container Home
-        """
+    def tela_home(self, evt: object or None=None) -> None:
+        """Evento click do botao home."""
         if self.view.container_ativo == 'home':
             return
 
-        self.view.desativar_container_ativo()
+        self.view.ocultar_container_ativo()
+        self.view.mostrar_container('home')
 
-        self.view.home.ativar()
-        self.view.container_ativo = 'home'
-
-    def tela_aluno(self) -> None:
-        """Evento click do botao aluno.
-
-        - Verifica se o container Aluno ja esta ativo
-            - sim -> para o evento
-            - nao -> continua
-        - Destroi container ativo
-        - Cria container Aluno
-        """
+    def tela_aluno(self, evt: object or None=None) -> None:
+        """Evento click do botao aluno."""
         if self.view.container_ativo == 'aluno':
             return
 
-        self.view.desativar_container_ativo()
+        self.view.ocultar_container_ativo()
+        self.view.mostrar_container('aluno')
 
-        self.view.aluno.ativar()
-        self.view.container_ativo = 'aluno'
-
-    def tela_atividade(self) -> None:
-        """Evento click do botao atividade.
-
-        - Verifica se o container Atividade ja esta ativo
-            - sim -> para o evento
-            - nao -> continua
-        - Destroi container ativo
-        - Cria container Atividade
-        """
+    def tela_atividade(self, evt: object or None=None) -> None:
+        """Evento click do botao atividade."""
         if self.view.container_ativo == 'atividade':
             return
 
-        self.view.desativar_container_ativo()
+        self.view.ocultar_container_ativo()
+        self.view.mostrar_container('atividade')
 
-        self.view.atividade.ativar()
-        self.view.container_ativo = 'atividade'
-
-    def tela_grupo(self) -> None:
-        """Evento click do botao grupo.
-
-        - Verifica se o container Grupo ja esta ativo
-            - sim -> para o evento
-            - nao -> continua
-        - Destroi container ativo
-        - Cria container Grupo
-        """
+    def tela_grupo(self, evt: object or None=None) -> None:
+        """Evento click do botao grupo."""
         if self.view.container_ativo == 'grupo':
             return
 
-        self.view.desativar_container_ativo()
+        self.view.ocultar_container_ativo()
+        self.view.mostrar_container('grupo')
 
-        self.view.grupo.ativar()
-        self.view.container_ativo = 'grupo'
-
-    def tela_sobre(self) -> None:
-        """Evento click do botao sobre.
-
-        - Verifica se o container Sobre ja esta ativo
-            - sim -> para o evento
-            - nao -> continua
-        - Destroi container ativo
-        - Cria container Sobre
-        """
+    def tela_sobre(self, evt: object or None=None) -> None:
+        """Evento click do botao sobre."""
         if self.view.container_ativo == 'sobre':
             return
 
-        self.view.desativar_container_ativo()
+        self.view.ocultar_container_ativo()
+        self.view.mostrar_container('sobre')
 
-        self.view.sobre.ativar()
-        self.view.container_ativo = 'sober'
+    def configurar(self) -> None:
+        navbar = self.view.navbar
 
-    def elemento_montado(self) -> None:
-        """Evento disparado quando o componente Navbar e montado.
+        navbar.subelemento.home.evento['<Button-1>'] = self.tela_home
+        navbar.subelemento.aluno.evento['<Button-1>'] = self.tela_aluno
+        navbar.subelemento.grupo.evento['<Button-1>'] = self.tela_grupo
+        navbar.subelemento.sobre.evento['<Button-1>'] = self.tela_sobre
+        navbar.subelemento.atividade.evento['<Button-1>'] = self.tela_atividade
 
-        - Inicia o componente Navbar
-        """
-        self.view.navbar.iniciar()
+        navbar.carregar_eventos()

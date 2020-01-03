@@ -1,0 +1,13 @@
+- fazer desinstalador
+- fazer modulo para help q consulta a docstring
+
+- verificar o tipo do retorno do select no store na hr de converter
+- transformar classe Tipo global
+- criar container Main das janelas direto no MJanela
+- criar variaveis globais no __init__ do src
+- mover definir_incone de dentro da classe TKUtils para classe MJanela como cnf
+- criar schema para model, uma classe com todos os metodos e atributos padroes
+- desativar botão de cadastro de algo quando ja tiver uma janela aberta
+- fazer obter do modelo retornar apenas o valor achado e nao uma lista
+- levar validar data para Utils
+- remover redundancia de nomes como "data_apresentacao" para "data"

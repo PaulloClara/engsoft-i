@@ -1,7 +1,9 @@
 class ExceptionNoTeste(Exception):
 
     def __init__(self, local, erro):
-        self.erro_msg = f'{local}: {erro}'
+        self.msg_erro = f'{local}: {erro}'
 
     def __str__(self):
-        return self.erro_msg
+        print(f'\n\t\033[1;33m {self.msg_erro}')
+
+        return '\033[0;0m'

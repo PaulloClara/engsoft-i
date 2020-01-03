@@ -1,16 +1,17 @@
-class Sobre:
+from src.model.modelo import Modelo
 
-    def __init__(self, model):
-        self.model = model
-        self.store = self.model.store
-        self.controller = self.model.controller.sobre
+class Sobre(Modelo):
+
+    def __init__(self):
+        super().__init__()
 
         self.tabela = 'sobre'
-        self.colunas = ['id_do_cartao', 'titulo', 'conteudo']
-
         self.cartoes = []
 
-    def iniciar(self):
+    def iniciar(self, model):
+        self.model = model
+        self.store = self.model.store
+
         self.obter_cartoes()
 
     def obter_cartoes(self):

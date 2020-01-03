@@ -1,40 +1,65 @@
+"""Conjunto de testes relacionados a todos os niveis de Utils."""
+
 from src.utils import Utils
+from src.utils.caminho import Caminho
+
 from src.utils.tk import TKUtils
 
 from tests.exception import ExceptionNoTeste
 
 
-class TesteDoUtils:
+class TUtils(object):
+    """Testes na camada root de Utils."""
 
-    def __init__(self, loop):
+    def __init__(self, loop) -> None:
+        """Init padrao."""
         self.loop = loop
 
-        self.utils = Utils
-        self.tk_utils = TKUtils
+    def iniciar(self) -> None:
+        """Segundo init."""
+        self.inteiro_aleatorio()
+        self.data_e_hora_atual()
 
-    def iniciar(self):
-        self.teste_do_obter_inteiro_aleatorio()
-        self.teste_do_caminho_de_execucao()
+        self.caminho_ate()
 
-    def teste_do_obter_inteiro_aleatorio(self):
-        local = 'utils.obter_inteiro_aleatorio'
-        inteiro = self.utils.obter_inteiro_aleatorio(inicio=self.loop, fim=100)
+    def inteiro_aleatorio(self) -> None:
+        """Testes de retorno."""
+        local = 'utils.inteiro_aleatorio'
 
+        erro = 'Nao retornou um inteiro'
+        inteiro = Utils.inteiro_aleatorio(inicio=self.loop, fim=100)
         if not isinstance(inteiro, int):
-            erro = 'nao retornou um inteiro'
-            raise ExceptionNoTeste(local=local, erro=erro)
+            raise ExceptionNoTeste(local, erro)
 
+        erro = 'Nao respeitou o numero minimo e maximo'
+        inteiro = Utils.inteiro_aleatorio(inicio=self.loop, fim=100)
         if inteiro < self.loop or inteiro > 100:
-            erro = 'nao respeitou o numero minimo e maximo'
-            raise ExceptionNoTeste(local=local, erro=erro)
+            raise ExceptionNoTeste(local, erro)
 
+        erro = 'Inteiro negativo'
+        inteiro = Utils.inteiro_aleatorio(inicio=self.loop, fim=100)
         if inteiro < 0:
-            erro = 'inteiro negativo'
-            raise ExceptionNoTeste(local=local, erro=erro)
+            raise ExceptionNoTeste(local, erro)
 
-    def teste_do_caminho_de_execucao(self):
-        local = 'utils.obter_caminho_de_execucao'
+    def data_e_hora_atual(self) -> None:
+        """Testes de retorno."""
+        local = 'utils.data_e_hora_atual'
 
-        if self.utils.obter_caminho_de_execucao() != '':
-            erro = 'valor precisa ser vazio'
-            raise ExceptionNoTeste(local=local, erro=erro)
+        erro = 'O valor nao e do tipo string'
+        data_hora = Utils.data_e_hora_atual()
+        if not isinstance(data_hora, str):
+            raise ExceptionNoTeste(local, erro)
+
+        erro = 'Formato invalido'
+        data, hora = Utils.data_e_hora_atual().split(' ')
+        if (len(data.split('/')) != 3 or len(data.replace('/', '')) != 8 or
+            len(hora.split(':')) != 2 or len(hora.replace(':', '')) != 4):
+            raise ExceptionNoTeste(local, erro)
+
+    def caminho_ate(self) -> None:
+        """Teste de retorno."""
+        local = 'utils.caminho.ate'
+
+        erro = 'O caminho nao esta completo'
+        if Caminho.ate('caminho/do/arquivo.aqui')[0] != '/':
+            raise ExceptionNoTeste(local, erro)

@@ -1,4 +1,4 @@
-from src.utils import Utils
+from src.utils.env import Env
 
 from src.view import View
 from src.model import Model
@@ -8,16 +8,16 @@ from tests import Tests
 
 
 if __name__ == '__main__':
-    if Utils.verificar_modo_teste():
-        tests = Tests()
-        tests.iniciar()
-    else:
-        controller = Controller()
-        view = View(controller=controller)
-        model = Model(controller=controller)
+    if Env.modo_teste():
+        Tests().iniciar()
+        exit()
 
-        controller.segundo_init(model=model, view=view)
-        view.segundo_init()
-        model.segundo_init()
+    view = View()
+    model = Model()
+    controller = Controller()
 
-        controller.iniciar()
+    view.iniciar()
+    model.iniciar()
+    controller.iniciar(view=view, model=model)
+
+    view.mainloop()

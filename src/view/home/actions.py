@@ -1,44 +1,38 @@
 from src.utils.tk import TKUtils
 
 
-class Actions(TKUtils.Container()):
+class Actions(TKUtils.obter_container()):
 
-    def __init__(self, master, eventos):
-        super().__init__(master=master, bd=10)
+    def __init__(self):
+        super().__init__()
 
-        self.eventos = eventos
+        self.defs.cnf['bd'] = 10
+        self.defs.pack['expand'] = True
+        self.defs.pack['side'] = 'bottom'
 
-        self.botao_ordenar = None
-        self.botao_cadastrar = None
+        self.subelemento.tarefa = TKUtils.obter_botao()
+        self.subelemento.cadastrar = TKUtils.obter_botao()
 
-    def iniciar(self):
-        self.criar_botao_ordenar()
-        self.criar_botao_cadastrar()
+    def iniciar(self, master):
+        super().iniciar(master=master)
 
-        self.pack(expand=True)
+        self.inicializar_botao_cadastro()
+        self.inicializar_botao_cadastro_tarefa()
 
-    def criar_botao_ordenar(self):
-        cnf, pack = {}, {}
+    def inicializar_botao_cadastro(self):
+        self.subelemento.cadastrar.defs.cnf['text'] = 'Cadastrar Apresentação'
+        self.subelemento.cadastrar.defs.cnf['bg'] = 'green'
+        self.subelemento.cadastrar.defs.cnf['width'] = 30
 
-        cnf['text'] = 'Ordenar Apresentações'
-        cnf['bg'] = 'blue'
-        cnf['width'] = 30
-        cnf['command'] = self.eventos['ordenar']
+        self.subelemento.cadastrar.defs.pack['side'] = 'right'
 
-        pack['side'] = 'left'
+        self.subelemento.cadastrar.iniciar(master=self)
 
-        self.botao_ordenar =\
-            TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
+    def inicializar_botao_cadastro_tarefa(self):
+        self.subelemento.tarefa.defs.cnf['text'] = 'Cadastrar Tarefa'
+        self.subelemento.tarefa.defs.cnf['bg'] = 'blue'
+        self.subelemento.tarefa.defs.cnf['width'] = 30
 
-    def criar_botao_cadastrar(self):
-        cnf, pack = {}, {}
+        self.subelemento.tarefa.defs.pack['side'] = 'left'
 
-        cnf['text'] = 'Cadastrar Apresentação'
-        cnf['bg'] = 'green'
-        cnf['width'] = 30
-        cnf['command'] = self.eventos['cadastrar']
-
-        pack['side'] = 'left'
-
-        self.botao_cadastrar =\
-            TKUtils.obter_botao(master=self, cnf=cnf, pack=pack)
+        self.subelemento.tarefa.iniciar(master=self)

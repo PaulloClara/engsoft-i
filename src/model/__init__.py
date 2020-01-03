@@ -10,37 +10,24 @@ from src.model.tarefa import Tarefa
 from src.model.apresentacao import Apresentacao
 
 
-class Model:
+class Model(object):
 
-    def __init__(self, controller):
-        self.controller = controller
-
-        self.store = None
-
-        self.aluno = None
-        self.grupo = None
-        self.sobre = None
-        self.atividade = None
-
-        self.tarefa = None
-        self.apresentacao = None
-
-    def segundo_init(self):
+    def __init__(self):
         self.store = Store()
 
-        self.aluno = Aluno(model=self)
-        self.grupo = Grupo(model=self)
-        self.sobre = Sobre(model=self)
-        self.atividade = Atividade(model=self)
+        self.aluno = Aluno()
+        self.grupo = Grupo()
+        self.sobre = Sobre()
+        self.atividade = Atividade()
 
-        self.tarefa = Tarefa(model=self)
-        self.apresentacao = Apresentacao(model=self)
+        self.tarefa = Tarefa()
+        self.apresentacao = Apresentacao()
 
     def iniciar(self):
-        self.aluno.iniciar()
-        self.grupo.iniciar()
-        self.sobre.iniciar()
-        self.atividade.iniciar()
+        self.aluno.iniciar(model=self)
+        self.grupo.iniciar(model=self)
+        self.sobre.iniciar(model=self)
+        self.atividade.iniciar(model=self)
 
-        self.tarefa.iniciar()
-        self.apresentacao.iniciar()
+        self.tarefa.iniciar(model=self)
+        self.apresentacao.iniciar(model=self)

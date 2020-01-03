@@ -1,58 +1,45 @@
 """Controller Root."""
 
 from src.controller.navbar import Navbar
+
 from src.controller.home import Home
 from src.controller.aluno import Aluno
 from src.controller.grupo import Grupo
-from src.controller.atividade import Atividade
 from src.controller.sobre import Sobre
+from src.controller.tarefa import Tarefa
+from src.controller.atividade import Atividade
+from src.controller.apresentacao import Apresentacao
 
 
 class Controller(object):
-    """Classe responsavel por gerenciar o fluxo de execucao da aplicacao.
-
-    Attributes:
-        view (View:obj): Objeto root View.
-        model (Model:obj): Objeto root Model.
-
-        navbar (Controller:Navbar:obj): Padrao None.
-        home (Controller:Home:obj): Padrao None.
-        aluno (Controller:Aluno:obj): Padrao None.
-        grupo (Controller:Grupo:obj): Padrao None.
-        atividade (Controller:Atividade:obj): Padrao None.
-        sobre (Controller:Sobre:obj): Padrao None.
-    """
+    """Classe responsavel por gerenciar o fluxo de execucao da aplicacao."""
 
     def __init__(self) -> None:
         """Contrutor padrao, declara os atributos da classe."""
         self.view = None
         self.model = None
 
-        self.navbar = None
-        self.home = None
-        self.aluno = None
-        self.grupo = None
-        self.atividade = None
-        self.sobre = None
+        self.navbar = Navbar()
 
-    def segundo_init(self, model: object, view: object) -> None:
-        """Segundo contrutor, recebe os objetos Model e View instanciados.
+        self.home = Home()
+        self.aluno = Aluno()
+        self.grupo = Grupo()
+        self.sobre = Sobre()
+        self.tarefa = Tarefa()
+        self.atividade = Atividade()
+        self.apresentacao = Apresentacao()
 
-        Args:
-            model (Model:obj): Objeto root Model
-            view (View:obj): Objeto root View
-        """
+    def iniciar(self, view, model) -> None:
+        """Instancia/cria os sub-objetos e inicializa Model root e View root."""
         self.view = view
         self.model = model
 
-    def iniciar(self) -> None:
-        """Instancia/cria os sub-objetos e inicializa Model root e View root."""
-        self.navbar = Navbar(controller=self)
-        self.home = Home(controller=self)
-        self.aluno = Aluno(controller=self)
-        self.atividade = Atividade(controller=self)
-        self.grupo = Grupo(controller=self)
-        self.sobre = Sobre(controller=self)
+        self.navbar.iniciar(controller=self)
 
-        self.model.iniciar()
-        self.view.iniciar()
+        self.home.iniciar(controller=self)
+        self.aluno.iniciar(controller=self)
+        self.grupo.iniciar(controller=self)
+        self.sobre.iniciar(controller=self)
+        self.tarefa.iniciar(controller=self)
+        self.atividade.iniciar(controller=self)
+        self.apresentacao.iniciar(controller=self)

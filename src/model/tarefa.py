@@ -1,89 +1,65 @@
 from src.utils import Utils
+from src.model.modelo import Modelo
 
 
-class Tarefa:
+class Tarefa(Modelo):
 
-    def __init__(self, model):
-        self.model = model
-        self.store = self.model.store
-        self.controller = self.model.controller
-
+    def __init__(self):
+        super().__init__()
         self.tabela = 'tarefa'
-        self.colunas = ['id_tarefa', 'id_atividade', 'aluno', 'data_tarefa',
-                        'data_cadastro']
 
         self.tarefas = []
 
-    def iniciar(self):
-        self.obter_tarefas()
+    def iniciar(self, model):
+        self.model = model
+        self.store = self.model.store
 
-    def obter_tarefa(self, id_grupo_atividade):
-        tab, cols = self.tabela, self.colunas
-        con = f'id_grupo_atividade == "{id_grupo_atividade}"'
+        self.carregar()
 
-        sql = self.store.select(tabela=tab, colunas=cols, condicao=con)
+    def obter(self, id_tarefa):
+        return super().obter(_id=id_tarefa)
 
-        return self.store.executar(codigo_sql=sql, colunas=cols)
-
-    def obter_tarefas(self):
-        tab, cols = self.tabela, self.colunas
-
-        sql = self.store.select(tabela=tab, colunas=cols)
-        self.tarefas = self.store.executar(codigo_sql=sql, colunas=cols)
+    def carregar(self):
+        self.tarefas = super().carregar()
 
         for tarefa in self.tarefas:
-            aluno = tarefa['aluno']
-            grupo = self.model.grupo.obter_grupo(aluno=aluno)
+            atividade = self.model.atividade.obter(tarefa['id_atividade'])
 
-            id_atividade = tarefa['id_atividade']
-            atividade =\
-                self.model.atividade.obter_atividade(id_atividade=id_atividade)
-
-            if grupo == []:
-                grupo = [{'nome': 'GRUPO DELETADO'}]
             if atividade == []:
                 atividade = [{'titulo': 'ATIVIDADE DELETADA'}]
 
-            tarefa['grupo'] = grupo[0]
             tarefa['atividade'] = atividade[0]
 
-            nome_do_grupo = tarefa['grupo']['nome']
-            titulo_da_atividade = tarefa['atividade']['titulo']
-            tarefa['titulo'] = f'{nome_do_grupo} - {titulo_da_atividade}'
+            nome_aluno = tarefa['aluno']
+            titulo_atividade = tarefa['atividade']['titulo']
+            tarefa['titulo'] = f'{nome_aluno} - {titulo_atividade}'
 
-    def cadastrar_apresentacao(self, tarefa):
-        tab, cols, vals = self.tabela, self.colunas[1:], []
-
+    def cadastrar(self, tarefa):
+        vals = []
         vals.append(tarefa['id_atividade'])
         vals.append(tarefa['aluno'])
         vals.append(tarefa['duracao'])
         vals.append(tarefa['data_tarefa'])
-        vals.append(Utils.obter_data_e_hora_atual())
+        vals.append(Utils.data_e_hora_atual())
 
-        sql = self.store.insert(tabela=tab, colunas=cols, valores=vals)
-        self.store.executar(codigo_sql=sql)
+        super().cadastrar(vals)
+        self.carregar()
 
-        self.obter_tarefas()
+        tarefa = self.tarefas[-1]
 
-    def remover_apresentacao(self, id_grupo_atividade):
-        tab, cols = self.tabela, self.colunas
-        con = f'id_grupo_atividade = {id_grupo_atividade}'
+        return tarefa
 
-        tarefa =\
-            self.obter_tarefa(id_grupo_atividade=id_grupo_atividade)[0]
+    def remover(self, id_tarefa):
+        tarefa = self.obter(id_tarefa)[0]
 
         id_atividade = tarefa['id_atividade']
-        self.model.atividade.atualizar_uso(id_atividade=id_atividade, valor=0)
+        self.model.atividade.atualizar(id_atividade, campos={'em_uso': 0})
 
-        aluno = tarefa['aluno']
-        self.model.grupo.atualizar_uso(aluno=aluno, valor=0)
+        super().remover(_id=id_tarefa)
 
-        sql = self.store.delete(tabela=tab, condicao=con)
-        self.store.executar(codigo_sql=sql)
+        return {'atividade': id_atividade}
 
-        self.obter_tarefas()
-
-    def validar_campos(self, formulario):
+    def validar(self, formulario):
         data = formulario['data_tarefa']
         duracao = formulario['duracao']
 

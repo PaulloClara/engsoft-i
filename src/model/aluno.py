@@ -1,32 +1,43 @@
-from src.utils import Utils
+"""Model de Aluno."""
+
+from src import ARQUIVO_CSV
+from src.model.modelo import Modelo
 
 
-class Aluno:
+class Aluno(Modelo):
+    """Cuida de todas as operacoes envolvendo Alunos e dados."""
 
-    def __init__(self, model):
-        self.model = model
-        self.store = self.model.store
-        self.controller = self.model.controller.aluno
+    def __init__(self):
+        """Inicializa a classe Modelo e configura os atributos."""
+        super().__init__()
 
+        self.aluno = None
         self.alunos = []
 
-    def iniciar(self):
-        self.ler_arquivo()
+    def iniciar(self, model):
+        """Inicializa os metodos das classes Aluno e Modelo."""
+        super().iniciar(model)
+
+        self.ler_arquivo_csv()
 
     def sortear(self):
-        fim = len(self.alunos) - 1
-        index = Utils.obter_inteiro_aleatorio(inicio=0, fim=fim)
+        """."""
+        if self.aluno:
+            aluno, self.aluno = self.aluno, None
 
-        return self.alunos[index]
+            return aluno
 
-    def ler_arquivo(self):
-        caminho = 'src/store/alunos.csv'
-        arquivo = self.store.obter_arquivo(caminho=caminho, modo='r')
+        return super().sortear(lista=self.alunos)
 
-        for linha in arquivo:
-            self.alunos.append(self.limpar_linha(linha=linha))
+    def ler_arquivo_csv(self):
+        """."""
+        csv = self.store.arquivo(ARQUIVO_CSV, modo='r')
 
-        arquivo.close()
+        for linha in csv:
+            self.alunos.append(self.formatar(linha))
 
-    def limpar_linha(self, linha):
+        csv.close()
+
+    def formatar(self, linha):
+        """."""
         return linha.replace('\n', '').title()
