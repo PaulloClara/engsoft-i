@@ -16,30 +16,26 @@ class Cadastro(object):
         if not grupo:
             return self.view.janela_erro.iniciar(erro)
 
-        id_grupo = grupo['id_grupo']
-        formulario['id_grupo'] = id_grupo
-
         erro = 'Todas as Atividades estão em uso'
         atividade = self.model.atividade.sortear()
         if not atividade:
-            self.view.janela_erro.iniciar(erro)
-            return
+            return self.view.janela_erro.iniciar(erro)
 
-        id_atividade = atividade['id_atividade']
-        formulario['id_atividade'] = id_atividade
+        formulario['id_grupo'] = grupo['_id']
+        formulario['id_atividade'] = atividade['_id']
 
         apresentacao = self.model.apresentacao.cadastrar(formulario)
-
-        self.model.grupo.atualizar(id_grupo, campos={'em_uso': 1})
-        self.model.atividade.atualizar(id_atividade, campos={'em_uso': 1})
-
-        self.view.home.cadastro_apresentacao.fechar()
 
         elemento = self.view.home.listagem.adicionar(apresentacao)
         self.configurar_(elemento)
 
-        self.view.grupo.listagem.desativar(id_grupo)
-        self.view.atividade.listagem.desativar(id_atividade)
+        self.view.grupo.listagem.desativar(grupo['_id'])
+        self.model.grupo.atualizar(grupo['_id'], campos={'em_uso': 1})
+
+        self.view.atividade.listagem.desativar(atividade['_id'])
+        self.model.atividade.atualizar(atividade['_id'], campos={'em_uso': 1})
+
+        self.view.home.cadastro_apresentacao.fechar()
 
     def cancelar(self, evt=None) -> None:
         """Evento click do botao cancelar no formulario de cadastro."""

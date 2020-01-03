@@ -28,8 +28,8 @@ class FormularioApresentacao(JanelaDeCadastro):
 
     def obter_campos(self):
         campos = {}
+        campos['data'] = self.subelemento.data.input.get()
         campos['duracao'] = self.subelemento.duracao.input.get()
-        campos['data_apresentacao'] = self.subelemento.data.input.get()
 
         return campos
 
@@ -79,11 +79,3 @@ class FormularioTarefa(FormularioApresentacao):
 
     def iniciar(self):
         super().iniciar()
-
-    def obter_campos(self):
-        campos = super().obter_campos()
-
-        campos['data_tarefa'] = campos['data_apresentacao']
-        del campos['data_apresentacao']
-
-        return campos

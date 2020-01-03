@@ -27,8 +27,8 @@ class Atividade(Modelo):
 
         return super().sortear(lista=self.atividades)
 
-    def obter(self, id_atividade):
-        return super().obter(_id=id_atividade)
+    def obter(self, _id):
+        return super().obter(_id)
 
     def carregar(self):
         self.atividades = super().carregar()
@@ -46,16 +46,16 @@ class Atividade(Modelo):
 
         return self.atividades[-1]
 
-    def atualizar(self, id_atividade, campos: dict):
-        super().atualizar(_id=id_atividade, campos=campos)
+    def atualizar(self, _id, campos: dict):
+        super().atualizar(_id, campos=campos)
 
         self.carregar()
 
-    def remover(self, id_atividade):
-        super().remover(_id=id_atividade)
+    def remover(self, _id):
+        super().remover(_id)
 
         for i, atividade in enumerate(self.atividades):
-            if atividade['id_atividade'] == id_atividade:
+            if atividade['_id'] == _id:
                 del self.atividades[i]
                 break
 

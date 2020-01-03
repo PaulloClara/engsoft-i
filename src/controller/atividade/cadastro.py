@@ -12,10 +12,11 @@ class Cadastro(object):
             return self.view.janela_erro.iniciar(erro)
 
         atividade = self.model.atividade.cadastrar(atividade=formulario)
-        self.view.atividade.cadastro.fechar()
 
         elemento = self.view.atividade.listagem.adicionar(atividade)
         self.configurar_(elemento)
+
+        self.view.atividade.cadastro.fechar()
 
     def cancelar(self, evt=None) -> None:
         """Evento click do botao cancelar do formulario."""

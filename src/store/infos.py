@@ -7,7 +7,7 @@ class Infos(object):
     @staticmethod
     def tabelas() -> list:
         """."""
-        return ['atividade', 'grupo', 'apresentacao', 'tarefa', 'evento']
+        return 'atividade', 'grupo', 'apresentacao', 'tarefa', 'evento'
 
     @staticmethod
     def colunas_da(tabela: str) -> list:
@@ -17,25 +17,22 @@ class Infos(object):
     @staticmethod
     def colunas_atividade() -> list:
         """."""
-        return ['id_atividade', 'titulo', 'descricao', 'em_uso',
-                'data_cadastro']
+        return '_id', 'titulo', 'descricao', 'em_uso', 'cadastro'
 
     @staticmethod
     def colunas_grupo() -> list:
         """."""
-        return ['id_grupo', 'nome', 'integrantes', 'em_uso', 'data_cadastro']
+        return '_id', 'nome', 'integrantes', 'em_uso', 'cadastro'
 
     @staticmethod
     def colunas_tarefa() -> list:
         """."""
-        return ['id_tarefa', 'id_atividade', 'aluno', 'duracao', 'data_tarefa',
-                'data_cadastro']
+        return '_id', 'id_atividade', 'aluno', 'duracao', 'data', 'cadastro'
 
     @staticmethod
     def colunas_apresentacao() -> list:
         """."""
-        return ['id_apresentacao', 'id_atividade', 'id_grupo', 'duracao',
-                'data_apresentacao', 'data_cadastro']
+        return '_id', 'id_atividade', 'id_grupo', 'duracao', 'data', 'cadastro'
 
     @staticmethod
     def colunas_evento() -> list:

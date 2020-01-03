@@ -76,7 +76,7 @@ class ListaDeAtividades(Listagem):
         secundario.subelemento.descricao.defs.pack['side'] = 'left'
 
         secundario.subelemento.cadastro.defs.cnf['text'] =\
-            self.elemento.dados['data_cadastro'].replace(' ', ' as ')
+            self.elemento.dados['cadastro'].replace(' ', ' as ')
         secundario.subelemento.cadastro.defs.cnf['width'] = 21
         secundario.subelemento.cadastro.defs.cnf['bg'] = 'blue'
 

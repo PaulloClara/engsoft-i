@@ -46,13 +46,9 @@ class ListaDeElementos(Listagem):
         secundario.subelemento.cadastro = self.criar_label()
         secundario.subelemento.apresentacao = self.criar_label()
 
-        if 'data_tarefa' in self.elemento.dados:
-            data = self.elemento.dados['data_tarefa']
-        else:
-            data = self.elemento.dados['data_apresentacao']
-
         secundario.subelemento.apresentacao.defs.cnf['text'] = (
-            'Apresentação marcada para ' + data + ' com duração prevista de ' +
+            'Apresentação marcada para ' + self.elemento.dados['data']
+            + ' com duração prevista de ' +
             str(self.elemento.dados['duracao']) + ' minutos'
         )
         secundario.subelemento.apresentacao.defs.cnf['width'] = 82
@@ -61,7 +57,7 @@ class ListaDeElementos(Listagem):
         secundario.subelemento.apresentacao.defs.pack['side'] = 'left'
 
         secundario.subelemento.cadastro.defs.cnf['text'] =\
-            self.elemento.dados['data_cadastro'].replace(' ', ' as ')
+            self.elemento.dados['cadastro'].replace(' ', ' as ')
         secundario.subelemento.cadastro.defs.cnf['width'] = 20
         secundario.subelemento.cadastro.defs.cnf['bg'] = 'orange'
 

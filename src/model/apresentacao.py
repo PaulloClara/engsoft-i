@@ -16,8 +16,8 @@ class Apresentacao(Modelo):
         self.carregar()
         self.ordenar()
 
-    def obter(self, id_apresentacao):
-        return super().obter(_id=id_apresentacao)
+    def obter(self, _id):
+        return super().obter(_id)
 
     def carregar(self):
         self.apresentacoes = super().carregar()
@@ -37,16 +37,16 @@ class Apresentacao(Modelo):
             apresentacao['grupo'] = grupo[0]
             apresentacao['atividade'] = atividade[0]
 
-            nome_do_grupo = apresentacao['grupo']['nome']
-            titulo_da_atividade = apresentacao['atividade']['titulo']
-            apresentacao['titulo'] = f'{nome_do_grupo} | {titulo_da_atividade}'
+            nome_grupo = apresentacao['grupo']['nome']
+            titulo_atividade = apresentacao['atividade']['titulo']
+            apresentacao['titulo'] = f'{nome_grupo} | {titulo_atividade}'
 
     def cadastrar(self, apresentacao):
         vals = []
         vals.append(apresentacao['id_atividade'])
         vals.append(apresentacao['id_grupo'])
         vals.append(apresentacao['duracao'])
-        vals.append(apresentacao['data_apresentacao'])
+        vals.append(apresentacao['data'])
         vals.append(Utils.data_e_hora_atual())
 
         super().cadastrar(vals)
@@ -57,8 +57,8 @@ class Apresentacao(Modelo):
 
         return apresentacao
 
-    def remover(self, id_apresentacao):
-        apresentacao = self.obter(id_apresentacao)[0]
+    def remover(self, _id):
+        apresentacao = self.obter(_id)[0]
 
         id_grupo = apresentacao['id_grupo']
         id_atividade = apresentacao['id_atividade']
@@ -66,20 +66,20 @@ class Apresentacao(Modelo):
         self.model.grupo.atualizar(id_grupo, campos={'em_uso': 0})
         self.model.atividade.atualizar(id_atividade, campos={'em_uso': 0})
 
-        super().remover(_id=id_apresentacao)
+        super().remover(_id)
 
         for i, apresentacao in enumerate(self.apresentacoes):
-            if apresentacao['id_apresentacao'] == id_apresentacao:
+            if apresentacao['_id'] == _id:
                 del self.apresentacoes[i]
 
         return {'atividade': id_atividade, 'grupo': id_grupo}
 
     def ordenar(self):
-        dp = 'data_apresentacao'
+        dp = 'data'
         self.apresentacoes.sort(key=lambda a: a[dp].split('/')[::-1])
 
     def validar(self, formulario):
-        data, duracao = formulario['data_apresentacao'], formulario['duracao']
+        data, duracao = formulario['data'], formulario['duracao']
 
         if not self.model.atividade.atividades:
             return 'Lista de Atividades vazia'

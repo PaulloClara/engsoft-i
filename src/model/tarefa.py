@@ -16,8 +16,8 @@ class Tarefa(Modelo):
 
         self.carregar()
 
-    def obter(self, id_tarefa):
-        return super().obter(_id=id_tarefa)
+    def obter(self, _id):
+        return super().obter(_id)
 
     def carregar(self):
         self.tarefas = super().carregar()
@@ -39,7 +39,7 @@ class Tarefa(Modelo):
         vals.append(tarefa['id_atividade'])
         vals.append(tarefa['aluno'])
         vals.append(tarefa['duracao'])
-        vals.append(tarefa['data_tarefa'])
+        vals.append(tarefa['data'])
         vals.append(Utils.data_e_hora_atual())
 
         super().cadastrar(vals)
@@ -49,18 +49,18 @@ class Tarefa(Modelo):
 
         return tarefa
 
-    def remover(self, id_tarefa):
-        tarefa = self.obter(id_tarefa)[0]
+    def remover(self, _id):
+        tarefa = self.obter(_id)[0]
 
         id_atividade = tarefa['id_atividade']
         self.model.atividade.atualizar(id_atividade, campos={'em_uso': 0})
 
-        super().remover(_id=id_tarefa)
+        super().remover(_id)
 
         return {'atividade': id_atividade}
 
     def validar(self, formulario):
-        data = formulario['data_tarefa']
+        data = formulario['data']
         duracao = formulario['duracao']
 
         if not data:

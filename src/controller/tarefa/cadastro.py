@@ -20,18 +20,16 @@ class Cadastro(object):
         if not aluno:
             return self.view.janela_erro.iniciar(erro)
 
-        id_atividade = atividade['id_atividade']
-
         formulario['aluno'] = aluno
-        formulario['id_atividade'] = id_atividade
+        formulario['id_atividade'] = atividade['_id']
 
         tarefa = self.model.tarefa.cadastrar(formulario)
 
         elemento = self.view.home.listagem.adicionar(tarefa=tarefa)
         self.configurar_(elemento)
 
-        self.model.atividade.atualizar(id_atividade, campos={'em_uso': 1})
-        self.view.atividade.listagem.desativar(id_atividade)
+        self.model.atividade.atualizar(atividade['_id'], campos={'em_uso': 1})
+        self.view.atividade.listagem.desativar(atividade['_id'])
 
         self.view.home.cadastro_tarefa.fechar()
 

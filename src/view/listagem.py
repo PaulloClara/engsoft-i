@@ -28,16 +28,13 @@ class Listagem(TKUtils.obter_scrollview()):
         super().iniciar(master=master)
         self.classe_pai = master.__str__().replace('.!', '')
 
-    def obter(self, _id, chave=''):
-        if not chave:
-            chave = f'id_{self.classe_pai}'
-
+    def obter(self, _id, filtro='_id'):
         for i, elemento in enumerate(self.elementos):
-            if chave in elemento.dados and elemento.dados[chave] == _id:
+            if filtro in elemento.dados and elemento.dados['_id'] == _id:
                 return {'elemento': elemento, 'index': i}
 
-    def remover(self, _id, chave=''):
-        resultado = self.obter(_id, chave)
+    def remover(self, _id, filtro='_id'):
+        resultado = self.obter(_id, filtro)
 
         resultado['elemento'].destroy()
         del self.elementos[resultado['index']]

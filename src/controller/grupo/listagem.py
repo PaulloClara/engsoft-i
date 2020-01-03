@@ -36,7 +36,7 @@ class Listagem(object):
         primario.subelemento.sortear.evento['<Button-1>'] =\
             lambda evt: self.sortear_(evt, elemento.dados)
         primario.subelemento.remover.evento['<Button-1>'] =\
-            lambda evt: self.remover(evt, elemento.dados['id_grupo'])
+            lambda evt: self.remover(evt, elemento.dados['_id'])
 
         secundario.subelemento.cadastro.evento['<Button-1>'] =\
             lambda evt: self.expandir_recolher(evt, elemento)

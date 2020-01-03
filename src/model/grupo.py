@@ -24,8 +24,8 @@ class Grupo(Modelo):
 
         return super().sortear(lista=self.grupos)
 
-    def obter(self, id_grupo):
-        return super().obter(_id=id_grupo)
+    def obter(self, _id):
+        return super().obter(_id)
 
     def carregar(self):
         self.grupos = super().carregar()
@@ -44,12 +44,12 @@ class Grupo(Modelo):
         super().cadastrar(vals)
         self.carregar()
 
-    def atualizar(self, id_grupo, campos):
-        super().atualizar(_id=id_grupo, campos=campos)
+    def atualizar(self, _id, campos):
+        super().atualizar(_id, campos=campos)
         self.carregar()
 
-    def remover(self, id_grupo):
-        super().remover(_id=id_grupo)
+    def remover(self, _id):
+        super().remover(_id)
         self.carregar()
 
     def gerar(self, formulario):

@@ -6,7 +6,7 @@ class Listagem(object):
     def remover(self, evt, id_apresentacao: str) -> None:
         """Evento click do botao remover na lista de apresentacoes."""
         ids = self.model.apresentacao.remover(id_apresentacao)
-        self.view.home.listagem.remover(id_apresentacao, 'id_apresentacao')
+        self.view.home.listagem.remover(id_apresentacao, filtro='id_grupo')
 
         self.model.grupo.atualizar(ids['grupo'], campos={'em_uso': 0})
         self.model.atividade.atualizar(ids['atividade'], campos={'em_uso': 0})
@@ -28,7 +28,7 @@ class Listagem(object):
             lambda evt: self.expandir_recolher(evt, elemento)
 
         primario.subelemento.remover.evento['<Button-1>'] =\
-            lambda evt: self.remover(evt, elemento.dados['id_apresentacao'])
+            lambda evt: self.remover(evt, elemento.dados['_id'])
 
         secundario.subelemento.cadastro.evento['<Button-1>'] =\
             lambda evt: self.expandir_recolher(evt, elemento)

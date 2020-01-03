@@ -27,6 +27,20 @@ class ListaDeGrupos(Listagem):
 
         return self.elementos[-1]
 
+    def ativar(self, id_grupo='', elemento=None):
+        if not elemento:
+            elemento = super().obter(_id=id_grupo)['elemento']
+
+        elemento.subelemento.primario.subelemento.remover.ativar()
+        elemento.subelemento.primario.subelemento.sortear.ativar()
+
+    def desativar(self, id_grupo='', elemento=None):
+        if not elemento:
+            elemento = super().obter(_id=id_grupo)['elemento']
+
+        elemento.subelemento.primario.subelemento.remover.desativar()
+        elemento.subelemento.primario.subelemento.sortear.desativar()
+
     def inicializar_primario(self):
         primario = self.elemento.subelemento.primario
 
@@ -44,20 +58,6 @@ class ListaDeGrupos(Listagem):
         primario.subelemento.sortear.iniciar(master=primario)
         primario.subelemento.remover.iniciar(master=primario)
 
-    def ativar(self, id_atividade='', elemento=None):
-        if not elemento:
-            elemento = super().obter(_id=id_atividade)['elemento']
-
-        elemento.subelemento.primario.subelemento.remover.ativar()
-        elemento.subelemento.primario.subelemento.sortear.ativar()
-
-    def desativar(self, id_atividade='', elemento=None):
-        if not elemento:
-            elemento = super().obter(_id=id_atividade)['elemento']
-
-        elemento.subelemento.primario.subelemento.remover.desativar()
-        elemento.subelemento.primario.subelemento.sortear.desativar()
-
     def inicializar_secundario(self):
         secundario = self.elemento.subelemento.secundario
 
@@ -72,7 +72,7 @@ class ListaDeGrupos(Listagem):
         secundario.subelemento.total.defs.pack['side'] = 'left'
 
         secundario.subelemento.cadastro.defs.cnf['text'] =\
-            self.elemento.dados['data_cadastro'].replace(' ', ' as ')
+            self.elemento.dados['cadastro'].replace(' ', ' as ')
         secundario.subelemento.cadastro.defs.cnf['width'] = 21
         secundario.subelemento.cadastro.defs.cnf['bg'] = 'green'
 
