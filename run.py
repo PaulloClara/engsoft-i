@@ -16,6 +16,8 @@ if __name__ == '__main__':
     model = Model()
     controller = Controller()
 
+    view.defs.mcnf['<Destroy>'] = controller.fechar
+
     view.iniciar()
     model.iniciar()
     controller.iniciar(view=view, model=model)

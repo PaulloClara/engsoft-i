@@ -15,11 +15,13 @@ class MJanela(Tk, Elemento):
         self.defs.cnf['geometry'] = '400x400'
         self.defs.cnf['resizable'] = False
 
+        self.ativa = False
+
     def iniciar(self) -> None:
         """Inicializa e configura."""
         Tk.__init__(self)
 
-        self.protocol("WM_DELETE_WINDOW", self.fechar)
+        self.protocol('WM_DELETE_WINDOW', self.fechar)
 
         if 'icon' in self.defs.cnf:
             self.wm_iconphoto(True, PhotoImage(file=self.defs.cnf['icon']))
@@ -33,9 +35,12 @@ class MJanela(Tk, Elemento):
         if '<Start>' in self.defs.mcnf:
             self.defs.mcnf['<Start>']()
 
+        self.ativa = True
+
     def fechar(self) -> None:
         """Destroi a janela"""
-        self.destroy()
-
         if '<Destroy>' in self.defs.mcnf:
             self.defs.mcnf['<Destroy>']()
+
+        self.destroy()
+        self.ativa = False

@@ -18,6 +18,7 @@ class Controller(object):
         """Contrutor padrao, declara os atributos da classe."""
         self.view = None
         self.model = None
+        self.subjanelas_ativas = True
 
         self.navbar = Navbar()
 
@@ -43,3 +44,22 @@ class Controller(object):
         self.tarefa.iniciar(controller=self)
         self.atividade.iniciar(controller=self)
         self.apresentacao.iniciar(controller=self)
+
+    def fechar(self):
+        if self.view.atividade.cadastro.ativa:
+            self.view.atividade.cadastro.fechar()
+
+        if self.view.grupo.cadastro.ativa:
+            self.view.grupo.cadastro.fechar()
+
+        if self.view.home.cadastro_apresentacao.ativa:
+            self.view.home.cadastro_apresentacao.fechar()
+
+        if self.view.home.cadastro_tarefa.ativa:
+            self.view.home.cadastro_tarefa.fechar()
+
+        if self.view.home.cadastro_apresentacao.ativa:
+            self.view.home.cadastro_apresentacao.fechar()
+
+        if self.view.janela_erro.ativa:
+            self.view.janela_erro.fechar()
