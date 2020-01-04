@@ -14,7 +14,7 @@ class ListaDeGrupos(Listagem):
         super().iniciar(master=master)
 
     def adicionar(self, grupo):
-        self.elemento = self.criar_elemento(dados=grupo)
+        self.elemento = self.criar_elemento(dados=grupo, integrantes=True)
 
         self.inicializar_primario()
         self.inicializar_secundario()

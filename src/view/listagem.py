@@ -22,11 +22,9 @@ class Listagem(TKUtils.obter_scrollview()):
 
         self.elemento = None
         self.elementos = []
-        self.classe_pai = ''
 
     def iniciar(self, master):
         super().iniciar(master=master)
-        self.classe_pai = master.__str__().replace('.!', '')
 
     def obter(self, _id, filtro='_id'):
         for i, elemento in enumerate(self.elementos):
@@ -39,7 +37,7 @@ class Listagem(TKUtils.obter_scrollview()):
         resultado['elemento'].destroy()
         del self.elementos[resultado['index']]
 
-    def criar_elemento(self, dados):
+    def criar_elemento(self, dados, integrantes=False):
         instanciar = True
 
         elemento = TKUtils.obter_container(instanciar)
@@ -64,7 +62,7 @@ class Listagem(TKUtils.obter_scrollview()):
 
         elemento.subelemento.secundario.defs.pack['side'] = 'bottom'
 
-        if self.classe_pai == 'grupo':
+        if integrantes:
             elemento.subelemento.integrantes =\
                 TKUtils.obter_container(instanciar)
             elemento.subelemento.integrantes.defs.cnf['bd'] = 1
