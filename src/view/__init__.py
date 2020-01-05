@@ -51,6 +51,7 @@ class View(TKUtils.obter_janela()):
     def mostrar_container(self, container):
         getattr(self, container).mostrar()
 
+        self.navbar.desativar_(container)
         self.container_ativo = container
 
     def ocultar_container_ativo(self):

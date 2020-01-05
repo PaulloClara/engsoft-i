@@ -11,8 +11,10 @@ class Navbar(TKUtils.obter_container()):
         self.subelemento.home = TKUtils.obter_botao()
         self.subelemento.aluno = TKUtils.obter_botao()
         self.subelemento.grupo = TKUtils.obter_botao()
-        self.subelemento.atividade = TKUtils.obter_botao()
         self.subelemento.sobre = TKUtils.obter_botao()
+        self.subelemento.atividade = TKUtils.obter_botao()
+
+        self.elemento_ativo = ''
 
     def iniciar(self, master):
         super().iniciar(master=master)
@@ -22,6 +24,14 @@ class Navbar(TKUtils.obter_container()):
         self.inicializar_botao_home()
         self.inicializar_botao_atividade()
         self.inicializar_botao_sobre()
+
+    def desativar_(self, elemento: str):
+        getattr(self.subelemento, elemento).desativar()
+
+        if self.elemento_ativo:
+            getattr(self.subelemento, self.elemento_ativo).ativar()
+
+        self.elemento_ativo = elemento
 
     def inicializar_botao_home(self):
         self.subelemento.home.defs.cnf['text'] = 'Home'
