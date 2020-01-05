@@ -7,8 +7,11 @@ class ListaDeElementos(Listagem):
     def __init__(self):
         super().__init__()
 
+        self.defs.canvas['height'] = 348
+
         self.elemento = None
         self.elementos = []
+        self.elemento_ativo = ''
 
     def iniciar(self, master):
         super().iniciar(master=master)
@@ -16,9 +19,13 @@ class ListaDeElementos(Listagem):
     def adicionar(self, apresentacao=None, tarefa=None):
         dados = tarefa if tarefa else apresentacao
         self.elemento = self.criar_elemento(dados)
+        self.elemento.defs.tipo = 'tarefa' if tarefa else 'apresentacao'
 
         self.inicializar_primario()
         self.inicializar_secundario()
+
+        if self.elemento_ativo != self.elemento.defs.tipo:
+            self.elemento.ocultar()
 
         self.elementos.append(self.elemento)
         self.elemento = None

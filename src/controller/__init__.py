@@ -45,6 +45,8 @@ class Controller(object):
         self.atividade.iniciar(controller=self)
         self.apresentacao.iniciar(controller=self)
 
+        self.home.filtrar(None, 'tarefa')
+
     def fechar(self):
         if self.view.atividade.cadastro.ativa:
             self.view.atividade.cadastro.fechar()
