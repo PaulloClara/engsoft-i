@@ -91,6 +91,7 @@ class Listagem(TKUtils.obter_scrollview()):
         botao.defs.cnf['bg'] = 'orange'
         botao.defs.cnf['bd'] = 4
         botao.defs.cnf['width'] = 2
+        botao.defs.cnf['relief'] = 'raised'
 
         botao.defs.pack['side'] = 'left'
 
@@ -103,6 +104,7 @@ class Listagem(TKUtils.obter_scrollview()):
         botao.defs.cnf['bg'] = 'red'
         botao.defs.cnf['bd'] = 4
         botao.defs.cnf['width'] = 2
+        botao.defs.cnf['relief'] = 'raised'
 
         botao.defs.pack['side'] = 'right'
 

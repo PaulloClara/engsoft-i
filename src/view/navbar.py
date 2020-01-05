@@ -26,10 +26,10 @@ class Navbar(TKUtils.obter_container()):
         self.inicializar_botao_sobre()
 
     def desativar_(self, elemento: str):
-        getattr(self.subelemento, elemento).desativar()
-
         if self.elemento_ativo:
             getattr(self.subelemento, self.elemento_ativo).ativar()
+
+        getattr(self.subelemento, elemento).desativar()
 
         self.elemento_ativo = elemento
 
@@ -38,6 +38,7 @@ class Navbar(TKUtils.obter_container()):
         self.subelemento.home.defs.cnf['bg'] = 'orange'
         self.subelemento.home.defs.cnf['width'] = 28
         self.subelemento.home.defs.cnf['pady'] = 9
+        self.subelemento.home.defs.cnf['bd'] = 1
         self.subelemento.home.defs.mcnf['fz'] = 15
 
         self.subelemento.home.defs.pack['side'] = 'left'
@@ -49,6 +50,7 @@ class Navbar(TKUtils.obter_container()):
         self.subelemento.aluno.defs.cnf['bg'] = 'red'
         self.subelemento.aluno.defs.cnf['width'] = 14
         self.subelemento.aluno.defs.cnf['pady'] = 9
+        self.subelemento.aluno.defs.cnf['bd'] = 1
         self.subelemento.aluno.defs.mcnf['fz'] = 15
 
         self.subelemento.aluno.defs.pack['side'] = 'left'
@@ -60,6 +62,7 @@ class Navbar(TKUtils.obter_container()):
         self.subelemento.atividade.defs.cnf['bg'] = 'blue'
         self.subelemento.atividade.defs.cnf['width'] = 14
         self.subelemento.atividade.defs.cnf['pady'] = 9
+        self.subelemento.atividade.defs.cnf['bd'] = 1
         self.subelemento.atividade.defs.mcnf['fz'] = 15
 
         self.subelemento.atividade.defs.pack['side'] = 'left'
@@ -71,6 +74,7 @@ class Navbar(TKUtils.obter_container()):
         self.subelemento.grupo.defs.cnf['bg'] = 'green'
         self.subelemento.grupo.defs.cnf['width'] = 14
         self.subelemento.grupo.defs.cnf['pady'] = 9
+        self.subelemento.grupo.defs.cnf['bd'] = 1
         self.subelemento.grupo.defs.mcnf['fz'] = 15
 
         self.subelemento.grupo.defs.pack['side'] = 'left'
@@ -79,9 +83,10 @@ class Navbar(TKUtils.obter_container()):
 
     def inicializar_botao_sobre(self):
         self.subelemento.sobre.defs.cnf['text'] = 'Sobre'
-        self.subelemento.sobre.defs.cnf['bg'] = 'grey'
+        self.subelemento.sobre.defs.cnf['bg'] = '#FFD700'
         self.subelemento.sobre.defs.cnf['width'] = 14
         self.subelemento.sobre.defs.cnf['pady'] = 9
+        self.subelemento.sobre.defs.cnf['bd'] = 1
         self.subelemento.sobre.defs.mcnf['fz'] = 15
 
         self.subelemento.sobre.defs.pack['side'] = 'left'

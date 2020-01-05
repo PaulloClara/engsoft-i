@@ -19,6 +19,7 @@ class MBotao(Button, Elemento):
         self.defs.cnf['padx'] = 6
         self.defs.cnf['bg'] = 'grey'
         self.defs.cnf['fg'] = 'white'
+        self.defs.cnf['relief'] = 'solid'
         self.defs.cnf['font'] = ('times new roman', 14, 'bold')
 
         self.ativo = True
