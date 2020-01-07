@@ -1,6 +1,6 @@
 from os import path
-from subprocess import run
 from sys import argv
+from subprocess import run
 
 
 ALIAS = '\nalias stuki="~/.stuki/dist/run"\n'
@@ -32,7 +32,7 @@ def main():
             run(['cxfreeze', caminho_arquivo, '--target-dir', caminho_dist])
         except Exception as e:
             try:
-                run(['pip3', 'install', 'cx-Freeze', '--user'])
+                run(['pip3', 'install', 'cx-Freeze==6.0', '--user'])
                 run(['cxfreeze', caminho_arquivo, '--target-dir', caminho_dist])
             except Exception as e:
                 print('Não foi possivel instalar o cxfreeze, pip necessario')
