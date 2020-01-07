@@ -41,11 +41,12 @@ class Evento(Modelo):
         super().remover(_id)
 
     def ordenar(self):
-        dp = 'data'
-        self.eventos.sort(key=lambda a: a[dp].split('/')[::-1])
+        chave = 'data'
+        self.eventos.sort(key=lambda a: a[chave].split('/')[::-1])
 
     def validar(self, formulario):
-        data, duracao = formulario['data'], formulario['duracao']
+        erro = super().validar_campos(formulario)
+        erro = super().validar_data(formulario['data'])
 
         if not self.model.atividade.atividades:
             return 'Lista de Atividades vazia'
@@ -53,50 +54,9 @@ class Evento(Modelo):
         if not self.model.grupo.grupos:
             return 'Lista de Grupos vazia'
 
-        if not data:
-            return 'O campo "Apresentação" não pode estar vazio!'
-        if not duracao:
-            return 'O campo "Duração" não pode estar vazio!'
-
-        if data[2] != '/' or data[5] != '/':
-            return 'Formato invalido! Entre com o formato dd/mm/aaaa'
-
-        dia, mes, ano = data.split('/')
-        data_atual = Utils.data_e_hora_atual().split(' ')[0].split('/')
-
         try:
-            dia, mes, ano = int(dia), int(mes), int(ano)
-        except Exception as e:
-            return 'Os valores em dd, mm e aaaa precisam ser numeros!'
-
-        data_valida = False
-
-        if data_atual[::-1] > data.split('/')[::-1]:
-            return 'Data INVALIDA'
-
-        meses_com_ate_31_dias = [1, 3, 5, 7, 8, 10, 12]
-        if mes in meses_com_ate_31_dias:
-            if dia <= 31:
-                data_valida = True
-
-        meses_com_ate_30_dias = [4, 6, 9, 11]
-        if mes in meses_com_ate_30_dias:
-            if dia <= 30:
-                data_valida = True
-
-        if mes == 2:
-            if ano % 4 == 0 and ano % 100 != 0 or ano % 400 == 0:
-                # Ano Bisexto! Fevereiro com possíveis 29 dias
-                if dia <= 29:
-                    data_valida = True
-
-            if dia <= 28:
-                data_valida = True
-
-        if not data_valida:
-            return 'Data INVALIDA!'
-
-        try:
-            duracao = int(duracao)
+            formulario['duracao'] = int(formulario['duracao'])
         except Exception as e:
             return 'O campo "Duração" só aceita valor inteiro!'
+
+        return erro if erro else None

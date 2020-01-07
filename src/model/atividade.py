@@ -60,13 +60,9 @@ class Atividade(Modelo):
                 break
 
     def validar(self, formulario):
-        if formulario['titulo'] == '':
-            return 'O campo "Titulo" não pode estar vazio'
+        erro = super().validar_campos(formulario)
 
-        if formulario['descricao'] == '':
-            return 'O campo "Descrição" não pode estar vazio'
-
-        return None
+        return erro if erro else None
 
     def limpar(self, formulario):
         formulario['titulo'] = ''

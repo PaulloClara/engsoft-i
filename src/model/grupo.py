@@ -89,30 +89,17 @@ class Grupo(Modelo):
         return grupos_gerados
 
     def validar(self, formulario):
-        alunos = self.model.aluno.alunos.copy()
-
-        if formulario['nome'] == '':
-            return 'O campo "Nome" não pode estar vazio'
-
-        if formulario['quantidade'] == '':
-            return 'O campo "Nome Base" não pode estar vazio'
+        erro = super().validar_campos(formulario)
+        qtd_alunos = len(self.model.aluno.alunos)
 
         try:
-            quantidade = int(formulario['quantidade'])
+            formulario['quantidade'] = int(formulario['quantidade'])
         except:
             return 'O campo "Quantidade" só aceita valor inteiro'
 
-        if quantidade < 2:
+        if formulario['quantidade'] < 2:
             return 'A quantidade mínima de integrantes é 2'
-
-        if quantidade > len(alunos):
+        if formulario['quantidade'] > qtd_alunos:
             return 'Quantidade de integrantes maior que a quantidade de alunos'
 
-        if len(alunos) / quantidade < 2:
-            return 'Numero de integrantes insuficientes para gerar grupos'
-
-        return None
-
-    def limpar(self, formulario):
-        formulario['nome'] = ''
-        formulario['quantidade'] = ''
+        return erro if erro else None
