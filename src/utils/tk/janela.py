@@ -2,6 +2,7 @@
 
 from tkinter import Tk, PhotoImage
 from src.utils.tk.elemento import Elemento
+from src.utils.tk.container import MContainer
 
 
 class MJanela(Tk, Elemento):
@@ -15,11 +16,16 @@ class MJanela(Tk, Elemento):
         self.defs.cnf['geometry'] = '400x400'
         self.defs.cnf['resizable'] = False
 
+        self.subelemento.main = MContainer()
+        self.subelemento.main.defs.cnf['bd'] = 10
+        self.subelemento.main.defs.cnf['padx'] = 8
+
         self.ativa = False
 
     def iniciar(self) -> None:
         """Inicializa e configura."""
         Tk.__init__(self)
+        self.subelemento.main.iniciar(master=self)
 
         self.protocol('WM_DELETE_WINDOW', self.fechar)
 

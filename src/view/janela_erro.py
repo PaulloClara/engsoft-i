@@ -13,7 +13,8 @@ class JanelaDeErro(TKUtils.obter_janela()):
         self.defs.cnf['title'] = 'Janela de Erro'
         self.defs.cnf['geometry'] = '340x200'
 
-        self.subelemento.main = TKUtils.obter_container(instanciar=True)
+        self.subelemento.main.defs.pack['expand'] = True
+
         self.subelemento.mensagem = TKUtils.obter_mensagem()
         self.subelemento.confirmar = TKUtils.obter_botao()
 
@@ -23,16 +24,8 @@ class JanelaDeErro(TKUtils.obter_janela()):
 
         self.msg_erro = erro
 
-        self.inicializar_container_main()
         self.inicializar_mensagem_erro()
         self.inicializar_botao_confirmar()
-
-    def inicializar_container_main(self) -> None:
-        """."""
-        self.subelemento.main.defs.cnf['bd'] = 10
-        self.subelemento.main.defs.pack['expand'] = True
-
-        self.subelemento.main.iniciar(master=self)
 
     def inicializar_mensagem_erro(self) -> None:
         """."""

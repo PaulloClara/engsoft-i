@@ -13,7 +13,6 @@ class JanelaDeCadastro(TKUtils.obter_janela()):
         self.defs.qtd_campos = campos
         self.defs.cnf['geometry'] = f'420x{180 + campos * 30}'
 
-        self.subelemento.main = TKUtils.obter_container(instanciar=True)
         self.subelemento.cancelar = TKUtils.obter_botao()
         self.subelemento.confirmar = TKUtils.obter_botao()
 
@@ -21,18 +20,8 @@ class JanelaDeCadastro(TKUtils.obter_janela()):
         """."""
         super().iniciar()
 
-        self.criar_container_main()
         self.criar_botao_cancelar()
         self.criar_botao_confirmar()
-
-    def criar_container_main(self) -> None:
-        """."""
-        self.subelemento.main.defs.cnf['bd'] = 10
-        self.subelemento.main.defs.cnf['padx'] = 8
-
-        self.subelemento.main.defs.grid['sticky'] = 'WE'
-
-        self.subelemento.main.iniciar(master=self)
 
     def criar_botao_cancelar(self) -> None:
         """."""
