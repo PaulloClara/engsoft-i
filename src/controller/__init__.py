@@ -6,6 +6,7 @@ from src.controller.home import Home
 from src.controller.aluno import Aluno
 from src.controller.grupo import Grupo
 from src.controller.sobre import Sobre
+from src.controller.evento import Evento
 from src.controller.tarefa import Tarefa
 from src.controller.atividade import Atividade
 from src.controller.apresentacao import Apresentacao
@@ -26,6 +27,7 @@ class Controller(object):
         self.aluno = Aluno()
         self.grupo = Grupo()
         self.sobre = Sobre()
+        self.evento = Evento()
         self.tarefa = Tarefa()
         self.atividade = Atividade()
         self.apresentacao = Apresentacao()
@@ -41,6 +43,7 @@ class Controller(object):
         self.aluno.iniciar(controller=self)
         self.grupo.iniciar(controller=self)
         self.sobre.iniciar(controller=self)
+        self.evento.iniciar(controller=self)
         self.tarefa.iniciar(controller=self)
         self.atividade.iniciar(controller=self)
         self.apresentacao.iniciar(controller=self)
@@ -56,6 +59,9 @@ class Controller(object):
 
         if self.view.home.cadastro_apresentacao.ativa:
             self.view.home.cadastro_apresentacao.fechar()
+
+        if self.view.home.cadastro_evento.ativa:
+            self.view.home.cadastro_evento.fechar()
 
         if self.view.home.cadastro_tarefa.ativa:
             self.view.home.cadastro_tarefa.fechar()

@@ -37,7 +37,7 @@ class Infos(object):
     @staticmethod
     def colunas_evento() -> list:
         """."""
-        return []
+        return '_id', 'titulo', 'duracao', 'data', 'cadastro'
 
     @staticmethod
     def colunas_sobre() -> list:

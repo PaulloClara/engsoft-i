@@ -11,7 +11,7 @@ class JanelaDeCadastro(TKUtils.obter_janela()):
         super().__init__()
 
         self.defs.qtd_campos = campos
-        self.defs.cnf['geometry'] = f'420x{campos * 120}'
+        self.defs.cnf['geometry'] = f'420x{180 + campos * 30}'
 
         self.subelemento.main = TKUtils.obter_container(instanciar=True)
         self.subelemento.cancelar = TKUtils.obter_botao()

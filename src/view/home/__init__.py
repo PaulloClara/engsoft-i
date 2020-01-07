@@ -3,7 +3,8 @@ from src.utils.tk import TKUtils
 from src.view.home.filtro import Filtro
 from src.view.home.actions import Actions
 from src.view.home.listagem import ListaDeElementos
-from src.view.home.cadastro import FormularioApresentacao, FormularioTarefa
+from src.view.home.cadastro import (FormularioApresentacao, FormularioTarefa,
+                                    FormularioEvento)
 
 
 class Home(TKUtils.obter_container()):
@@ -16,6 +17,7 @@ class Home(TKUtils.obter_container()):
         self.filtro = Filtro()
         self.actions = Actions()
         self.listagem = ListaDeElementos()
+        self.cadastro_evento = FormularioEvento()
         self.cadastro_tarefa = FormularioTarefa()
         self.cadastro_apresentacao = FormularioApresentacao()
 

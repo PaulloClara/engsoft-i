@@ -7,6 +7,7 @@ class Home(object):
         self.view = controller.view
         self.model = controller.model
 
+        self.cadastrar_evento = controller.evento.cadastrar
         self.cadastrar_tarefa = controller.tarefa.cadastrar
         self.cadastrar_apresentacao = controller.apresentacao.cadastrar
 
@@ -26,6 +27,8 @@ class Home(object):
         filtro = self.view.home.filtro.subelemento
         actions = self.view.home.actions.subelemento
 
+        filtro.evento.evento['<Button-1>'] =\
+            lambda evt: self.filtrar(evt, 'evento')
         filtro.tarefa.evento['<Button-1>'] =\
             lambda evt: self.filtrar(evt, 'tarefa')
         filtro.apresentacao.evento['<Button-1>'] =\
@@ -33,18 +36,24 @@ class Home(object):
 
         filtro.tarefa.desativar()
 
+        actions.evento.evento['<Button-1>'] = self.cadastrar_evento
         actions.tarefa.evento['<Button-1>'] = self.cadastrar_tarefa
-        actions.cadastrar.evento['<Button-1>'] = self.cadastrar_apresentacao
+        actions.apresentacao.evento['<Button-1>'] = self.cadastrar_apresentacao
 
         self.view.home.filtro.carregar_eventos()
         self.view.home.actions.carregar_eventos()
 
         self.view.home.cadastro_apresentacao.defs.mcnf['<Start>'] =\
-            actions.cadastrar.desativar
+            actions.apresentacao.desativar
         self.view.home.cadastro_apresentacao.defs.mcnf['<Destroy>'] =\
-            actions.cadastrar.ativar
+            actions.apresentacao.ativar
 
         self.view.home.cadastro_tarefa.defs.mcnf['<Start>'] =\
             actions.tarefa.desativar
         self.view.home.cadastro_tarefa.defs.mcnf['<Destroy>'] =\
             actions.tarefa.ativar
+
+        self.view.home.cadastro_evento.defs.mcnf['<Start>'] =\
+            actions.evento.desativar
+        self.view.home.cadastro_evento.defs.mcnf['<Destroy>'] =\
+            actions.evento.ativar

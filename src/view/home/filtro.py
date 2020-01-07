@@ -10,12 +10,14 @@ class Filtro(TKUtils.obter_container()):
         self.defs.pack['side'] = 'top'
 
         self.elemento_ativo = ''
+        self.subelemento.evento = TKUtils.obter_botao()
         self.subelemento.tarefa = TKUtils.obter_botao()
         self.subelemento.apresentacao = TKUtils.obter_botao()
 
     def iniciar(self, master):
         super().iniciar(master=master)
 
+        self.inicializar_botao_evento()
         self.inicializar_botao_tarefa()
         self.inicializar_botao_apresentacao()
 
@@ -43,6 +45,16 @@ class Filtro(TKUtils.obter_container()):
         self.subelemento.apresentacao.defs.cnf['width'] = 14
         self.subelemento.apresentacao.defs.cnf['pady'] = 2
 
-        self.subelemento.tarefa.defs.pack['side'] = 'right'
+        self.subelemento.apresentacao.defs.pack['side'] = 'right'
 
         self.subelemento.apresentacao.iniciar(master=self)
+
+    def inicializar_botao_evento(self):
+        self.subelemento.evento.defs.cnf['text'] = 'Evento'
+        self.subelemento.evento.defs.cnf['bg'] = 'orange'
+        self.subelemento.evento.defs.cnf['width'] = 8
+        self.subelemento.evento.defs.cnf['pady'] = 2
+
+        self.subelemento.evento.defs.pack['side'] = 'right'
+
+        self.subelemento.evento.iniciar(master=self)

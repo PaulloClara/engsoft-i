@@ -16,10 +16,11 @@ class ListaDeElementos(Listagem):
     def iniciar(self, master):
         super().iniciar(master=master)
 
-    def adicionar(self, apresentacao=None, tarefa=None):
-        dados = tarefa if tarefa else apresentacao
+    def adicionar(self, apresentacao=None, tarefa=None, evento=None):
+        dados = tarefa if tarefa else evento if evento else apresentacao
         self.elemento = self.criar_elemento(dados)
-        self.elemento.defs.tipo = 'tarefa' if tarefa else 'apresentacao'
+        self.elemento.defs.tipo =\
+            'tarefa' if tarefa else 'evento' if evento else 'apresentacao'
 
         self.inicializar_primario()
         self.inicializar_secundario()
@@ -53,11 +54,17 @@ class ListaDeElementos(Listagem):
         secundario.subelemento.cadastro = self.criar_label()
         secundario.subelemento.apresentacao = self.criar_label()
 
+        if self.elemento.defs.tipo == 'evento':
+            tipo = 'Evento marcado'
+        elif self.elemento.defs.tipo == 'tarefa':
+            tipo = 'Tarefa marcada'
+        else:
+            tipo = 'Apresentação marcada'
+
         secundario.subelemento.apresentacao.defs.cnf['text'] = (
-            'Apresentação marcada para ' + self.elemento.dados['data']
-            + ' com duração prevista de ' +
-            str(self.elemento.dados['duracao']) + ' minutos'
-        )
+            tipo + ' para ' + self.elemento.dados['data'] +
+            ' com duração prevista de ' + str(self.elemento.dados['duracao']) +
+            ' minutos')
         secundario.subelemento.apresentacao.defs.cnf['width'] = 82
         secundario.subelemento.apresentacao.defs.cnf['bg'] = 'orange'
 
