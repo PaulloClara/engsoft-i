@@ -34,8 +34,8 @@ class Apresentacao(Modelo):
             if not atividade:
                 atividade = [{'titulo': 'ATIVIDADE DELETADA'}]
 
-            apresentacao['grupo'] = grupo[0]
-            apresentacao['atividade'] = atividade[0]
+            apresentacao['grupo'] = grupo
+            apresentacao['atividade'] = atividade
 
             nome_grupo = apresentacao['grupo']['nome']
             titulo_atividade = apresentacao['atividade']['titulo']
@@ -58,7 +58,7 @@ class Apresentacao(Modelo):
         return apresentacao
 
     def remover(self, _id):
-        apresentacao = self.obter(_id)[0]
+        apresentacao = self.obter(_id)
 
         id_grupo = apresentacao['id_grupo']
         id_atividade = apresentacao['id_atividade']

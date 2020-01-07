@@ -28,7 +28,7 @@ class Tarefa(Modelo):
             if atividade == []:
                 atividade = [{'titulo': 'ATIVIDADE DELETADA'}]
 
-            tarefa['atividade'] = atividade[0]
+            tarefa['atividade'] = atividade
 
             nome_aluno = tarefa['aluno']
             titulo_atividade = tarefa['atividade']['titulo']
@@ -50,7 +50,7 @@ class Tarefa(Modelo):
         return tarefa
 
     def remover(self, _id):
-        tarefa = self.obter(_id)[0]
+        tarefa = self.obter(_id)
 
         id_atividade = tarefa['id_atividade']
         self.model.atividade.atualizar(id_atividade, campos={'em_uso': 0})

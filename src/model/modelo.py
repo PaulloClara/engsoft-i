@@ -23,8 +23,9 @@ class Modelo(object):
 
     def obter(self, _id):
         sql = self.store.sql.select(self.tabela, _id)
+        resultado = self.store.executar(sql)
 
-        return self.store.executar(sql)
+        return resultado[0] if resultado else None
 
     def carregar(self):
         sql = self.store.sql.select(self.tabela)
