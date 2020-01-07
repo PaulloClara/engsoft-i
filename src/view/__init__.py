@@ -10,7 +10,6 @@ from src.view.sobre import Sobre
 from src.view.atividade import Atividade
 
 from src.view.janela_erro import JanelaDeErro
-from src.view.janela_sorteio import JanelaDeSorteio
 
 
 class View(TKUtils.obter_janela()):
@@ -31,7 +30,6 @@ class View(TKUtils.obter_janela()):
         self.atividade = Atividade()
 
         self.janela_erro = JanelaDeErro()
-        self.janela_sorteio = JanelaDeSorteio()
 
         self.container_ativo = ''
 
