@@ -15,7 +15,7 @@ Projeto referente à disciplina de Engenharia de Software I - IFPI
 `$ python -m venv .env`\
 `$ source .env/bin/activate`\
 `$ pip install -r requirements.txt`\
-`$ git update-index --assume-unchanged src/store/banco_de_dados.sqlite`
+`$ git update-index --assume-unchanged src/store/file/bd.sqlite`
 
 #### Ativar/Desativar Env
 
