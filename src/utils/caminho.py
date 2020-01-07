@@ -10,10 +10,11 @@ class Caminho(object):
     @staticmethod
     def ate(arquivo: str) -> str:
         """Resolve o caminho ate um arquivo de acordo com diversos fatores."""
-        final = f'{Caminho.atual()}/{arquivo}'
-
+        final = f'{Caminho.atual()}'
         if Env.modo_producao():
-            final = f'{final}/lib/{arquivo}'
+            final = f'{final}/lib'
+
+        final = f'{final}/{arquivo}'
 
         return final
 
