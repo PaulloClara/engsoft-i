@@ -1,22 +1,22 @@
-class Actions(object):
+"""Actions de Aluno no contexto do Controller."""
 
-    def __init__(self):
+from src.utils.tipo import Tipo
+
+
+class Actions(object):
+    """Controla os eventos relacionados a View da camada Aluno."""
+
+    def __init__(self) -> None:
+        """."""
         pass
 
-    def sortear(self, evt):
-        self.view.ocultar_container_ativo()
-        self.view.mostrar_container('home')
-
-        self.cadastrar_tarefa(evt=None)
-
-    def arquivo(self, evt) -> None:
+    def arquivo(self, evt: Tipo.evento_tk()) -> None:
         """Evento click do botao para carregar arquivo csv."""
         pass
 
-    def configurar(self):
-        actions = self.view.aluno.actions.subelemento
-
-        actions.arquivo.evento['<Button-1>'] = self.arquivo
-        actions.sortear.evento['<Button-1>'] = self.sortear
+    def configurar(self) -> None:
+        """Configura os elementos."""
+        self.view.aluno.actions.subelemento.arquivo.evento['<Button-1>'] =\
+            self.arquivo
 
         self.view.aluno.actions.carregar_eventos()

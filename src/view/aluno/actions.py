@@ -10,23 +10,12 @@ class Actions(TKUtils.obter_container()):
         self.defs.pack['expand'] = True
         self.defs.pack['side'] = 'bottom'
 
-        self.subelemento.sortear = TKUtils.obter_botao()
         self.subelemento.arquivo = TKUtils.obter_botao()
 
     def iniciar(self, master):
         super().iniciar(master=master)
 
-        self.inicializar_botao_sorteio()
         self.inicializar_botao_carregar_arquivo()
-
-    def inicializar_botao_sorteio(self):
-        self.subelemento.sortear.defs.cnf['text'] = 'Sortear Aluno'
-        self.subelemento.sortear.defs.cnf['bg'] = 'blue'
-        self.subelemento.sortear.defs.cnf['width'] = 20
-
-        self.subelemento.sortear.defs.pack['side'] = 'left'
-
-        self.subelemento.sortear.iniciar(master=self)
 
     def inicializar_botao_carregar_arquivo(self):
         self.subelemento.arquivo.defs.cnf['text'] = 'Procurar CSV'
