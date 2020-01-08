@@ -35,5 +35,5 @@ class Caminho(object):
 
     @staticmethod
     def execucao() -> str:
-        """Caminho em que o comando de exeucao foi executado."""
+        """Caminho em que o comando de execucao foi executado."""
         return '/'.join(Env.parametros()[0].split('/')[:-1])
