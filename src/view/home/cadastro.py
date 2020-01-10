@@ -112,9 +112,6 @@ class FormularioEvento(FormularioBase):
         campo = super().obter_campos()
         campo['titulo'] = self.subelemento.titulo.input.get()
 
-        if ' ' in campo['duracao']:
-            campo['duracao'] = campo['duracao'].split(' ')[0]
-
         return campo
 
     def configurar_campo_titulo(self):
@@ -134,12 +131,17 @@ class FormularioEvento(FormularioBase):
     def configurar_campo_data(self):
         super().configurar_campo_data()
 
+        self.subelemento.data.label.defs.cnf['text'] = 'Data Inicio'
         self.subelemento.data.label.defs.grid['row'] = 1
+
         self.subelemento.data.input.defs.grid['row'] = 1
 
     def configurar_campo_duracao(self):
         super().configurar_campo_duracao()
 
-        self.subelemento.duracao.input.defs.mcnf['placeholder'] = '2 dias'
+        self.subelemento.duracao.label.defs.cnf['text'] = 'Data Fim'
         self.subelemento.duracao.label.defs.grid['row'] = 2
+
+        self.subelemento.duracao.input.defs.mcnf['placeholder'] =\
+            Utils.data_e_hora_em_(dias=2).split(' ')[0]
         self.subelemento.duracao.input.defs.grid['row'] = 2

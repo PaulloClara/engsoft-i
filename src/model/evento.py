@@ -47,16 +47,12 @@ class Evento(Modelo):
     def validar(self, formulario):
         erro = super().validar_campos(formulario)
         erro = super().validar_data(formulario['data'])
+        erro = super().validar_data(formulario['duracao'])
 
         if not self.model.atividade.atividades:
             return 'Lista de Atividades vazia'
 
         if not self.model.grupo.grupos:
             return 'Lista de Grupos vazia'
-
-        try:
-            formulario['duracao'] = int(formulario['duracao'])
-        except Exception as e:
-            return 'O campo "Duração" só aceita valor inteiro!'
 
         return erro if erro else None
