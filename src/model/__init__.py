@@ -3,7 +3,6 @@ from src.store import Store
 
 from src.model.aluno import Aluno
 from src.model.grupo import Grupo
-from src.model.sobre import Sobre
 from src.model.atividade import Atividade
 
 from src.model.evento import Evento
@@ -18,7 +17,6 @@ class Model(object):
 
         self.aluno = Aluno()
         self.grupo = Grupo()
-        self.sobre = Sobre()
         self.atividade = Atividade()
 
         self.evento = Evento()
@@ -28,7 +26,6 @@ class Model(object):
     def iniciar(self):
         self.aluno.iniciar(model=self)
         self.grupo.iniciar(model=self)
-        self.sobre.iniciar(model=self)
         self.atividade.iniciar(model=self)
 
         self.evento.iniciar(model=self)

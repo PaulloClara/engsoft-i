@@ -5,10 +5,10 @@ from src.controller.navbar import Navbar
 from src.controller.home import Home
 from src.controller.aluno import Aluno
 from src.controller.grupo import Grupo
-from src.controller.sobre import Sobre
-from src.controller.evento import Evento
-from src.controller.tarefa import Tarefa
 from src.controller.atividade import Atividade
+
+from src.controller.tarefa import Tarefa
+from src.controller.evento import Evento
 from src.controller.apresentacao import Apresentacao
 
 
@@ -26,7 +26,6 @@ class Controller(object):
         self.home = Home()
         self.aluno = Aluno()
         self.grupo = Grupo()
-        self.sobre = Sobre()
         self.evento = Evento()
         self.tarefa = Tarefa()
         self.atividade = Atividade()
@@ -42,7 +41,6 @@ class Controller(object):
         self.home.iniciar(controller=self)
         self.aluno.iniciar(controller=self)
         self.grupo.iniciar(controller=self)
-        self.sobre.iniciar(controller=self)
         self.evento.iniciar(controller=self)
         self.tarefa.iniciar(controller=self)
         self.atividade.iniciar(controller=self)
