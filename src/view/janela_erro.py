@@ -11,7 +11,7 @@ class JanelaDeErro(TKUtils.obter_janela()):
         super().__init__()
 
         self.defs.cnf['title'] = 'Janela de Erro'
-        self.defs.cnf['geometry'] = '340x200'
+        self.defs.cnf['geometry'] = '400x200'
 
         self.subelemento.main.defs.pack['expand'] = True
 
@@ -31,7 +31,7 @@ class JanelaDeErro(TKUtils.obter_janela()):
         """."""
         self.subelemento.mensagem.defs.cnf['text'] = self.msg_erro
         self.subelemento.mensagem.defs.cnf['fg'] = 'red'
-        self.subelemento.mensagem.defs.cnf['width'] = 320
+        self.subelemento.mensagem.defs.cnf['width'] = 380
         self.subelemento.mensagem.defs.mcnf['fz'] = 20
 
         self.subelemento.mensagem.defs.pack['pady'] = 10
