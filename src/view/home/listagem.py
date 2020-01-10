@@ -1,3 +1,5 @@
+from src.utils import Utils
+
 from src.utils.tk import TKUtils
 from src.view.listagem import Listagem
 
@@ -18,7 +20,7 @@ class ListaDeElementos(Listagem):
 
     def adicionar(self, apresentacao=None, tarefa=None, evento=None):
         dados = tarefa if tarefa else evento if evento else apresentacao
-        self.elemento = self.criar_elemento(dados)
+        self.elemento = self.criar_elemento(dados, integrantes=evento)
         self.elemento.defs.tipo =\
             'tarefa' if tarefa else 'evento' if evento else 'apresentacao'
 
@@ -54,17 +56,18 @@ class ListaDeElementos(Listagem):
         secundario.subelemento.cadastro = self.criar_label()
         secundario.subelemento.apresentacao = self.criar_label()
 
+        base = (
+            '{} marcad{} para ' + self.elemento.dados['data'] +
+            ' com {} prevista {} ' + str(self.elemento.dados['duracao']) +
+            ' {}')
         if self.elemento.defs.tipo == 'evento':
-            tipo = 'Evento marcado'
+            texto = base.format('Evento', 'o', 'finalização', 'para', '')
         elif self.elemento.defs.tipo == 'tarefa':
-            tipo = 'Tarefa marcada'
+            texto = base.format('Tarefa', 'a', 'duração', 'de', 'minutos')
         else:
-            tipo = 'Apresentação marcada'
+            texto = base.format('Apresentação', 'a', 'duração', 'de', 'minutos')
 
-        secundario.subelemento.apresentacao.defs.cnf['text'] = (
-            tipo + ' para ' + self.elemento.dados['data'] +
-            ' com duração prevista de ' + str(self.elemento.dados['duracao']) +
-            ' minutos')
+        secundario.subelemento.apresentacao.defs.cnf['text'] = texto
         secundario.subelemento.apresentacao.defs.cnf['width'] = 82
         secundario.subelemento.apresentacao.defs.cnf['bg'] = 'orange'
 
@@ -82,3 +85,24 @@ class ListaDeElementos(Listagem):
         secundario.subelemento.apresentacao.iniciar(master=secundario)
 
         secundario.ocultar()
+
+    def inicializar_integrantes(self, elemento):
+        elemento.subelemento.integrantes.iniciar(master=elemento)
+
+        duracao = elemento.dados['duracao']
+        for _elemento in self.elementos:
+            if (_elemento.defs.tipo != 'apresentacao' or
+                Utils.comparar_(data1=_elemento.dados['data'], data2=duracao)):
+                continue
+
+            integrante = self.criar_label()
+
+            integrante.defs.cnf['text'] = _elemento.dados['titulo']
+            integrante.defs.cnf['width'] = 102
+            integrante.defs.cnf['height'] = 1
+            integrante.defs.cnf['bg'] = 'orange'
+
+            integrante.defs.pack['side'] = 'top'
+
+            integrante.iniciar(master=elemento.subelemento.integrantes)
+            elemento.subelemento.integrantes.lista.append(integrante)
