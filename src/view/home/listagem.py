@@ -89,10 +89,13 @@ class ListaDeElementos(Listagem):
     def inicializar_integrantes(self, elemento):
         elemento.subelemento.integrantes.iniciar(master=elemento)
 
-        duracao = elemento.dados['duracao']
+        fim = elemento.dados['duracao']
+        inicio = elemento.dados['data']
         for _elemento in self.elementos:
+            data = _elemento.dados['data']
             if (_elemento.defs.tipo != 'apresentacao' or
-                Utils.comparar_(data1=_elemento.dados['data'], data2=duracao)):
+                Utils.comparar_(data1=fim, data2=data) in [-1] or
+                Utils.comparar_(data1=inicio, data2=data) in [1]):
                 continue
 
             integrante = self.criar_label()

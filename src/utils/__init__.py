@@ -26,10 +26,8 @@ class Utils(object):
 
     @staticmethod
     def comparar_(data1: str, data2: str) -> bool or None:
+        """Devolve 1 se data1 > data2, -1 se data1 < data2 e 0 em igualdade."""
         data1 = ''.join(data1.split('/')[::-1])
         data2 = ''.join(data2.split('/')[::-1])
 
-        if data1 > data2:
-            return True
-        if data1 < data2:
-            return False
+        return 1 if data1 > data2 else -1 if data1 < data2 else 0
