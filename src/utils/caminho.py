@@ -26,10 +26,12 @@ class Caminho(object):
         absoluto = getcwd()
         execucao = Caminho.execucao()
 
-        if execucao and execucao[0] != '/':
+        if not execucao:
+            caminho = absoluto
+        elif execucao[0] != '/':
             caminho = f'{absoluto}/{execucao}'
         else:
-            caminho = absoluto
+            caminho = execucao
 
         return caminho
 
