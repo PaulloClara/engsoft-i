@@ -31,7 +31,7 @@ class JanelaDeErro(TKUtils.obter_janela()):
         """."""
         self.subelemento.mensagem.defs.cnf['text'] = self.msg_erro
         self.subelemento.mensagem.defs.cnf['fg'] = 'red'
-        self.subelemento.mensagem.defs.cnf['width'] = 380
+        self.subelemento.mensagem.defs.cnf['width'] = 360
         self.subelemento.mensagem.defs.mcnf['fz'] = 20
 
         self.subelemento.mensagem.defs.pack['pady'] = 10
