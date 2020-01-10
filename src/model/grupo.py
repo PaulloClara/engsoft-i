@@ -49,8 +49,7 @@ class Grupo(Modelo):
         self.carregar()
 
     def remover(self, _id):
-        super().remover(_id)
-        self.carregar()
+        super().remover(_id, 'grupos')
 
     def gerar(self, formulario):
         nome, quantidade = formulario['nome'], int(formulario['quantidade'])

@@ -54,8 +54,7 @@ class Tarefa(Modelo):
 
         id_atividade = tarefa['id_atividade']
         self.model.atividade.atualizar(id_atividade, campos={'em_uso': 0})
-
-        super().remover(_id)
+        super().remover(_id, 'tarefas')
 
         return {'atividade': id_atividade}
 

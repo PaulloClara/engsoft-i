@@ -52,12 +52,7 @@ class Atividade(Modelo):
         self.carregar()
 
     def remover(self, _id):
-        super().remover(_id)
-
-        for i, atividade in enumerate(self.atividades):
-            if atividade['_id'] == _id:
-                del self.atividades[i]
-                break
+        super().remover(_id, 'atividades')
 
     def validar(self, formulario):
         erro = super().validar_campos(formulario)

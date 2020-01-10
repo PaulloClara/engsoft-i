@@ -38,7 +38,7 @@ class Evento(Modelo):
         return evento
 
     def remover(self, _id):
-        super().remover(_id)
+        super().remover(_id, 'eventos')
 
     def ordenar(self):
         chave = 'data'
@@ -48,6 +48,14 @@ class Evento(Modelo):
         erro = super().validar_campos(formulario)
         erro = super().validar_data(formulario['data'])
         erro = super().validar_data(formulario['duracao'])
+
+        data = formulario['data']
+        for evento in self.eventos:
+            if Utils.comparar_(data1=evento['duracao'], data2=data) in [0, 1]:
+                return 'Conflito entre os Eventos'
+
+        if Utils.comparar_(data1=data, data2=formulario['duracao']) == 1:
+            return 'Data de inicio não pode ser maior que a duração/finalização'
 
         if not self.model.atividade.atividades:
             return 'Lista de Atividades vazia'

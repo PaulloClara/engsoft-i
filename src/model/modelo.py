@@ -40,9 +40,15 @@ class Modelo(object):
         sql = self.store.sql.update(self.tabela, _id, campos)
         self.store.executar(sql)
 
-    def remover(self, _id):
+    def remover(self, _id, tipo):
         sql = self.store.sql.delete(self.tabela, _id)
         self.store.executar(sql)
+
+        lista = getattr(self, tipo)
+        for i, elemento in enumerate(lista):
+            if elemento['_id'] == _id:
+                del lista[i]
+                break
 
     def validar_campos(self, formulario):
         for campo in formulario:

@@ -66,11 +66,7 @@ class Apresentacao(Modelo):
         self.model.grupo.atualizar(id_grupo, campos={'em_uso': 0})
         self.model.atividade.atualizar(id_atividade, campos={'em_uso': 0})
 
-        super().remover(_id)
-
-        for i, apresentacao in enumerate(self.apresentacoes):
-            if apresentacao['_id'] == _id:
-                del self.apresentacoes[i]
+        super().remover(_id, 'apresentacoes')
 
         return {'atividade': id_atividade, 'grupo': id_grupo}
 
