@@ -4,7 +4,6 @@ class Listagem(object):
         pass
 
     def remover(self, evt, id_apresentacao: str) -> None:
-        """Evento click do botao remover na lista de apresentacoes."""
         ids = self.model.apresentacao.remover(id_apresentacao)
         self.view.home.listagem.remover(id_apresentacao, filtro='id_grupo')
 
@@ -39,7 +38,6 @@ class Listagem(object):
         elemento.carregar_eventos()
 
     def configurar(self) -> None:
-        """Carrega as apresentacoes na lista de eventos da Home na View."""
         for apresentacao in self.model.apresentacao.apresentacoes:
             elemento = self.view.home.listagem.adicionar(apresentacao)
             self.configurar_(elemento)

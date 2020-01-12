@@ -1,5 +1,3 @@
-"""Conjunto de testes relacionados a todos os niveis de Utils."""
-
 from src.utils import Utils
 from src.utils.caminho import Caminho
 
@@ -9,21 +7,17 @@ from tests.exception import ExceptionNoTeste
 
 
 class TUtils(object):
-    """Testes na camada root de Utils."""
 
     def __init__(self, loop) -> None:
-        """Init padrao."""
         self.loop = loop
 
     def iniciar(self) -> None:
-        """Segundo init."""
         self.inteiro_aleatorio()
         self.data_e_hora_atual()
 
         self.caminho_ate()
 
     def inteiro_aleatorio(self) -> None:
-        """Testes de retorno."""
         local = 'utils.inteiro_aleatorio'
 
         erro = 'Nao retornou um inteiro'
@@ -42,7 +36,6 @@ class TUtils(object):
             raise ExceptionNoTeste(local, erro)
 
     def data_e_hora_atual(self) -> None:
-        """Testes de retorno."""
         local = 'utils.data_e_hora_atual'
 
         erro = 'O valor nao e do tipo string'
@@ -57,7 +50,6 @@ class TUtils(object):
             raise ExceptionNoTeste(local, erro)
 
     def caminho_ate(self) -> None:
-        """Teste de retorno."""
         local = 'utils.caminho.ate'
 
         erro = 'O caminho nao esta completo'

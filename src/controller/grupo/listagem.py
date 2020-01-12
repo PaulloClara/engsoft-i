@@ -12,7 +12,6 @@ class Listagem(object):
         self.cadastrar_apresentacao(evt=None)
 
     def remover(self, evt, id_grupo: str) -> None:
-        """Evento click do botao remover da lista de grupos."""
         self.model.grupo.remover(id_grupo)
         self.view.grupo.listagem.remover(id_grupo)
 
@@ -46,7 +45,6 @@ class Listagem(object):
         elemento.carregar_eventos()
 
     def configurar(self) -> None:
-        """Busca os grupos no Model e carrega a listagem dos grupos na View."""
         for grupo in self.model.grupo.grupos:
             elemento = self.view.grupo.listagem.adicionar(grupo)
             self.configurar_(elemento)

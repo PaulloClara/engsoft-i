@@ -4,7 +4,6 @@ class Cadastro(object):
         pass
 
     def confirmar(self, evt=None) -> None:
-        """Evento click do botao confirmar do formulario de cadastro."""
         formulario = self.view.grupo.cadastro.obter_campos()
 
         erro = self.model.grupo.validar(formulario)
@@ -23,7 +22,6 @@ class Cadastro(object):
         self.view.grupo.cadastro.fechar()
 
     def cancelar(self, evt=None) -> None:
-        """Evento click do botao cancelar no formulario."""
         self.view.grupo.cadastro.fechar()
 
     def configurar(self):

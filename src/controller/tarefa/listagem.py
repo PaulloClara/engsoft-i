@@ -4,7 +4,6 @@ class Listagem(object):
         pass
 
     def remover(self, evt, id_tarefa: str) -> None:
-        """Evento click do botao remover na lista de apresentacoes."""
         ids = self.model.tarefa.remover(id_tarefa)
         self.view.home.listagem.remover(id_tarefa, filtro='aluno')
 
@@ -36,7 +35,6 @@ class Listagem(object):
         elemento.carregar_eventos()
 
     def configurar(self) -> None:
-        """Carrega as apresentacoes na lista de eventos da Home na View."""
         for tarefa in self.model.tarefa.tarefas:
             elemento = self.view.home.listagem.adicionar(tarefa=tarefa)
             self.configurar_(elemento)

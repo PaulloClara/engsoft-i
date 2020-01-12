@@ -1,13 +1,9 @@
-"""."""
-
 from src.utils.tk import TKUtils
 
 
 class JanelaDeCadastro(TKUtils.obter_janela()):
-    """."""
 
     def __init__(self, campos: int=2) -> None:
-        """."""
         super().__init__()
 
         self.defs.qtd_campos = campos
@@ -17,14 +13,12 @@ class JanelaDeCadastro(TKUtils.obter_janela()):
         self.subelemento.confirmar = TKUtils.obter_botao()
 
     def iniciar(self) -> None:
-        """."""
         super().iniciar()
 
         self.criar_botao_cancelar()
         self.criar_botao_confirmar()
 
     def criar_botao_cancelar(self) -> None:
-        """."""
         self.subelemento.cancelar.defs.cnf['text'] = 'Cancelar'
         self.subelemento.cancelar.defs.cnf['bg'] = 'red'
 
@@ -36,7 +30,6 @@ class JanelaDeCadastro(TKUtils.obter_janela()):
         self.subelemento.cancelar.iniciar(master=self.subelemento.main)
 
     def criar_botao_confirmar(self) -> None:
-        """."""
         self.subelemento.confirmar.defs.cnf['text'] = 'Confirmar'
         self.subelemento.confirmar.defs.cnf['bg'] = 'green'
 

@@ -1,4 +1,3 @@
-"""."""
 from src import BANCO_DE_DADOS
 import sqlite3
 
@@ -9,17 +8,14 @@ from src.utils.tipo import Tipo
 
 
 class MSqLite(object):
-    """."""
 
     def __init__(self) -> None:
-        """."""
         self.sql = CodigoSql
 
         self.conexao = None
         self.conectado = False
 
     def executar(self, codigo_sql: str) -> Tipo.exc_sqlite:
-        """."""
         if self.conectado:
             self.fechar_conexao()
 
@@ -31,7 +27,6 @@ class MSqLite(object):
         return resultado
 
     def salvar(self, fechar_conexao: bool=True) -> None:
-        """."""
         if not self.conectado:
             return
 
@@ -41,7 +36,6 @@ class MSqLite(object):
             self.fechar_conexao()
 
     def fechar_conexao(self) -> None:
-        """."""
         if not self.conectado:
             return
 
@@ -49,6 +43,5 @@ class MSqLite(object):
         self.conectado = False
 
     def conectar(self) -> None:
-        """."""
         self.conexao = sqlite3.connect(BANCO_DE_DADOS)
         self.conectado = True

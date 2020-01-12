@@ -4,7 +4,6 @@ class Actions(object):
         pass
 
     def configurar(self) -> None:
-        """Disparado quando o componente Atividade da View e montado."""
         actions = self.view.atividade.actions.subelemento
 
         actions.cadastrar.evento['<Button-1>'] = self.cadastrar

@@ -1,13 +1,9 @@
-"""Subelemento de Utils."""
-
 from src.utils.atributo import Atributo
 
 
 class Elemento(object):
-    """Salva os dados de cada elemento TK de forma padronizada e organizada."""
 
     def __init__(self) -> None:
-        """Define os atributos customizados que podem ser usados."""
         self.evento = {}
         self.dados = None
 
@@ -22,7 +18,6 @@ class Elemento(object):
         self.defs.visivel = False
 
     def mostrar(self) -> None:
-        """Deixa o componente visivel com as regras geometricas predefinidas."""
         if self.defs.grid:
             self.grid(self.defs.grid)
         else:
@@ -31,7 +26,6 @@ class Elemento(object):
         self.defs.visivel = True
 
     def ocultar(self) -> None:
-        """Oculta o elemento."""
         if self.defs.grid:
             self.grid_forget()
         else:
@@ -40,7 +34,6 @@ class Elemento(object):
         self.defs.visivel = False
 
     def carregar_eventos(self) -> None:
-        """Carrega/ativa os eventos predefinidos do elemento e subelementos."""
         for key in self.evento:
             self.bind(key, self.evento[key])
 

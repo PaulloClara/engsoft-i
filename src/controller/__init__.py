@@ -1,5 +1,3 @@
-"""Controller Root."""
-
 from src.controller.navbar import Navbar
 
 from src.controller.home import Home
@@ -13,10 +11,8 @@ from src.controller.apresentacao import Apresentacao
 
 
 class Controller(object):
-    """Classe responsavel por gerenciar o fluxo de execucao da aplicacao."""
 
     def __init__(self) -> None:
-        """Contrutor padrao, declara os atributos da classe."""
         self.view = None
         self.model = None
         self.subjanelas_ativas = True
@@ -32,7 +28,6 @@ class Controller(object):
         self.apresentacao = Apresentacao()
 
     def iniciar(self, view, model) -> None:
-        """Instancia/cria os sub-objetos e inicializa Model root e View root."""
         self.view = view
         self.model = model
 

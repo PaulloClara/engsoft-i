@@ -1,13 +1,9 @@
-"""."""
-
 from src.utils.tk import TKUtils
 
 
 class JanelaDeErro(TKUtils.obter_janela()):
-    """."""
 
     def __init__(self) -> None:
-        """."""
         super().__init__()
 
         self.defs.cnf['title'] = 'Janela de Erro'
@@ -19,7 +15,6 @@ class JanelaDeErro(TKUtils.obter_janela()):
         self.subelemento.confirmar = TKUtils.obter_botao()
 
     def iniciar(self, erro: str) -> None:
-        """."""
         super().iniciar()
 
         self.msg_erro = erro
@@ -28,7 +23,6 @@ class JanelaDeErro(TKUtils.obter_janela()):
         self.inicializar_botao_confirmar()
 
     def inicializar_mensagem_erro(self) -> None:
-        """."""
         self.subelemento.mensagem.defs.cnf['text'] = self.msg_erro
         self.subelemento.mensagem.defs.cnf['fg'] = 'red'
         self.subelemento.mensagem.defs.cnf['width'] = 360
@@ -39,7 +33,6 @@ class JanelaDeErro(TKUtils.obter_janela()):
         self.subelemento.mensagem.iniciar(master=self.subelemento.main)
 
     def inicializar_botao_confirmar(self) -> None:
-        """."""
         self.subelemento.confirmar.defs.cnf['text'] = 'OK'
         self.subelemento.confirmar.defs.cnf['bg'] = 'green'
         self.subelemento.confirmar.defs.cnf['command'] = self.fechar

@@ -1,11 +1,6 @@
-"""Controller do Navbar."""
-
-
 class Navbar(object):
-    """Classe responsavle por gerenciar View e Model relacionados com Navbar."""
 
     def __init__(self) -> None:
-        """Construtor padrao, define o atributo view."""
         pass
 
     def iniciar(self, controller: object):

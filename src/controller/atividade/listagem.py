@@ -12,7 +12,6 @@ class Listagem(object):
         self.cadastrar_apresentacao(evt=None)
 
     def remover(self, evt, id_atividade: str) -> None:
-        """Evento click do botao remover atividade no label da listagem."""
         self.model.atividade.remover(id_atividade)
         self.view.atividade.listagem.remover(id_atividade)
 
@@ -41,7 +40,6 @@ class Listagem(object):
         elemento.carregar_eventos()
 
     def configurar(self) -> None:
-        """Busca as atividades no Model e cria os componentes visuais."""
         for atividade in self.model.atividade.atividades:
             elemento = self.view.atividade.listagem.adicionar(atividade)
             self.configurar_(elemento)

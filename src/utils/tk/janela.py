@@ -1,15 +1,11 @@
-"""Tk de TK personalizado."""
-
 from tkinter import Tk, PhotoImage
 from src.utils.tk.elemento import Elemento
 from src.utils.tk.container import MContainer
 
 
 class MJanela(Tk, Elemento):
-    """Estende a classe Tk de TK abstraindo algumas configuracoes."""
 
     def __init__(self) -> None:
-        """Define as configuracoes padroes."""
         Elemento.__init__(self)
 
         self.defs.cnf['title'] = 'JANELA SEM TITULO'
@@ -23,7 +19,6 @@ class MJanela(Tk, Elemento):
         self.ativa = False
 
     def iniciar(self) -> None:
-        """Inicializa e configura."""
         Tk.__init__(self)
         self.subelemento.main.iniciar(master=self)
 

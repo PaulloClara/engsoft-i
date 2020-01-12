@@ -1,5 +1,3 @@
-"""ScrollView com classes TK puras."""
-
 from tkinter import Frame, Canvas, Scrollbar
 from src.utils.tk.elemento import Elemento
 
@@ -12,7 +10,6 @@ class MScrollView(Frame, Elemento):
     """
 
     def __init__(self) -> None:
-        """Define algumas configuracoes extras relacionadas ao Elemento."""
         Elemento.__init__(self)
 
         self.defs.pack['expand'] = True
@@ -22,7 +19,6 @@ class MScrollView(Frame, Elemento):
         self.defs.scrollbar = {}
 
     def iniciar(self, master: object) -> None:
-        """Inicializa e configura."""
         Frame.__init__(self, master=master, cnf=self.defs.cnf)
 
         self.canvas = Canvas(master=self, cnf=self.defs.canvas)
@@ -47,9 +43,7 @@ class MScrollView(Frame, Elemento):
         self.mostrar()
 
     def evento_configurar_viewport(self, evt) -> None:
-        """."""
         self.canvas.configure(scrollregion=self.canvas.bbox('all'))
 
     def evento_configurar_canvas(self, evt) -> None:
-        """."""
         self.canvas.itemconfig(self.canvas_window, width=evt.width)

@@ -1,5 +1,3 @@
-"""."""
-
 from src.utils.caminho import Caminho
 
 
