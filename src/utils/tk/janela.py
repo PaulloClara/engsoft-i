@@ -45,6 +45,9 @@ class MJanela(Tk, Elemento):
 
     def fechar(self) -> None:
         """Destroi a janela"""
+        if not self.ativa:
+            return
+
         if '<Destroy>' in self.defs.mcnf:
             self.defs.mcnf['<Destroy>']()
 

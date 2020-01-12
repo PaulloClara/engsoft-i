@@ -49,23 +49,10 @@ class Controller(object):
         self.home.filtrar(None, 'tarefa')
 
     def fechar(self):
-        if self.view.atividade.cadastro.ativa:
-            self.view.atividade.cadastro.fechar()
-
-        if self.view.grupo.cadastro.ativa:
-            self.view.grupo.cadastro.fechar()
-
-        if self.view.home.cadastro_apresentacao.ativa:
-            self.view.home.cadastro_apresentacao.fechar()
-
-        if self.view.home.cadastro_evento.ativa:
-            self.view.home.cadastro_evento.fechar()
-
-        if self.view.home.cadastro_tarefa.ativa:
-            self.view.home.cadastro_tarefa.fechar()
-
-        if self.view.home.cadastro_apresentacao.ativa:
-            self.view.home.cadastro_apresentacao.fechar()
-
-        if self.view.janela_erro.ativa:
-            self.view.janela_erro.fechar()
+        self.view.janela_erro.fechar()
+        self.view.grupo.cadastro.fechar()
+        self.view.atividade.cadastro.fechar()
+        self.view.home.cadastro_evento.fechar()
+        self.view.home.cadastro_tarefa.fechar()
+        self.view.home.cadastro_apresentacao.fechar()
+        self.view.home.cadastro_apresentacao.fechar()
