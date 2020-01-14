@@ -8,8 +8,7 @@ class Listagem(object):
         self.view.home.listagem.remover(id_apresentacao, filtro='titulo')
 
     def expandir_recolher(self, evt, elemento):
-        if not elemento.subelemento.integrantes.lista:
-            self.view.home.listagem.inicializar_integrantes(elemento)
+        self.view.home.listagem.inicializar_integrantes(elemento)
 
         if elemento.subelemento.secundario.defs.visivel:
             elemento.subelemento.secundario.ocultar()

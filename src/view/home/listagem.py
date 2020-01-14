@@ -87,7 +87,13 @@ class ListaDeElementos(Listagem):
         secundario.ocultar()
 
     def inicializar_integrantes(self, elemento):
-        elemento.subelemento.integrantes.iniciar(master=elemento)
+        if not elemento.subelemento.integrantes.ativo:
+            elemento.subelemento.integrantes.iniciar(master=elemento)
+
+        for integrante in elemento.subelemento.integrantes.lista:
+            integrante.destroy()
+
+        elemento.subelemento.integrantes.lista = []
 
         fim = elemento.dados['duracao']
         inicio = elemento.dados['data']
