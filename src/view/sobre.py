@@ -13,7 +13,6 @@ class Sobre(TKUtils.obter_container()):
 
         self.inicializar_infos()
         self.inicializar_repositorio()
-        self.inicializar_novidades()
         self.inicializar_devs()
 
         self.ocultar()
@@ -28,36 +27,6 @@ class Sobre(TKUtils.obter_container()):
         infos.defs.pack['padx'] = 20
         infos.defs.pack['pady'] = 20
         infos.iniciar(master=self)
-
-    def inicializar_novidades(self):
-        def criar_label(master, texto):
-            label = TKUtils.obter_label()
-            label.defs.cnf['text'] = texto
-            label.defs.cnf['width'] = 200
-            label.defs.mcnf['fz'] = 18
-            label.iniciar(master=master)
-
-        versao = TKUtils.obter_container(instanciar=True)
-        versao.defs.pack['pady'] = 6
-        versao.iniciar(master=self)
-
-        label = TKUtils.obter_label()
-        label.defs.cnf['text'] = 'V0.4'
-        label.defs.mcnf['fz'] = 24
-        label.defs.pack['padx'] = 20
-        label.defs.pack['side'] = 'left'
-        label.iniciar(master=versao)
-
-        novidades = TKUtils.obter_container(instanciar=True)
-        novidades.defs.cnf['bd'] = 4
-        novidades.defs.cnf['bg'] = 'grey'
-        novidades.defs.pack['side'] = 'bottom'
-        novidades.iniciar(master=versao)
-
-        criar_label(novidades, '- Sobre: infos sobre o software')
-        criar_label(novidades, '- Eventos: cadastro de eventos')
-        criar_label(novidades, '- Designer: novo designer dos botões')
-        criar_label(novidades, '- Indicadores: efeito de seleção nos botões')
 
     def inicializar_devs(self):
         def criar_label(master, texto):
