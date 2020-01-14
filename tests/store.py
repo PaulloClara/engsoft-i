@@ -2,12 +2,11 @@ from src.store import Store
 from tests.exception import ExceptionNoTeste
 
 
-class TesteDoStore:
+class TStore(object):
 
-    def __init__(self, loop):
+    def __init__(self, loop: int) -> None:
         self.loop = loop
-
         self.store = Store()
 
-    def iniciar(self):
+    def iniciar(self) -> None:
         pass

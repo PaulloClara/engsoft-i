@@ -10,7 +10,6 @@ from tests import Tests
 if __name__ == '__main__':
     if Env.modo_teste():
         Tests().iniciar()
-        exit()
 
     view = View()
     model = Model()

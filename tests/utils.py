@@ -1,14 +1,13 @@
 from src.utils import Utils
-from src.utils.caminho import Caminho
-
 from src.utils.tk import TKUtils
+from src.utils.caminho import Caminho
 
 from tests.exception import ExceptionNoTeste
 
 
 class TUtils(object):
 
-    def __init__(self, loop) -> None:
+    def __init__(self, loop: int) -> None:
         self.loop = loop
 
     def iniciar(self) -> None:
